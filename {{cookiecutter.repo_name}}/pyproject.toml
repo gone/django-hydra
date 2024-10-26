@@ -37,7 +37,7 @@ pytest-dotenv = "^0.5.2"
 django-robots = "^6.1"
 
 [tool.poetry.group.dev.dependencies]
-Werkzeug = "3.0.3"
+Werkzeug = "3.0.6"
 coverage = {extras = ["toml"], version = "^7.5.3"}
 ipython = "^8.13.1"
 ipdb = "^0.13.13"
