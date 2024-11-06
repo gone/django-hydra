@@ -23,7 +23,7 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "fast-glob": "^3.3.2",
-    "happy-dom": "^15.8.4",
+    "happy-dom": "^15.10.1",
     "postcss": "^8.4.38",
     "postcss-nested": "^6.2.0",
     "sass": "^1.77.4",
