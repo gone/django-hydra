@@ -14,7 +14,7 @@
     "@types/alpinejs__focus": "^3.13.4",
     "@types/alpinejs__mask": "^3.13.4",
     "@types/js-cookie": "^3.0.6",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
