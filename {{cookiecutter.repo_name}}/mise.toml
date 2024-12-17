@@ -1,0 +1,47 @@
+[tools]
+python = "3.13"
+node = "22"
+uv = "0.5.9"
+colima  = "latest"
+lima = "latest"
+pre-commit = "latest"
+
+[env]
+_.python.venv = { path = ".venv", create = true }
+UV_PYTHON="python3.13"
+ENV_NAME="sampleapp"
+DJANGO_SETTINGS_MODULE = "{{env.ENV_NAME}}.config.settings.local"
+DATABASE_URL = "postgres://{{env.ENV_NAME}}:{{env.ENV_NAME}}@localhost:5432/{{env.ENV_NAME}}"
+REDIS_URL="redis://localhost:6379"
+
+# Development settings
+PYTHONBREAKPOINT="pudb.set_trace"
+DJANGO_DEBUG = "True"
+DJANGO_SECRET_KEY = "your-secret-key-here"
+PYTHONDONTWRITEBYTECODE = "1"  # Prevent Python from writing .pyc files
+
+
+#required settings for prod to run, sometimes helpful to set locally to run local w/ prod settings
+REDIS_HOST=""
+REDIS_PORT=""
+SENTRY_DSN=""
+DJANGO_ALLOWED_HOSTS="127.0.0.1,localhost"
+DJANGO_AWS_ACCESS_KEY_ID=""
+DJANGO_AWS_SECRET_ACCESS_KEY=""
+DJANGO_AWS_STORAGE_BUCKET_NAME=""
+DJANGO_AWS_S3_ENDPOINT_URL=""
+DJANGO_SECURE_SSL_REDIRECT="false"
+DJANGO_SECURE_HSTS_SECONDS=0
+
+[tasks]
+install = "scripts/setup_existing_project.sh"
+dev = "./manage.py runserver_plus"
+build = "npm run build"
+test = "pytest"
+lint = "pre-commit run --all-files"
+clean = ["rm -rf .venv", "rm -rf node_modules"]
+
+
+
+[settings]
+status.show_env = true
