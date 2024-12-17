@@ -17,9 +17,8 @@ class LoginForm(AllAuthLoginForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-class SignupForm(AllAuthSignupForm):
-    template_name = "account/signup_form.jinja"
 
+class SignupForm(AllAuthSignupForm):
     first_name = forms.CharField(
         label=_("First Name"),
         min_length=1,
