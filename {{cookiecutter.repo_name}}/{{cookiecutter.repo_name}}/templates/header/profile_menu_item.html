@@ -1,0 +1,13 @@
+{% load heroicons %}
+<a
+  href="{{href}}"
+  class="group px-2 py-1.5 w-full flex items-center rounded-md  transition-colors text-left text-gray-800 focus-visible:bg-gray-50 hover:bg-gray-50"
+  role="menuitem"
+  tabindex="-1"
+>
+  {% if icon %}
+    {% heroicon_solid icon class="shrink-0 size-5 mr-2 text-gray-400 group-focus-visible:text-gray-800 group-hover:text-gray-800" %}
+  {% endif %}
+  </svg>
+  {{label}}
+</a>
