@@ -1453,7 +1453,7 @@ wheels = [
 ]
 
 [[package]]
-name = "sampleapp"
+name = "{{cookiecutter.repo_name}}"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

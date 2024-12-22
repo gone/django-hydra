@@ -1,0 +1,27 @@
+{% load heroicons %}
+<div class="relative min-w-48 md:flex-shrink-0">
+  {% component "popover" button_class="group flex items-center rounded-lg w-full p-1 hover:bg-gray-800/10" %}
+    {% fill "trigger" %}
+      <span class="sr-only">Open user menu</span>
+      <div class="flex items-center justify-between w-full">
+        <img
+          class="h-8 w-8 rounded-full"
+          src="{{ avatar_url|default:'' }}"
+          alt="{{ user_name|default:'Profile' }}"
+        >
+        <span class="flex items-center gap-2">
+          {{user_name}}
+          {% if show_chevron|default:True %}
+            {% heroicon_micro "chevron-down" %}
+          {% endif %}
+        </span>
+      </div>
+    {% endfill %}
+    {% fill "content" %}
+      <div class="p-1.5 space-y-1">
+        {% slot "menu_items" default %}
+        {% endslot %}
+      </div>
+    {% endfill %}
+  {% endcomponent %}
+</div>

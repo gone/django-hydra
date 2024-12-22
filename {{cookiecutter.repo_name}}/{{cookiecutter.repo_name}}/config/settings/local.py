@@ -1,5 +1,4 @@
 # pylint: skip-file
-from ..jinja2 import options
 from .base import *  # noqa
 from .base import env
 
@@ -75,6 +74,7 @@ DEBUG_TOOLBAR_PANELS = [
 
 DEBUG_TOOLBAR_CONFIG = {
     "DISABLE_PANELS": [
+        "debug_toolbar.panels.profiling.ProfilingPanel",  # https://github.com/django-commons/django-debug-toolbar/issues/1875
         "debug_toolbar.panels.redirects.RedirectsPanel",
     ],
     "SHOW_TEMPLATE_CONTEXT": True,
@@ -83,7 +83,7 @@ DEBUG_TOOLBAR_CONFIG = {
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 
-SILKY_PYTHON_PROFILER = True
+SILKY_PYTHON_PROFILER = False
 SILKY_AUTHENTICATION = False  # User must login
 SILKY_AUTHORISATION = False  # User must have permissions ('is_staff' by default).
 SILKY_INTERCEPT_PERCENT = 100
@@ -108,19 +108,3 @@ CSP_DEFAULT_SRC = [
 ]
 CSP_SCRIPT_SRC += [f"localhost:{DJANGO_VITE_DEV_SERVER_PORT}", "cdn.jsdelivr.net"]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", f"localhost:{DJANGO_VITE_DEV_SERVER_PORT}"]
-
-# Local development template caching fix
-# Issue reference:
-# https://github.com/pallets/jinja/issues/253#issuecomment-1052871750
-options["cache_size"] = 0 if DEBUG else 400
-
-TEMPLATES[0]["OPTIONS"] = options
-
-# see: https://code.djangoproject.com/ticket/33497
-# see: https://github.com/Lightmatter/htn/pull/77
-# Ideally this should be zero in all setups, but there have been reports from other projects
-# that that cuases rendering issues
-#
-# Bandaid fix until the django project puts in an offical patch
-# Unclear at this time why prod + dev hosts do not experience any issues with this
-DATABASES["default"]["CONN_MAX_AGE"] = 0  # noqa F405

@@ -1,0 +1,15 @@
+<header x-data="{open: false}">
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    {% include "header/mobile_menu_button.html" %}
+                    {% include "header/logo.html" %}
+                    {% include "header/desktop_center.html" %}
+                </div>
+                <div class="flex items-center">{% include "header/end.html" %}</div>
+            </div>
+        </div>
+        {% include "header/mobile_menu.html" %}
+    </nav>
+</header>

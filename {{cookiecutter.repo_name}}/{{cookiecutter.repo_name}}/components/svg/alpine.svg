@@ -1,0 +1,15 @@
+
+    <object>
+        <svg class="h-6 w-6"
+             fill="currentColor"
+             viewBox="0 0 256 118"
+             aria-hidden="true">
+            <title>Alpine</title>
+            <g>
+            <polygon clip-rule="evenodd"
+            fill-rule="evenodd" points="199.111112 0 256 56.6393762 199.111112 113.278752 142.222222 56.6393762"></polygon>
+            <polygon clip-rule="evenodd"
+            fill-rule="evenodd" points="56.8888888 0 174.826667 117.420507 61.0488889 117.420507 0 56.6393762"></polygon>
+            </g>
+        </svg>
+    </object>

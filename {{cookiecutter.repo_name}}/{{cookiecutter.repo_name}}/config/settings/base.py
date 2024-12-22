@@ -3,8 +3,6 @@ from pathlib import Path
 
 from environ import Env
 
-from ..jinja2 import options
-
 env = Env()
 
 APP_DIR = Path(__file__).resolve().parent.parent.parent
@@ -56,14 +54,14 @@ WSGI_APPLICATION = "{{cookiecutter.repo_name}}.config.wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.messages",
     "django.contrib.sessions",
     "django.contrib.sites",
-    "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.humanize", # Handy template tags
-    "django.contrib.admin",
+    "django.contrib.humanize", # Handy template tags
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
@@ -71,7 +69,6 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "django_extensions",
     "django_htmx",
-    "django_jinja",
     "django_vite",
     "model_utils",
     "allauth",
@@ -80,6 +77,7 @@ THIRD_PARTY_APPS = [
     "hijack",
     "hijack.contrib.admin",
     "robots",
+    "django_components",
 ]
 LOCAL_APPS = [
     "{{cookiecutter.repo_name}}.home.apps.HomeConfig",
@@ -152,6 +150,8 @@ MIDDLEWARE = [
     "hijack.middleware.HijackUserMiddleware",
     "{{cookiecutter.repo_name}}.util.middleware.HTMXMessageMiddleware",
     "{{cookiecutter.repo_name}}.util.middleware.TimezoneMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
+    "django_components.middleware.ComponentDependencyMiddleware",
 ]
 
 
@@ -167,6 +167,7 @@ STATICFILES_DIRS = [APP_DIR / "static_source"]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django_components.finders.ComponentsFileSystemFinder",
 ]
 
 DJANGO_VITE_ASSETS_PATH = STATICFILES_DIRS[0]
@@ -184,6 +185,17 @@ MEDIA_URL = "/media/"
 # TEMPLATES
 # ------------------------------------------------------------------------------
 
+# django-components
+# ------------------------------------------------------------------------------
+# https://emilstenstrom.github.io/django-components
+from django_components import ComponentsSettings
+COMPONENTS = ComponentsSettings(
+    dirs=[
+        Path(APP_DIR) / "components",
+    ],
+)
+
+
 # https://docs.djangoproject.com/en/dev/ref/templates/api/#using-requestcontext
 CONTEXT_PROCESSORS = [
     "django.template.context_processors.debug",
@@ -199,28 +211,25 @@ CONTEXT_PROCESSORS = [
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
 
+loaders = [
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
+    "django_components.template_loader.Loader",
+]
+
 TEMPLATES = [
-    {
-        # https://niwi.nz/django-jinja/latest/
-        "BACKEND": "django_jinja.backend.Jinja2",
-        "DIRS": [APP_DIR / "templates"],
-        "APP_DIRS": True,
-        "OPTIONS": options,
-    },
     {
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-        "DIRS": [APP_DIR / "dtl_templates"],
+        "DIRS": [APP_DIR / "templates"],
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
-            "loaders": [
-                "django.template.loaders.filesystem.Loader",
-                "django.template.loaders.app_directories.Loader",
-            ],
+            "loaders": [ ("django.template.loaders.cached.Loader", loaders )] if not DEBUG else loaders,
             "builtins": [
                 "django.templatetags.static",
+                "django_components.templatetags.component_tags",
             ],
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": CONTEXT_PROCESSORS,
@@ -324,7 +333,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_ADAPTER = "{{cookiecutter.repo_name}}.user.adapter.HTMXAccountAdapter"
-ACCOUNT_TEMPLATE_EXTENSION = "jinja"
 
 
 # https://django-allauth.readthedocs.io/en/latest/forms.html#account-forms

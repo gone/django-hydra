@@ -44,43 +44,29 @@ repos:
 
   # TODO:  https://github.com/adamchainz/pre-commit-oxipng
 
-  - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v15.10.0
-    hooks:
-    -   id: stylelint
-        name: stylelint
-        files: ^{{cookiecutter.repo_name}}/static_source/
-        types_or: [css, scss]
-        args: [--report-needless-disables, --report-invalid-scope-disables, --fix, --allow-empty-input]
-        additional_dependencies:
-            # stylelint itself needs to be here when using additional_dependencies.
-            - stylelint@15.10.0
-            - stylelint-config-standard-scss@10.0.0
-
-  ## static files
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v8.29.0"
-    hooks:
-        - id: eslint
-          name: eslint
-          files: ^{{cookiecutter.repo_name}}/static_source/
-          types_or: [javascript, ts]
-          args: [--fix]
-          additional_dependencies:
-              - eslint@8.29.0
-              - "@typescript-eslint/eslint-plugin"
-              - "@typescript-eslint/parser"
-              - eslint-config-airbnb-base@15.0.0
-              - eslint-import-resolver-alias@1.1.2
-              - eslint-import-resolver-typescript@3.5.2
-              - eslint-plugin-import@2.26.0
 
   - repo: local
     hooks:
-        - id: tsc
-          name: tsc
-          entry: npx tsc --noEmit
-          files: ^{{cookiecutter.repo_name}}/static_source/
-          language: system
-          types_or: [javascript, ts]
-          pass_filenames: false
+      - id: stylelint
+        name: stylelint
+        entry: npx stylelint
+        language: node
+        files: ^{{cookiecutter.repo_name}}/static_source/
+        types_or: [css, scss]
+        args: [--report-needless-disables, --report-invalid-scope-disables, --fix, --allow-empty-input]
+
+      - id: eslint
+        name: eslint
+        entry: npx eslint
+        language: node
+        files: ^{{cookiecutter.repo_name}}/static_source/
+        types_or: [javascript, ts]
+        args: [--fix]
+
+      - id: tsc
+        name: tsc
+        entry: npx tsc --noEmit
+        files: ^{{cookiecutter.repo_name}}/static_source/
+        language: system
+        types_or: [javascript, ts]
+        pass_filenames: false

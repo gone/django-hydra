@@ -17,6 +17,8 @@ body {
 
 html {
   -webkit-tap-highlight-color: transparent;
+  // For better cross-browser consistency
+  width: 100vw;
 }
 
 

@@ -1,0 +1,22 @@
+<div x-data x-popover class="{{ wrapper_class|default:'relative' }}">
+  <button
+    x-popover:button
+    class="{{ button_class|default:'flex items-center gap-2 py-2 rounded-lg' }}"
+    type="button"
+  >
+    {% slot "trigger" %}
+      click here
+    {% endslot %}
+  </button>
+
+  <div
+    x-popover:panel
+    x-transition.origin.top.left
+    x-cloak
+    class="{{ panel_class|default:'absolute left-0 min-w-48 rounded-lg shadow-sm mt-2 z-10 origin-top-left bg-white p-1.5 outline-none border border-gray-200' }}"
+  >
+    {% slot "content" %}
+      Content goes here
+    {% endslot %}
+  </div>
+</div>

@@ -10,7 +10,8 @@ module.exports = {
     './{{cookiecutter.repo_name}}/static_source/**/*.scss',
     './{{cookiecutter.repo_name}}/static_source/**/*.sass',
     './{{cookiecutter.repo_name}}/templates/**/*.html',
-    './{{cookiecutter.repo_name}}/templates/**/*.jinja',
+    './{{cookiecutter.repo_name}}/components/**/*.html',
+    './{{cookiecutter.repo_name}}/components/**/*.svg',
   ],
   theme: {
     extend: {

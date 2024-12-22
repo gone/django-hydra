@@ -56,4 +56,5 @@ urlpatterns += [
     path("admin/", admin.site.urls),
     path("hijack/", include("hijack.urls")),
     path("", include("{{cookiecutter.repo_name}}.home.urls")),
+    path("", include("django_components.urls")),
 ]

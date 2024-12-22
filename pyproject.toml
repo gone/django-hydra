@@ -2,7 +2,7 @@
 name = "django-hydra"
 version = "3.0"
 description = "A generic project template for django"
-authors = ["Ben Beecher <ben@lightmatter.com>"]
+authors = ["Ben Beecher <benbeecher@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"

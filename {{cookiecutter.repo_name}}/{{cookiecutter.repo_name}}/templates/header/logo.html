@@ -1,12 +1,12 @@
 <div class="flex-shrink-0 flex items-center">
-    <a href="{{ url('home') }}">
+     <a href="{% url 'home' %}">
         <img class="block lg:hidden h-8 w-auto"
-             src="{{ static('img/logomark.svg') }}"
+             src="{% static 'img/logomark.svg' %}"
              alt=""
              width="265"
              height="265"/>
         <img class="hidden lg:block h-8 w-auto"
-             src="{{ static('img/logo.svg') }}"
+             src="{% static 'img/logo.svg' %}"
              alt=""
              width="257"
              height="50"/>
