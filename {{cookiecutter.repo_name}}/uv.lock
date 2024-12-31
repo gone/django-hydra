@@ -96,6 +96,18 @@ wheels = [
 ]
 
 [[package]]
+name = "beautifulsoup4"
+version = "4.12.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "soupsieve" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b3/ca/824b1195773ce6166d388573fc106ce56d4a805bd7427b624e063596ec58/beautifulsoup4-4.12.3.tar.gz", hash = "sha256:74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051", size = 581181 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b1/fe/e8c672695b37eecc5cbf43e1d0638d88d66ba3a44c4d321c796f4e59167f/beautifulsoup4-4.12.3-py3-none-any.whl", hash = "sha256:b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed", size = 147925 },
+]
+
+[[package]]
 name = "binaryornot"
 version = "0.4.4"
 source = { registry = "https://pypi.org/simple" }
@@ -409,6 +421,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/47/37/24b5344f682808d0f5488ef154e8ddb0d9c65a68e155ded7787d080667a3/django_cachalot-2.7.0.tar.gz", hash = "sha256:834b95d5cffdc8953018a33a4e16ef63c8cfe2226a4dc36573e8bf3d62130175", size = 74110 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/91/13/6290ac3e7ba6643585aa38e3bd448a99927f61a9004229847d129e9f8137/django_cachalot-2.7.0-py3-none-any.whl", hash = "sha256:a96fa16a25dc07110770d0bde0b01b444c065c7693d4c162c75da9e447f1750c", size = 55475 },
+]
+
+[[package]]
+name = "django-components"
+version = "0.123"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a7/9d/8b76d151067dc6c580826fd6e9b18d93ae13826ab77f7b05edb421a7c64d/django_components-0.123.tar.gz", hash = "sha256:cc03680d4d4743e6d32af33b00db29b27f9519489d0d0e1a094253aa2c5301c6", size = 91177 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/38/e7988f774c0ce60c0a568dc22a225f52d5b9b93b99e5ec70894330ce9cec/django_components-0.123-py3-none-any.whl", hash = "sha256:0c1791cce2aecbf30f356501d4a1d3710bb626f0ac9f15f425cde3defd8e49c1", size = 103198 },
 ]
 
 [[package]]
@@ -1463,6 +1488,7 @@ dependencies = [
     { name = "django-annoying" },
     { name = "django-anymail" },
     { name = "django-cachalot" },
+    { name = "django-components" },
     { name = "django-cors-headers" },
     { name = "django-csp" },
     { name = "django-environ" },
@@ -1536,6 +1562,7 @@ requires-dist = [
     { name = "django-annoying", specifier = "==0.10.7" },
     { name = "django-anymail", extras = ["sendgrid"], specifier = "==12.0" },
     { name = "django-cachalot", specifier = "==2.7.0" },
+    { name = "django-components", specifier = ">=0.123" },
     { name = "django-cors-headers", specifier = "==4.6.0" },
     { name = "django-csp", specifier = "==3.8" },
     { name = "django-debug-toolbar", marker = "extra == 'dev'", specifier = "==4.4.6" },
@@ -1650,6 +1677,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/44/7b/af302bebf22c749c56c9c3e8ae13190b5b5db37a33d9068652e8f73b7089/snowballstemmer-2.2.0.tar.gz", hash = "sha256:09b16deb8547d3412ad7b590689584cd0fe25ec8db3be37788be3810cbf19cb1", size = 86699 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ed/dc/c02e01294f7265e63a7315fe086dd1df7dacb9f840a804da846b96d01b96/snowballstemmer-2.2.0-py2.py3-none-any.whl", hash = "sha256:c8e1716e83cc398ae16824e5572ae04e0d9fc2c6b985fb0f900f5f0c96ecba1a", size = 93002 },
+]
+
+[[package]]
+name = "soupsieve"
+version = "2.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/ce/fbaeed4f9fb8b2daa961f90591662df6a86c1abf25c548329a86920aedfb/soupsieve-2.6.tar.gz", hash = "sha256:e2e68417777af359ec65daac1057404a3c8a5455bb8abc36f1a9866ab1a51abb", size = 101569 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/c2/fe97d779f3ef3b15f05c94a2f1e3d21732574ed441687474db9d342a7315/soupsieve-2.6-py3-none-any.whl", hash = "sha256:e72c4ff06e4fb6e4b5a9f0f55fe6e81514581fca1515028625d0f299c602ccc9", size = 36186 },
 ]
 
 [[package]]

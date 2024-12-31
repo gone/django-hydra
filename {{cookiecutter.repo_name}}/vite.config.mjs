@@ -14,7 +14,7 @@ export default defineConfig({
         },
     },
     build: {
-        manifest: true, // adds a manifest.json
+        manifest: "manifest.json",
         rollupOptions: {
             input: {
                 /* The bundle's entry point(s).  If you provide an array of entry points or an object mapping names to

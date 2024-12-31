@@ -13,6 +13,7 @@ dependencies = [
     "django-annoying==0.10.7",
     "django-anymail[sendgrid]==12.0",
     "django-cachalot==2.7.0",
+    "django-components>=0.123",
     "django-cors-headers==4.6.0",
     "django-csp==3.8",
     "django-environ==0.11.2",

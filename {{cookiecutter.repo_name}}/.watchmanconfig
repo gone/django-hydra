@@ -1,0 +1,14 @@
+{
+    "ignore_dirs": [
+        "node_modules",
+        ".venv",
+        "__pycache__",
+        ".git",
+        "scripts",
+        "{{cookiecutter.repo_name}}/static",
+        "{{cookiecutter.repo_name}}/static_source",
+        "{{cookiecutter.repo_name}}/media",
+        ".pytest_cache",
+        "*.egg-info"
+    ]
+}
