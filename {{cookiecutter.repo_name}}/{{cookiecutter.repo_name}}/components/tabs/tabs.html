@@ -1,0 +1,11 @@
+<div x-data x-tabs class="relative {{ tabs_style }}"
+  {% for attr, value in tabs_attrs.items %}{{ attr }}="{{ value }}"{% endfor %}>
+  <div x-tabs:list class="{{ labels_list_style }}"
+    {% for attr, value in labels_list_attrs.items %}{{ attr }}="{{ value }}"{% endfor %}>
+    {% slot "labels" %}{% endslot %}
+  </div>
+  <div x-tabs:panels class="{{ panels_list_style }}"
+    {% for attr, value in panels_list_attrs.items %}{{ attr }}="{{ value }}"{% endfor %}>
+    {% slot "panels" %}{% endslot %}
+  </div>
+</div>

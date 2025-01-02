@@ -242,3 +242,6 @@ junit.xml
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+
+#project export for ai
+output.xml

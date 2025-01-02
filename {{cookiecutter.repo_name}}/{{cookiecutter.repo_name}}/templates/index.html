@@ -1,87 +1,92 @@
 {% extends "base.html" %}
-{% from "components/button/button.jinja" import button %}
-{% from 'components/flyout/flyout.jinja' import flyout %}
-{% from 'components/modal/modal.jinja' import modal %}
-{% from 'components/tabs/tabs.jinja' import tabs %}
+{% load heroicons %}
+
 {% block title %}
     Index
 {% endblock title %}
+
 {% block content %}
   <div class="container mx-auto">
-    {% set greeting='Hello There!' %}
-    {% set greeting_styled %}
-    <em class="text-2xl font-bold ">{{ greeting }}</em>
-  {% endset %}
-  <h1>{{ greeting_styled }}</h1>
-  <div id="current-time">{% include "samples/current_time.jinja" %}</div>
-  {{ button("Refresh time", attrs={"hx-get": url("current_time"), "hx-target": "#current-time", "hx-swap": "innerHTML", "hx-push-url": "false"}) }}
-  {{ button("Test hx-redirect with messages", attrs={"hx-get": url("test_redirect"), "hx-push-url": "false"}) }}
-  {{ button("Test hx-refresh with messages", attrs={"hx-get": url("test_refresh")}) }}
-  <div id="random-chart">{% include "samples/random_chart.jinja" %}</div>
-  {{ button('Refresh Chart', attrs={"hx-push-url": "false", "hx-get": url("random_chart"), "hx-target": "#random-chart", "hx-swap": "innerHTML"}) }}
-  <div class="flex flex-col items-start">
-    {% set flyout_button %}
-    {{ button(button_content="Open Flyout", attrs={"x-menu:button": True})}}
-    {% endset %}
-    {% call flyout(button=flyout_button) %}
-      <a
-          x-menu:item
-          href="#"
-          class="block w-full px-4 py-2 text-sm transition-colors"
-      >
-          Menu Item One
-      </a>
-    {% endcall %}
-    {% set modal_button %}
-      {{ button(button_content="Open Modal")}}
-    {% endset %}
-    {% call modal(button=modal_button) %}
-      <div class="absolute top-0 right-0 pt-4 pr-4">
-        <button type="button" @click="$dialog.close()" class="bg-gray-50 rounded-lg p-2 text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-            <span class="sr-only">Close modal</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+    <h1>
+      <em class="text-2xl font-bold">Hello There!</em>
+    </h1>
+    <div id="current-time">{% include "samples/current_time.html" %}</div>
+
+    {% comment %}
+      {{ button("Refresh time", attrs={"hx-get": url("current_time"), "hx-target": "#current-time", "hx-swap": "innerHTML", "hx-push-url": "false"}) }}
+      {{ button("Test hx-redirect with messages", attrs={"hx-get": url("test_redirect"), "hx-push-url": "false"}) }}
+      {{ button("Test hx-refresh with messages", attrs={"hx-get": url("test_refresh")}) }}
+      {% endcomment %}
+    <div class="flex flex-col items-start">
+      {% component "popover" button_class="group flex items-center rounded-lg w-full p-1 hover:bg-gray-800/10" %}
+        {% fill "trigger" %}
+          open menu
+        {% endfill %}
+        {% fill "content" %}
+          <a
+            x-menu:item
+            href="#"
+            class="block w-full px-4 py-2 text-sm transition-colors"
+          >
+            Menu Item One
+          </a>
+      {% endfill %}
+    {% endcomponent %}
+
+
+
+
+      {% component "modal" button=modal_button %}
+        {% fill "content" %}
+          <div class="absolute top-0 right-0 pt-4 pr-4">
+            <button type="button" @click="$dialog.close()" class="bg-gray-50 rounded-lg p-2 text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+              <span class="sr-only">Close modal</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-        </button>
-      </div>
+              </svg>
+            </button>
+          </div>
 
-      <!-- Body -->
-      <div class="p-8">
-          <!-- Title -->
-          <h2 x-dialog:title class="text-2xl font-bold">Modal Title</h2>
 
-          <!-- Content -->
-          <p class="mt-3 text-gray-600">Your modal text and content goes here.</p>
-      </div>
+          <div class="p-8">
+            <h2 x-dialog:title class="text-2xl font-bold">Modal Title</h2>
+            <p class="mt-3 text-gray-600">Your modal text and content goes here.</p>
+          </div>
 
-      <!-- Footer -->
-      <div class="p-4 flex justify-end space-x-2 bg-gray-50">
-          <button type="button" x-on:click="$dialog.close()" class="text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg px-5 py-2.5">
+          <div class="p-4 flex justify-end space-x-2 bg-gray-50">
+            <button type="button" x-on:click="$dialog.close()" class="text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg px-5 py-2.5">
               Cancel
-          </button>
-
-          <button type="button" x-on:click="$dialog.close()" class="bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 px-5 py-2.5 rounded-lg text-white">
+            </button>
+            <button type="button" x-on:click="$dialog.close()" class="bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 px-5 py-2.5 rounded-lg text-white">
               Confirm
+            </button>
+          </div>
+        {% endfill %}
+      {% endcomponent %}
+
+
+      {% component "tabs" %}
+        {% fill "labels" %}
+          <button x-tabs:tab type="button"
+            :class="$tab.isSelected ? 'border-gray-200 bg-red-500' : 'border-transparent'"
+            class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5">
+            TabOne
           </button>
-      </div>
-    {% endcall %}
-    {% set panel1 %}
-      <div class="bg-slate-500"><h4 class="text-red-900">Testing 123</h4></div>
-    {% endset %}
-    {% set panel2 %}
-      <div class="bg-green-500"><h4 class="text-blue-600">Testing 124</h4></div>
-    {% endset %}
-    {% set tab_content = [
-      {
-        'label': {'label': "TabOne", "selected_class": "border-gray-200 bg-red-500"},
-        'tab': {'content': panel1}
-      },
-      {
-        'label': {'label': "TabTwo", "selected_class": "border-gray-200 bg-orange-500"},
-        'tab': {'content': panel2, "tab_class": 'p-10'}
-      }
-    ] %}
-    {{ tabs(tab_content) }}
+          <button x-tabs:tab type="button"
+            :class="$tab.isSelected ? 'border-gray-200 bg-orange-500' : 'border-transparent'"
+            class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5">
+            TabTwo
+          </button>
+        {% endfill %}
+        {% fill "panels" %}
+          <section x-tabs:panel class="p-4">
+            <div class="bg-slate-500"><h4 class="text-red-900">Testing 123</h4></div>
+          </section>
+          <section x-tabs:panel class="p-10">
+            <div class="bg-green-500"><h4 class="text-blue-600">Testing 124</h4></div>
+          </section>
+        {% endfill %}
+      {% endcomponent %}
   </div>
 </div>
 {% endblock content %}

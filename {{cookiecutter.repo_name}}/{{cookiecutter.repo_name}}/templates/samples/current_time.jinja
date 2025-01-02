@@ -1,9 +1,0 @@
-<div x-data>
-    <h2>Using globals: {{ template_localtime(now()) }}</h2>
-    <h2>Using filters: {{ now()|template_localtime }}</h2>
-    <h2>
-        Using alpine:
-        <p x-text="new Date('{{ now()}}')">
-        </p>
-    </h2>
-</div>
