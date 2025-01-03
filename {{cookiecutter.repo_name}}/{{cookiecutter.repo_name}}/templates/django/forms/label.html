@@ -1,3 +1,14 @@
-{% from 'forms/label.jinja' import django_to_label %}
-
-{{django_to_label(field, label, use_tag, tag, attrs)}}
+{% with
+  disabled_class="translate-y-2 cursor-not-allowed"
+  readonly_class="-translate-y-2 translate-x-2 text-xs bg-white px-1 cursor-not-allowed"
+  default_class="cursor-text transition"
+%}
+  {% if use_tag %}
+    <{{ tag }}
+    class="{% if field.field.disabled %}{{ disabled_class }}{% elif field.field.widget.attrs.readonly %}{{ readonly_class }}{% else %}{{ default_class }}{% endif %}"
+    {% include 'django/forms/attrs.html' %}
+    >{{ label }}</{{ tag }}>
+  {% else %}
+    {{ label }}
+  {% endif %}
+{% endwith %}

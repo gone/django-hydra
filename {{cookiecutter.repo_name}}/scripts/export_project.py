@@ -19,6 +19,7 @@ MANUAL_EXCLUDES = {
     '.venv',
     '.git',
     'static_source/assets/*',
+    '*.svg',
 }
 
 def parse_gitignore(gitignore_path: Path) -> Set[str]:

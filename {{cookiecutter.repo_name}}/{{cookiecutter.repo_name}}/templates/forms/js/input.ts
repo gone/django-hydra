@@ -8,18 +8,21 @@ interface Input {
   //real types
   eventName: string;
   value: string;
+  type: string;
   active: boolean;
 }
 
 
 const input = (...args: unknown[]): AlpineComponent<Input> => {
-  const [eventName, value] = args as [string, string];
+  const [eventName, value, type] = args as [string, string, string];
   return {
     eventName,
     value,
+    type,
     active: false,
     init() {
       inputListener.call(this);
+
 
       if (this.value === "None") {
         this.value = "";
