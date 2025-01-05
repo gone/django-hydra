@@ -19,7 +19,7 @@ def error(request):
 def current_time(request):
     """Generate the current time. Useful for testing htmx"""
     messages.info(request, "updated the current time")
-    return TemplateResponse(request, "samples/current_time.jinja")
+    return TemplateResponse(request, "samples/current_time.html")
 
 
 def test_message_redirect(request):

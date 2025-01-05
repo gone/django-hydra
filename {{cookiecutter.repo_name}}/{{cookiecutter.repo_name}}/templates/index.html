@@ -12,23 +12,49 @@
     </h1>
     <div id="current-time">{% include "samples/current_time.html" %}</div>
 
-    {% comment %}
-      {{ button("Refresh time", attrs={"hx-get": url("current_time"), "hx-target": "#current-time", "hx-swap": "innerHTML", "hx-push-url": "false"}) }}
-      {{ button("Test hx-redirect with messages", attrs={"hx-get": url("test_redirect"), "hx-push-url": "false"}) }}
-      {{ button("Test hx-refresh with messages", attrs={"hx-get": url("test_refresh")}) }}
-      {% endcomment %}
+
+    {% component "button"
+      attrs:hx-get="{% url 'current_time' %}"
+      attrs:hx-target="#current-time"
+      attrs:hx-swap="innerHTML"
+      attrs:hx-push-url="false"
+      %}
+      Refresh time
+    {% endcomponent %}
+    {% component "button"
+      color="secondary"
+      attrs:hx-get="{% url 'test_redirect' %}"
+      attrs:hx-push-url="false"
+      %}
+      Test hx-redirect with messages
+    {% endcomponent %}
+    {% component "button"
+      variant="outline"
+      attrs:hx-get="{% url 'test_refresh' %}"
+    %}
+      Test hx-refresh with messages
+    {% endcomponent %}
+
     <div class="flex flex-col items-start">
       {% component "popover" button_class="group flex items-center rounded-lg w-full p-1 hover:bg-gray-800/10" %}
         {% fill "trigger" %}
-          open menu
+          {% component "button" %}
+            open menu {% heroicon_micro "chevron-down" %}
+          {% endcomponent %}
         {% endfill %}
         {% fill "content" %}
           <a
-            x-menu:item
             href="#"
             class="block w-full px-4 py-2 text-sm transition-colors"
           >
             Menu Item One
+          </a>
+
+          <a
+            href="#"
+            class="block w-full px-4 py-2 text-sm transition-colors"
+          >
+            Menu Item two
           </a>
       {% endfill %}
     {% endcomponent %}

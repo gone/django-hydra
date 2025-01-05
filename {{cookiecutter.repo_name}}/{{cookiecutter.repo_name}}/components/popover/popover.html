@@ -1,13 +1,12 @@
 <div x-data x-popover class="{{ wrapper_class|default:'relative' }}">
-  <button
-    x-popover:button
-    class="{{ button_class|default:'flex items-center gap-2 py-2 rounded-lg' }}"
-    type="button"
-  >
+
+  <span x-popover:button>
     {% slot "trigger" %}
-      click here
+      {% component "button" %}
+          open menu
+      {% endcomponent %}
     {% endslot %}
-  </button>
+  </span>
 
   <div
     x-popover:panel

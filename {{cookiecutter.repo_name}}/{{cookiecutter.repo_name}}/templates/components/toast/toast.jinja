@@ -1,3 +1,4 @@
+{% comment %}
 {% with timeout=3_000 %}
     <div x-data="{ show: true }"
          x-init="setTimeout(() => { show = false; $el.innerHTML = ''; $el.remove(); }, {{ timeout }})"
@@ -14,3 +15,4 @@
         </div>
     </div>
 {% endwith %}
+{% endcomment %}
