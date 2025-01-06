@@ -73,27 +73,21 @@
 
 
       {% component "tabs" %}
-        {% fill "labels" %}
-          <button x-tabs:tab type="button"
-            :class="$tab.isSelected ? 'border-gray-200 bg-red-500' : 'border-transparent'"
-            class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5">
-            TabOne
-          </button>
-          <button x-tabs:tab type="button"
-            :class="$tab.isSelected ? 'border-gray-200 bg-orange-500' : 'border-transparent'"
-            class="inline-flex rounded-t-md border-t border-l border-r px-5 py-2.5">
-            TabTwo
-          </button>
-        {% endfill %}
-        {% fill "panels" %}
-          <section x-tabs:panel class="p-4">
-            <div class="bg-slate-500"><h4 class="text-red-900">Testing 123</h4></div>
-          </section>
-          <section x-tabs:panel class="p-10">
-            <div class="bg-green-500"><h4 class="text-blue-600">Testing 124</h4></div>
-          </section>
-        {% endfill %}
+
+        {% component "tab_item" header="TabOne" %}
+          <div class="bg-slate-500">
+            <h4 class="text-red-900">Testing 123</h4>
+          </div>
+        {% endcomponent %}
+
+        {% component "tab_item" header="TabTwo" %}
+          <div class="bg-green-500">
+            <h4 class="text-blue-900">Testing 124</h4>
+          </div>
+        {% endcomponent %}
+
       {% endcomponent %}
+
   </div>
 </div>
 {% endblock content %}

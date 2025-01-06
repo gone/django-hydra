@@ -1,11 +1,21 @@
-<div x-data x-tabs class="relative {{ tabs_style }}"
-  {% for attr, value in tabs_attrs.items %}{{ attr }}="{{ value }}"{% endfor %}>
-  <div x-tabs:list class="{{ labels_list_style }}"
-    {% for attr, value in labels_list_attrs.items %}{{ attr }}="{{ value }}"{% endfor %}>
-    {% slot "labels" %}{% endslot %}
+<div x-data x-tabs {% html_attrs tabs_attrs %}>
+  <div x-tabs:list {% html_attrs labels_list_attrs %}>
+    {% for tab in tabs %}
+      <button x-tabs:tab
+        type="button"
+        :class="$tab.isSelected && '{{ selected_class }}'"
+        {% html_attrs tab.attrs %}
+        {% if tab.disabled %}disabled="disabled"{% endif %}
+      >
+        {{ tab.header }}
+      </button>
+    {% endfor %}
   </div>
-  <div x-tabs:panels class="{{ panels_list_style }}"
-    {% for attr, value in panels_list_attrs.items %}{{ attr }}="{{ value }}"{% endfor %}>
-    {% slot "panels" %}{% endslot %}
+  <div x-tabs:panels {% html_attrs panels_list_attrs %}>
+    {% for tab in tabs %}
+      <section x-tabs:panel class="{{ panel_class }}">
+        {{ tab.content }}
+      </section>
+    {% endfor %}
   </div>
 </div>
