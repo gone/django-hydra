@@ -79,6 +79,8 @@ DEBUG_TOOLBAR_CONFIG = {
     ],
     "SHOW_TEMPLATE_CONTEXT": True,
     "RENDER_PANELS": False,
+    "ROOT_TAG_EXTRA_ATTRS": "hx-preserve hx-boost='false'"
+
 }
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]

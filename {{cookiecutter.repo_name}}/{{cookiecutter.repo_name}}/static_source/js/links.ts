@@ -13,6 +13,11 @@ export function isExternalLink(link: HTMLAnchorElement) {
 }
 
 export function isCurrentPage(link: HTMLAnchorElement) {
+  //javascript controls tend to point to #
+  if (link.getAttribute('href') === '#') {
+    return false;
+  }
+
   const currentUrl = window.location.href;
   const currentPath = window.location.pathname;
   const href = link.href.split("#")[0];

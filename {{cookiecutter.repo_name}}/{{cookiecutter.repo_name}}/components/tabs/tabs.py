@@ -72,7 +72,6 @@ class Tabs(Component):
 
     def on_render_after(self, context, template, content):
         """After all tab_items are processed, render using the implementation component."""
-        breakpoint()
         return TabsImpl.render(
             kwargs={
                 "tabs": context["tabs"],
@@ -124,7 +123,6 @@ class TabItem(Component):
         }
 
     def on_render_after(self, context, template, content):
-        breakpoint()
         # Add this tab's data to the parent tabs list
         context["parent_tabs"].append({
             "header": context["header"],
