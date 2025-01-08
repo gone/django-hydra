@@ -99,6 +99,7 @@ $background-color: #fff;
   }
 
   .password {
+    @apply mr-2;
     & input,
     & ~ label {
       @apply px-4;

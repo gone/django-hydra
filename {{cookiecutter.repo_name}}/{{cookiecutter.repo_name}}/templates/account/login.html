@@ -1,61 +1,42 @@
-{% extends "account/account_base.jinja" %}
-{% from 'components/button/button.jinja' import button %}
-{% import 'svg/svg.jinja' as svg %}
-{% set title %}
-Welcome back!
-{% endset %}
-{% block account_title %}
-    {% trans %}
-        Sign In
-    {% endtrans %}
-{% endblock account_title %}
+{% extends "account/account_base.html" %}
+{% load i18n %}
+
+{% block title %}
+ {{block.super}} | Welcome back!
+{% endblock %}
+
+{% block account_title %}{% translate "Sign In" %}{% endblock %}
 
 
 {% block account_content %}
-<form hx-post="{{ url('account_login') }}"
-      hx-target="#account-box"
-      hx-select="#account-box"
-      hx-swap="outerHTML"
-      class="flex flex-col">
+  <form hx-post="{% url 'account_login' %}"
+    hx-target="#account-box"
+    hx-select="#account-box"
+    hx-swap="outerHTML"
+    class="flex flex-col">
     {{ form }}
     {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     {% csrf_token %}
-    {{ button("Login", 'submit', type="submit") }}
+    {% component "button" attrs:type="submit"  %}
+      {% translate "Login" %}
+    {% endcomponent %}
 </form>
-<p class="mb-10">Need an account? <a  class="link" href="{{ url('account_signup') }}"> Register </a></p>
+<p class="mb-10">{% translate "Need an account?" %} <a class="link" href="{% url 'account_signup' %}">{% translate "Register" %}</a></p>
+
 <div class="relative">
-    <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-gray-300"></div>
-    </div>
-    <div class="relative flex justify-center text-sm">
-        <span class="px-2 bg-white text-gray-500">Or</span>
-    </div>
+  <div class="absolute inset-0 flex items-center">
+    <div class="w-full border-t border-gray-300"></div>
+  </div>
+  <div class="relative flex justify-center text-sm">
+    <span class="px-2 bg-white text-gray-500">{% translate "Or" %}</span>
+  </div>
 </div>
+
 <div class="mt-6">
-    <div class="grid grid-cols-3 gap-3">
-        <div>
-            <a href="#"
-               class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">Sign in with Facebook</span>
-                {{ svg.facebook() }}
-            </a>
-        </div>
-        <div>
-            <a href="#"
-               class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">Sign in with Twitter</span>
-                {{ svg.twitter() }}
-            </a>
-        </div>
-        <div>
-            <a href="#"
-               class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">Sign in with GitHub</span>
-                {{ svg.github() }}
-            </a>
-        </div>
-    </div>
+  <div class="grid grid-cols-3 gap-3">
+    {% include "account/snippets/social_login_buttons.html" %}
+  </div>
 </div>
 {% endblock %}

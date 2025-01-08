@@ -7,7 +7,7 @@ from .models import User
 
 
 class LoginForm(AllAuthLoginForm):
-    template_name = "account/login_form.jinja"
+    template_name = "account/login_form.html"
     remember = forms.BooleanField(
         help_text=_("For 2 weeks"),
         label=_("Remember Me"),

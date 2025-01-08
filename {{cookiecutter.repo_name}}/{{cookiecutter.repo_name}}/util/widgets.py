@@ -5,8 +5,6 @@ class ToggleWidget(CheckboxInput):
     """
     Change a CheckboxInput to a Toggle widget
 
-    This will use the html file toggle.html which calls a jinja macro toggle()
-
     It is modeled after: https://alpinejs.dev/component/toggle
 
     Usage:

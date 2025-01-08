@@ -1,15 +1,12 @@
 {% load replace %}
-<div
-  x-data="input('update-{{ widget.attrs.id|default:''|replace:'_|-' }}', '{{ widget.value|default:'' }}', '{{widget.type}}')"
-  x-ref="input"
-  :class="{ 'has-focus': active }"
-  class="w-full input"
->
   <input
+    x-data="input('update-{{ widget.attrs.id|default:''|replace:'_|-' }}', '{{ widget.value|default:'' }}', '{{widget.type}}')"
+    x-ref="input"
+    :class="{ 'has-focus': active }"
+    class="w-full input"
     type="{{ widget.type }}"
     name="{{ widget.name }}"
     {% if widget.value != None %}value="{{ widget.value|stringformat:'s' }}"{% endif %}
     x-model.debounce.500ms="value"
     {% include "django/forms/widgets/attrs.html" %}
   />
-</div>

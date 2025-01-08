@@ -1,29 +1,13 @@
-{% from 'account/components/account_box.jinja' import account_box %}
-{% extends "base.jinja" %}
-{% block title %}
-    Account
-{% endblock title %}
-
-{% block opengraph %}
-    {% from 'components/open_graph_tags.jinja' import og_tags %}
-    {{og_tags(title="TODO | Account", url="TODO/account/login/", description="TODO Account", image_url="TODO")}}
-{% endblock %}
-
-{% set account_back %}
-{% block account_back %}
-{% endblock account_back %}
-{% endset %}
-
-{% set account_title %}
-{% block account_title %}
-{% endblock account_title %}
-{% endset %}
-
-{% set account_content %}
-{% block account_content %}
-{% endblock account_content %}
-{% endset %}
+{% extends "base.html" %}
+{% block title %}Account{% endblock %}
 
 {% block content %}
-    {{ account_box(account_title, account_content, back=account_back) }}
-{% endblock content %}
+  <div class="mt-20 sm:mx-auto sm:w-full sm:max-w-md" id="account-box">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex flex-col justify-center relative">
+      {% if back %}{{ back }}{% endif %}
+      <img class="mx-auto h-12 w-auto" src="{% static 'img/logo.svg' %}" alt="logo">
+      <h2 class="mt-2 mb-4 text-center text-xl font-bold text-gray-900">{% block account_title %}{% endblock %}</h2>
+      {% block account_content %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}

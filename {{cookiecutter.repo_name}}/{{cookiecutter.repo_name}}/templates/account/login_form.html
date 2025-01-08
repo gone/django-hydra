@@ -1,16 +1,13 @@
-{% from 'forms/field.jinja' import field as f %}
-{% from 'forms/checkbox.jinja' import checkbox %}
 <div class="form-wrapper justify-between mb-6">
     {{ errors }}
-    {% for field, errors in fields %}
+    {% for field in form %}
         {% if field.name == 'remember' %}
-            {{ checkbox(field) }}
+          remember
         {% else %}
-            {{ f(field, errors) }}
+          <div class="w-full">
+            {% include 'forms/field.html' with field=field errors=field.errors %}
+          </div>
         {% endif %}
     {% endfor %}
-    <a href="{{ url("account_reset_password") }}"
-       hx-select='#account-box'
-       class="link">Forgot your password?</a>
-    {% for field in hidden_fields %}{{ field }}{% endfor %}
+    {% for field in form.hidden_fields %}{{ field }}{% endfor %}
 </div>
