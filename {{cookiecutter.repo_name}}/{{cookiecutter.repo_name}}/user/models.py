@@ -84,8 +84,8 @@ class User(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
         unique=True,
         error_messages={"unique": _("A user with that email address already exists.")},
     )
-    first_name = models.CharField(_("first name"), max_length=30, blank=True)
-    last_name = models.CharField(_("last name"), max_length=30, blank=True)
+    first_name = models.CharField(_("first name"), max_length=150, blank=True)
+    last_name = models.CharField(_("last name"), max_length=150, blank=True)
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,

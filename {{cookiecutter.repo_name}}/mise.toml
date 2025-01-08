@@ -33,7 +33,7 @@ DJANGO_SECURE_SSL_REDIRECT="false"
 DJANGO_SECURE_HSTS_SECONDS=0
 
 [tasks]
-dsync = "uv sync --extra dev --extra test"
+uv = "uv sync --extra dev --extra test"
 dev = "./manage.py runserver_plus"
 build = "npm run build"
 test = "pytest"

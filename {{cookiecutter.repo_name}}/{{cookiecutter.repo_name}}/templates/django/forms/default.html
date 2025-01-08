@@ -1,9 +1,0 @@
-{% from 'forms/field.jinja' import field as f %}
-{% macro default(fields, errors, hidden_fields) %}
-<div class="form-wrapper">
-    <span class="text-red">{{ errors }}</span>
-    {% for field, errors in fields %}{{ f(field, errors )}}{% endfor %}
-    {% for field in hidden_fields %}{{ field }}{% endfor %}
-</div>
-{% endmacro %}
-{{ default(fields, errors, hidden_fields) }}

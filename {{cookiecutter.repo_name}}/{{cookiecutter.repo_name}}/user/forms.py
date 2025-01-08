@@ -7,7 +7,6 @@ from .models import User
 
 
 class LoginForm(AllAuthLoginForm):
-    template_name = "account/login_form.html"
     remember = forms.BooleanField(
         help_text=_("For 2 weeks"),
         label=_("Remember Me"),
@@ -16,7 +15,6 @@ class LoginForm(AllAuthLoginForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
 
 class SignupForm(AllAuthSignupForm):
     first_name = forms.CharField(
