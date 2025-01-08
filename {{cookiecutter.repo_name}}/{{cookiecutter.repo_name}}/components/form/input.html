@@ -6,13 +6,13 @@
     {% if field.label %}{{ field.label_tag }}{% endif %}
 
     {% if field.errors %}
-    <div class="right-icon">
-      {% heroicon_solid "exclamation-circle" class="text-error" %}
-    </div>
-    <div class="text-error">{{ field.errors }}</div>
-  {% endif %}
-</div>
-{% if field.help_text %}
-  <p class="text-sm text-gray-500">{{ field.help_text|safe }}</p>
+      <div class="right-icon">
+        {% heroicon_solid "exclamation-circle" class="text-error" %}
+      </div>
+      <div class="text-error">{{ field.errors }}</div>
+    {% endif %}
+  </div>
+  {% if field.help_text %}
+    <p class="helptext text-sm text-gray-500" id="{{ field.auto_id }}_helptext" >{{ field.help_text|safe }}</p>
 {% endif %}
 </div>

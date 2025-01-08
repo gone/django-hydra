@@ -1,0 +1,40 @@
+<fieldset {% html_attrs attrs %}>
+  <legend>
+    {{ field.label }}
+  </legend>
+  <div class="radio py-4">
+    <div x-data="{value: '{{ field.value.0 }}'}" x-radio x-model="value" class="flex flex-col gap-4">
+      {% for group_name, group_choices, group_index in field.subwidgets %}
+        {% if group_name %}
+          <label>{{ group_name }}</label>
+        {% endif %}
+        {% for choice in group_choices %}
+          <div x-radio:option value="{{ choice.data.value }}" class="flex items-center">
+            <input
+              id="{{ choice.attrs.id }}"
+              type="{{ choice.widget_type }}"
+              name="{{ choice.name }}"
+              value="{{ choice.data.value }}"
+              x-bind:checked="value === '{{ choice.data.value }}'"
+              class="hidden"
+            >
+            <span
+              :class="{ 'bg-primary': $radioOption.isChecked }"
+              class="radio-choice-ring inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 border-white ring-1 ring-gray-600"
+              aria-hidden="true"
+            ></span>
+            <span class="ml-3">
+              <p x-radio:label>{{ choice.data.label }}</p>
+            </span>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  {% if field.help_text %}
+    <p class="helptext mt-2 text-sm text-gray-500" id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</p>
+  {% endif %}
+  {% if field.errors %}
+    <div class="text-error">{{ field.errors }}</div>
+  {% endif %}
+</fieldset>
