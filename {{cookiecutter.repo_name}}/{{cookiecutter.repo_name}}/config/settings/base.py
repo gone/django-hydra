@@ -230,6 +230,7 @@ TEMPLATES = [
             "builtins": [
                 "django.templatetags.static",
                 "django_components.templatetags.component_tags",
+                "django.templatetags.i18n",
             ],
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": CONTEXT_PROCESSORS,

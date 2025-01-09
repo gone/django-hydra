@@ -17,10 +17,11 @@ class Field(Component):
 
     def get_context_data(self, field, attrs=None):
         attrs = attrs or {}
-        attrs['class'] = f"h-full {field.css_classes(extra_classes=attrs.get('class', ''))}".strip() #h-full overridden by user passed attrs
+        #defauts overridden by user passed attrs
+        attrs['class'] = f"relative h-full {field.css_classes(extra_classes=attrs.get('class', ''))}".strip()
         # checkbox is a little bit of a special snowflakex
         if field.widget_type == "checkbox":
-            attrs['class'] += " relative flex items-start"
+            attrs['class'] += " flex items-start"
 
         return {
             'field': field,

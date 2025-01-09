@@ -12,6 +12,7 @@
 
 // base guidelines for styles. All assume a base font size of 16
 $input-height: 3.75rem;                    // 60px
+$input-center: calc($input-height / 2);    // for icons
 $textarea-height: calc($input-height * 3); // replace with "auto" to default to HTML rows
 $border-radius: 0.5rem;                    // 8px
 $focus-color: var(--primary-focus);        // Outline of focused text elements
@@ -67,6 +68,14 @@ $background-color: #fff;
   }
 }
 
+
+.helptext {
+  ul {
+    list-style: none;
+  }
+}
+
+
 .field { // wrapper element for input/label, provides basic styling for input
   @apply border relative h-auto;
   @apply flex items-center h-full relative overflow-x-hidden overflow-ellipsis;
@@ -76,8 +85,8 @@ $background-color: #fff;
   background-color: $background-color;
 
   &.error {
-    @apply block w-full border-red-300 text-red-900 placeholder-red-300;
-    @apply focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm;
+    @apply w-full border-red-300 text-red-900 placeholder-red-300;
+    @apply focus:outline-none focus:ring-red-500 focus:border-red-500;
   }
 
   & + .errorlist {
@@ -292,15 +301,16 @@ $background-color: #fff;
 
 
 .left-icon {
-  @apply inset-y-0 relative left-0 flex items-center pointer-events-none z-10;
-
-  background-color: $background-color;
+  @apply absolute left-3 pointer-events-none z-10;
+  top: $input-center;
+  transform: translateY(-50%);
+  background-color: transparent;
 }
-
 .right-icon {
-  @apply inset-y-0 absolute right-0 flex items-center pointer-events-none z-10;
-
-  background-color: $background-color;
+  @apply absolute -right-7 pointer-events-none z-10;
+  top: $input-center;
+  transform: translateY(-50%);
+  background-color: transparent;
 }
 
 .form-wrapper {

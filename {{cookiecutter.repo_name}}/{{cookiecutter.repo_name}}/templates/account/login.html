@@ -1,5 +1,4 @@
 {% extends "account/account_base.html" %}
-{% load i18n %}
 
 {% block title %}
  {{block.super}} | Welcome back!
@@ -23,7 +22,7 @@
       {% translate "Login" %}
     {% endcomponent %}
 </form>
-<p class="mb-10">{% translate "Need an account?" %} <a class="link" href="{% url 'account_signup' %}">{% translate "Register" %}</a></p>
+<p class="mb-10"><a class="link" href="{% url 'account_signup' %}"> {% translate "Need an account?" %} {% translate "Register" %}</a></p>
 
 <div class="relative">
   <div class="absolute inset-0 flex items-center">
