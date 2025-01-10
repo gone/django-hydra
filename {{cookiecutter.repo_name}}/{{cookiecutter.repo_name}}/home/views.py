@@ -33,16 +33,16 @@ def test_message_refresh(request):
 
 
 def FourHundy(request, exception):
-    return bad_request(request, exception, template_name="400.jinja")
+    return bad_request(request, exception, template_name="400.html")
 
 
 def FourOhThree(request, exception):
-    return permission_denied(request, exception, template_name="403.jinja")
+    return permission_denied(request, exception, template_name="403.html")
 
 
 def FourOhFour(request, exception):
-    return page_not_found(request, exception, template_name="404.jinja")
+    return page_not_found(request, exception, template_name="404.html")
 
 
 def WorkedLocally(request):
-    return server_error(request, template_name="500.jinja")
+    return server_error(request, template_name="500.html")

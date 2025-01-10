@@ -735,11 +735,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/a0/fd/ec090ea0a4f7e5aeb1fda250ea04739489be62f20594248d527ba9d48f9a/heroicons-2.9.0-py3-none-any.whl", hash = "sha256:c9b380221bc7397aed99fcca86b8e6cd210346bf5326bcd7626cd5df69dce2d3", size = 414967 },
 ]
 
-[package.optional-dependencies]
-jinja = [
-    { name = "jinja2" },
-]
-
 [[package]]
 name = "honcho"
 version = "2.0.0"
@@ -1490,7 +1485,7 @@ dependencies = [
     { name = "django-storages" },
     { name = "django-vite" },
     { name = "gunicorn" },
-    { name = "heroicons", extra = ["jinja"] },
+    { name = "heroicons" },
     { name = "pillow" },
     { name = "psycopg2-binary" },
     { name = "redis" },
@@ -1567,7 +1562,7 @@ requires-dist = [
     { name = "djlint", marker = "extra == 'dev'", specifier = "==1.36.3" },
     { name = "epc", marker = "extra == 'dev'", specifier = "==0.0.5" },
     { name = "gunicorn", specifier = "==23.0.0" },
-    { name = "heroicons", extras = ["jinja"], specifier = "==2.9.0" },
+    { name = "heroicons", specifier = "==2.9.0" },
     { name = "honcho", marker = "extra == 'dev'", specifier = "==2.0.0" },
     { name = "icecream", marker = "extra == 'dev'", specifier = "==2.1.3" },
     { name = "importmagic", marker = "extra == 'dev'", specifier = "==0.1.7" },

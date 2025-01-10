@@ -268,7 +268,7 @@ LANGUAGE_COOKIE_NAME = prefixed_cookie("language")
 CORS_ALLOWED_ORIGINS = []
 
 # unsafe-eval: https://alpinejs.dev/advanced/csp
-# unsafe-inline: from base.jinja and random_chart.jinja
+# unsafe-inline: remove when you don't need it.
 CSP_SCRIPT_SRC = [
     "'self'",
     "'unsafe-eval'",

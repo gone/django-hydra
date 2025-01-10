@@ -1,13 +1,11 @@
-{% extends "account/account_base.jinja" %}
+{% extends "account/account_base.html" %}
+
 {% block account_title %}
-    {% trans %}
-        Account Inactive
-    {% endtrans %}
+  {% translate "Account Inactive" %}
 {% endblock account_title %}
+
 {% block account_content %}
-    <p>
-        {% trans %}
-            This account is inactive.
-        {% endtrans %}
-    </p>
+  <h5 class="text-center">
+    {% translate "This account is inactive" %}
+  </h5>
 {% endblock account_content %}

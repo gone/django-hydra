@@ -1,14 +1,16 @@
-{% extends "base.jinja" %}
+{% extends "base.html" %}
+
 {% block title %}
-    Page not found
+    {% translate "Page not found" %}
 {% endblock title %}
+
 {% block content %}
-    <h1>Page not found</h1>
+    <h1>{% translate "Page not found" %}</h1>
     <p>
         {% if exception %}
             {{ exception }}
         {% else %}
-            This is not the page you were looking for.
+            {% translate "This is not the page you were looking for." %}
         {% endif %}
     </p>
 {% endblock content %}

@@ -1,14 +1,16 @@
-{% extends "base.jinja" %}
+{% extends "base.html" %}
+
 {% block title %}
-    Forbidden (403)
+    {% translate "Bad Request (400)" %}
 {% endblock title %}
+
 {% block content %}
-    <h1>Forbidden (403)</h1>
+    <h1>{% translate "Bad Request (400)" %}</h1>
     <p>
         {% if exception %}
             {{ exception }}
         {% else %}
-            You're not allowed to access this page.
+            {% translate "This request was a bad, bad request." %}
         {% endif %}
     </p>
 {% endblock content %}

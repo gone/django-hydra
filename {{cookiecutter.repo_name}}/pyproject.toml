@@ -27,7 +27,7 @@ dependencies = [
     "django-storages==1.14.4",
     "django-vite==3.0.5",
     "gunicorn==23.0.0",
-    "heroicons[jinja]==2.9.0",
+    "heroicons==2.9.0",
     "psycopg2-binary==2.9.10",
     "redis==5.2.1",
     "sentry-sdk==2.19.2",
