@@ -5,7 +5,9 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>{% translate "Forbidden (403)" %}</h1>
+  <div class="container mx-auto text-center ">
+    <div class="mt-56" >
+      <h1>{% translate "Forbidden (403)" %}</h1>
     <p>
         {% if exception %}
             {{ exception }}
@@ -13,4 +15,6 @@
             {% translate "You're not allowed to access this page." %}
         {% endif %}
     </p>
+    </div>
+  </div>
 {% endblock content %}

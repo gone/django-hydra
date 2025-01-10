@@ -36,11 +36,10 @@ DJANGO_SECURE_HSTS_SECONDS=0
 export = "./scripts/export_project.py . output.xml"
 uv = "uv sync --extra dev --extra test"
 dev = "./manage.py runserver_plus"
-build = "npm run build"
+build = "npm run build; ./manage.py collectstatic"
 test = "pytest"
 lint = "pre-commit run --all-files"
 clean = ["rm -rf .venv", "rm -rf node_modules"]
-
 
 
 [settings]

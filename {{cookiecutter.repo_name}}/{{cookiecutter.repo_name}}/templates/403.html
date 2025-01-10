@@ -5,6 +5,8 @@
 {% endblock title %}
 
 {% block content %}
+  <div class="container mx-auto text-center ">
+    <div class="mt-56" >
     <h1>{% translate "Bad Request (400)" %}</h1>
     <p>
         {% if exception %}
@@ -13,4 +15,6 @@
             {% translate "This request was a bad, bad request." %}
         {% endif %}
     </p>
+    </div>
+  </div>
 {% endblock content %}
