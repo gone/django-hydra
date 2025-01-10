@@ -1,7 +1,0 @@
-{% raw %}
-{% extends "account/email/base_message.txt" %}
-
-{% block content %}{% autoescape off %}You're receiving this e-mail because user {{ user }} has given your e-mail address to register an account on {{ current_site.domain }}.
-
-To confirm this is correct, go to {{ activate_url }}{% endautoescape %}{% endblock %}
-{%- endraw -%}

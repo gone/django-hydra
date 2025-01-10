@@ -1,3 +1,0 @@
-{% raw %}
-{% include "account/email/email_confirmation_subject.txt" %}
-{%- endraw -%}

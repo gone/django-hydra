@@ -1,5 +1,0 @@
-{% raw %}
-{% autoescape off %}
-{% trans %}Password Reset E-mail{% endtrans %}
-{% endautoescape %}
-{%- endraw -%}

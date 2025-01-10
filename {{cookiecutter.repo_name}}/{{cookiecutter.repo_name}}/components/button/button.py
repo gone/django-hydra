@@ -73,7 +73,8 @@ class Button(Component):
         if variant == "outline":
             classes.append("btn-outline")
 
-        attrs.setdefault("class", " ".join(classes))
+
+        attrs['class'] = f"{' '.join(classes)} {attrs.get('class', '')}".strip()
 
         # Check for HTMX usage
         is_htmx = any(k.startswith('hx-') for k in attrs.keys())
