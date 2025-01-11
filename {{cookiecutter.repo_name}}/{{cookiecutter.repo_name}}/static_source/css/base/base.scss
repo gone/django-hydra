@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100%;
   overflow-x: hidden;
 
   // Example font-family inclusion
@@ -31,12 +32,16 @@ html {
 }
 
 #app {
-  flex: 1;
-
+  flex: 1 0 auto;
+  flex-direction: column;
   @include no-jitter-scrollbar;
 }
 
 header {
+  @include no-jitter-scrollbar;
+}
+footer {
+  flex-shrink: 0;
   @include no-jitter-scrollbar;
 }
 

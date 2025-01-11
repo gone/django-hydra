@@ -14,9 +14,10 @@ class FooterNavLink(Component):
 class SocialLink(Component):
     template_name = "social_link.html"
 
-    def get_context_data(self, name, href="#", icon_type=None):
+    def get_context_data(self, name, href="#", icon_type=None, size="5"):
         return {
             "href": href,
             "name": name,
-            "icon_type": icon_type or name.lower()
+            "icon_type": icon_type or name.lower(),
+            "size": size,
         }

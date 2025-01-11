@@ -1,0 +1,35 @@
+{% load heroicons %}
+
+<div x-data="{ show: true, init: false }"
+  x-init="
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          init = true;
+          }, 0);
+      });
+      setTimeout(() => { show = false; $el.remove(); }, {{ timeout }})
+  "
+  x-show="show"
+  x-cloak
+  x-transition
+  :class="init ? 'opacity-100' : 'opacity-0'"
+  class="rounded-lg p-4 mt-2 shadow-lg {{ level_class }} alert-message relative overflow-hidden transition-all duration-300  ">
+  <div class="flex items-start">
+    <div class="shrink-0 text-current/60">
+      {% heroicon_solid icon class="h-5 w-5" %}
+    </div>
+    <div class="ml-3">
+      <p class="text-sm font-medium">{{ message }}</p>
+    </div>
+    <div class="ml-auto pl-3">
+      <div class="-mx-1.5 -my-1.5">
+        <button x-on:click="show = false"
+          type="button"
+          class="inline-flex rounded-md p-1.5 text-current/60 hover:bg-current/10 focus:outline-none focus:ring-2 focus:ring-current/20">
+          <span class="sr-only">Dismiss</span>
+          {% heroicon_mini "x-mark" class="h-5 w-5" %}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,8 @@ module.exports = {
     './{{cookiecutter.repo_name}}/templates/**/*.html',
     './{{cookiecutter.repo_name}}/components/**/*.html',
     './{{cookiecutter.repo_name}}/components/**/*.svg',
+    './{{cookiecutter.repo_name}}/components/**/*.py',
+
   ],
   theme: {
     extend: {
@@ -41,6 +43,11 @@ module.exports = {
           '700': '#374151',
           '800': '#1F2937',
           '900': '#111827',
+        },
+        debug: {
+          DEFAULT: 'var(--info)',
+          'focus': 'var(--info-focus)',
+          'content': 'var(--info-content)'
         },
         info: {
           DEFAULT: 'var(--info)',
