@@ -62,7 +62,7 @@ class UserManager(BaseUserManager):
             else:
                 raise ValueError(
                     "You have multiple authentication backends configured and "
-                    "therefore must provide the `backend` argument."
+                    "therefore must provide the `backend` argument.",
                 )
         elif not isinstance(backend, str):
             raise TypeError(f"backend must be a dotted import path string (got {backend}).")
@@ -95,8 +95,7 @@ class User(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
         _("active"),
         default=True,
         help_text=_(
-            "Designates whether this user should be treated as "
-            "active. Unselect this instead of deleting accounts."
+            "Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
         ),
     )
 

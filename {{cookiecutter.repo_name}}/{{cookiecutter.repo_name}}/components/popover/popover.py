@@ -1,5 +1,6 @@
 from django_components import Component, register
 
+
 @register("popover")
 class Popover(Component):
     """

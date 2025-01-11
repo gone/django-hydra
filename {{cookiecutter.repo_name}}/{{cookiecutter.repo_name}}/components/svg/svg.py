@@ -1,5 +1,6 @@
 from django_components import Component, register
 
+
 @register("svg")
 class Svg(Component):
     def get_template_name(self, context):

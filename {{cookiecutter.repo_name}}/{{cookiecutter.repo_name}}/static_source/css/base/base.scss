@@ -18,6 +18,7 @@ body {
 
 html {
   -webkit-tap-highlight-color: transparent;
+
   // For better cross-browser consistency
   width: 100vw;
 }
@@ -34,14 +35,17 @@ html {
 #app {
   flex: 1 0 auto;
   flex-direction: column;
+
   @include no-jitter-scrollbar;
 }
 
 header {
   @include no-jitter-scrollbar;
 }
+
 footer {
   flex-shrink: 0;
+
   @include no-jitter-scrollbar;
 }
 

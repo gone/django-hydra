@@ -1,53 +1,54 @@
 #!/usr/bin/env python
-import os
-from pathlib import Path
-from fnmatch import fnmatch
 import html
-from typing import Set
+import os
+from fnmatch import fnmatch
+from pathlib import Path
 
 MANUAL_EXCLUDES = {
-    'uv.lock',
-    '.pytest_cache',
-    '.coverage',
-    '.ruff_cache',
-    'dist',
-    'build',
-    '__pycache__',
-    '*.pyc',
-    'node_modules',
-    'package-lock.json',
-    '.venv',
-    '.git',
-    'static_source/assets/*',
-    '*.svg',
+    "uv.lock",
+    ".pytest_cache",
+    ".coverage",
+    ".ruff_cache",
+    "dist",
+    "build",
+    "__pycache__",
+    "*.pyc",
+    "node_modules",
+    "package-lock.json",
+    ".venv",
+    ".git",
+    "static_source/assets/*",
+    "*.svg",
 }
 
-def parse_gitignore(gitignore_path: Path) -> Set[str]:
+
+def parse_gitignore(gitignore_path: Path) -> set[str]:
     if not gitignore_path.exists():
         return set()
 
     patterns = set()
-    with open(gitignore_path, 'r') as f:
+    with open(gitignore_path) as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith('#'):
+            if not line or line.startswith("#"):
                 continue
 
             # Normalize pattern
-            if line.startswith('/'):
+            if line.startswith("/"):
                 line = line[1:]
-            if line.endswith('/'):
+            if line.endswith("/"):
                 patterns.add(f"{line}**")
                 line = line[:-1]
 
             patterns.add(line)
             # Add pattern with and without leading **/ to catch both absolute and relative paths
-            if not line.startswith('**/'):
+            if not line.startswith("**/"):
                 patterns.add(f"**/{line}")
 
     return patterns
 
-def should_include(path: Path, gitignore_patterns: Set[str], source_root: Path) -> bool:
+
+def should_include(path: Path, gitignore_patterns: set[str], source_root: Path) -> bool:
     try:
         rel_path = str(path.relative_to(source_root))
     except ValueError:
@@ -65,11 +66,12 @@ def should_include(path: Path, gitignore_patterns: Set[str], source_root: Path) 
 
     return True
 
+
 def export_project(source_dir: str, output_file: str):
     source_path = Path(source_dir).resolve()
-    gitignore_patterns = parse_gitignore(source_path / '.gitignore')
+    gitignore_patterns = parse_gitignore(source_path / ".gitignore")
 
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write("<documents>\n")
 
         file_count = 0
@@ -83,14 +85,16 @@ def export_project(source_dir: str, output_file: str):
                     continue
 
                 try:
-                    with open(file_path, 'r', encoding='utf-8') as src:
+                    with open(file_path, encoding="utf-8") as src:
                         content = src.read()
 
                     relative_path = file_path.relative_to(source_path)
                     f.write(f'<document index="{file_count + 1}">\n')
-                    f.write(f'<source>{html.escape(str(relative_path))}</source>\n')
-                    f.write(f'<document_content>{html.escape(content)}</document_content>\n')
-                    f.write('</document>\n')
+                    f.write(f"<source>{html.escape(str(relative_path))}</source>\n")
+                    f.write(
+                        f"<document_content>{html.escape(content)}</document_content>\n",
+                    )
+                    f.write("</document>\n")
                     file_count += 1
 
                 except UnicodeDecodeError:
@@ -100,11 +104,13 @@ def export_project(source_dir: str, output_file: str):
         f.write("</documents>")
         print(f"Exported {file_count} files")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('source', help='Source directory')
-    parser.add_argument('output', help='Output XML file')
+    parser.add_argument("source", help="Source directory")
+    parser.add_argument("output", help="Output XML file")
     args = parser.parse_args()
 
     export_project(args.source, args.output)

@@ -61,7 +61,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.staticfiles",
-    "django.contrib.humanize", # Handy template tags
+    "django.contrib.humanize",  # Handy template tags
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
@@ -188,7 +188,8 @@ MEDIA_URL = "/media/"
 # django-components
 # ------------------------------------------------------------------------------
 # https://emilstenstrom.github.io/django-components
-from django_components import ComponentsSettings
+from django_components import ComponentsSettings  # noqa F402
+
 COMPONENTS = ComponentsSettings(
     dirs=[
         Path(APP_DIR) / "components",
@@ -226,7 +227,7 @@ TEMPLATES = [
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
-            "loaders": [ ("django.template.loaders.cached.Loader", loaders )] if not DEBUG else loaders,
+            "loaders": [("django.template.loaders.cached.Loader", loaders)] if not DEBUG else loaders,
             "builtins": [
                 "django.templatetags.static",
                 "django_components.templatetags.component_tags",
@@ -301,16 +302,15 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
+        },
     },
     "handlers": {
         "console": {
             "level": "DEBUG",
             "class": "rich.logging.RichHandler",
             "formatter": "verbose",
-        }
+        },
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {

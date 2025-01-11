@@ -14,14 +14,15 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "LOCATION": "radio-kaikan",
-    }
+    },
 }
 
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+    "DJANGO_EMAIL_BACKEND",
+    default="django.core.mail.backends.console.EmailBackend",
 )
 
 # WhiteNoise
@@ -78,8 +79,7 @@ DEBUG_TOOLBAR_CONFIG = {
     ],
     "SHOW_TEMPLATE_CONTEXT": True,
     "RENDER_PANELS": False,
-    "ROOT_TAG_EXTRA_ATTRS": "hx-preserve hx-boost='false'"
-
+    "ROOT_TAG_EXTRA_ATTRS": "hx-preserve hx-boost='false'",
 }
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
@@ -99,7 +99,7 @@ CACHALOT_UNCACHABLE_TABLES = frozenset(
         "silk_sqlquery",
         "silk_profile",
         "silk_request",
-    )
+    ),
 )
 
 CSP_DEFAULT_SRC = [

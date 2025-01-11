@@ -32,7 +32,7 @@ export default function linksInit() {
     link.classList.remove("active");
 
     if (isExternalLink(link)) {
-      link.target = "_blank"; // eslint-disable-line no-param-reassign
+      link.target = "_blank";
     }
 
     if (isCurrentPage(link)) {

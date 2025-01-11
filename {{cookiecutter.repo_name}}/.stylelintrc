@@ -1,47 +1,32 @@
 {
-  "extends": "stylelint-config-standard-scss",
-  "rules": {
-    "at-rule-no-unknown": [ true, {
-      "ignoreAtRules": [
-        "mixin",
-        "include",
-        "extends",
-        "apply",
-        "tailwind",
-        "components",
-        "utilities",
-        "screen",
-        "layer"
-      ]
-    }],
-    "function-url-quotes": ["always", { "except": "empty"}],
-    "block-no-empty": true,
-    "color-no-invalid-hex": true,
-    "declaration-colon-space-after": "always",
-    "scss/at-import-partial-extension": null,
-    "scss/at-rule-no-unknown": [ true, {
-      "ignoreAtRules": [
-        "extends",
-        "apply",
-        "tailwind",
-        "components",
-        "utilities",
-        "screen",
-        "layer"
-      ]
-    }],
-    "indentation": 2,
-    "max-empty-lines": 2,
-    "rule-empty-line-before": [
-      "always",
-      {
-        "except": [
-          "first-nested"
-        ],
-        "ignore": [
-          "after-comment"
+    "extends": "stylelint-config-standard-scss",
+    "reportDescriptionlessDisables": true,
+    "reportInvalidScopeDisables": true,
+    "reportNeedlessDisables": true,
+    "rules": {
+        "function-url-quotes": ["always", { "except": "empty"}],
+        "scss/at-import-partial-extension": null,
+        "scss/at-rule-no-unknown": [ true, {
+            "ignoreAtRules": [
+                "extends",
+                "apply",
+                "tailwind",
+                "components",
+                "utilities",
+                "screen",
+                "layer"
+            ]
+        }],
+        "rule-empty-line-before": [
+            "always",
+            {
+                "except": [
+                    "first-nested"
+                ],
+                "ignore": [
+                    "after-comment"
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 }

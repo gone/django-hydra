@@ -1,5 +1,6 @@
 from django_components import Component, register
 
+
 @register("button")
 class Button(Component):
     """
@@ -48,8 +49,6 @@ class Button(Component):
 
     template_name = "button.html"
 
-
-
     def get_context_data(
         self,
         variant: str = "normal",
@@ -73,11 +72,10 @@ class Button(Component):
         if variant == "outline":
             classes.append("btn-outline")
 
-
-        attrs['class'] = f"{' '.join(classes)} {attrs.get('class', '')}".strip()
+        attrs["class"] = f"{' '.join(classes)} {attrs.get('class', '')}".strip()
 
         # Check for HTMX usage
-        is_htmx = any(k.startswith('hx-') for k in attrs.keys())
+        is_htmx = any(k.startswith("hx-") for k in attrs)
 
         # Handle disabled state
         if disabled:
@@ -85,8 +83,7 @@ class Button(Component):
             attrs["aria-disabled"] = "true"
             attrs["class"] += " disabled"
 
-
         return {
-            'attrs': attrs,
-            'is_htmx': is_htmx,
+            "attrs": attrs,
+            "is_htmx": is_htmx,
         }

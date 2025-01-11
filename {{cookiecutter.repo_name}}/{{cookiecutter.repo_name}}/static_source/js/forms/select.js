@@ -5,9 +5,10 @@ import "tom-select/dist/css/tom-select.bootstrap5.css"; // doesn't actually incl
 const select = () => ({
   init() {
     // give a timeout to let htmx finish swapping content in
+    // eslint-disable-next-line  no-undef
     setTimeout(() => {
       const control = this.$el;
-      // eslint-disable-next-line no-new
+
       new TomSelect(control, {
       });
     }, 80);

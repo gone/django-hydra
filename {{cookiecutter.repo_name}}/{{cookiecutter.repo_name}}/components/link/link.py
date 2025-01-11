@@ -1,5 +1,6 @@
 from django_components import Component, register
 
+
 @register("link")
 class Button(Component):
     """
@@ -9,12 +10,11 @@ class Button(Component):
 
     template_name = "link.html"
 
-
     def get_context_data(
-            self,
-            text: str,
-            url: str,
-            attrs: dict[str, str] | None = None,
+        self,
+        text: str,
+        url: str,
+        attrs: dict[str, str] | None = None,
     ):
         if attrs is None:
             attrs = {}
@@ -26,14 +26,10 @@ class Button(Component):
             "underline",
         ]
 
-        attrs['class'] = f"{' '.join(classes)} {attrs.get('class', '')}".strip()
-
-        # Check for HTMX usage
-        is_htmx = any(k.startswith('hx-') for k in attrs.keys())
-
+        attrs["class"] = f"{' '.join(classes)} {attrs.get('class', '')}".strip()
 
         return {
-            'text': text,
-            'url': url,
-            'attrs': attrs,
+            "text": text,
+            "url": url,
+            "attrs": attrs,
         }

@@ -33,6 +33,7 @@
       @apply focus:ring-primary;
     }
   }
+
   &.btn-secondary {
     @apply bg-secondary text-secondary-content;
     @apply hover:bg-secondary-focus;

@@ -245,3 +245,6 @@ junit.xml
 
 #project export for ai
 output.xml
+
+#stylelint cache
+.stylelintcache

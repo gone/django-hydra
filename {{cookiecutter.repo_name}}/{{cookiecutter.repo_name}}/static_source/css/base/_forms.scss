@@ -1,5 +1,5 @@
-/* stylelint-disable no-descending-specificity */
-/* stylelint-disable block-no-empty */
+/* stylelint-disable no-descending-specificity -- work done by html and not by css */
+/* stylelint-disable block-no-empty -- we need it for the keyframes */
 
 
 /*
@@ -111,6 +111,7 @@ $background-color: #fff;
 
   .password {
     @apply mr-2;
+
     & input,
     & ~ label {
       @apply px-4;
@@ -244,6 +245,7 @@ $background-color: #fff;
 .flatpickr-input {
   @apply focus:ring-0;
 }
+
 // global/admin styling for tom-select
 .ts-wrapper {
   @apply px-4 ring-0;
@@ -302,12 +304,15 @@ $background-color: #fff;
 
 .left-icon {
   @apply absolute left-3 pointer-events-none z-10;
+
   top: $input-center;
   transform: translateY(-50%);
   background-color: transparent;
 }
+
 .right-icon {
   @apply absolute -right-7 pointer-events-none z-10;
+
   top: $input-center;
   transform: translateY(-50%);
   background-color: transparent;
@@ -316,6 +321,7 @@ $background-color: #fff;
 .form-wrapper {
   @apply flex flex-row flex-wrap gap-7;
 }
+
 .errorlist {
   @apply text-red-400 list-none
 }

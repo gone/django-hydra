@@ -30,7 +30,7 @@ bucket_policy = {
             "Principal": "*",
             "Action": ["s3:GetObject"],
             "Resource": f"arn:aws:s3:::{bucketname}/*",
-        }
+        },
     ],
 }
 bucket_policy = json.dumps(bucket_policy)

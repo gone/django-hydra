@@ -4,7 +4,6 @@ from django_htmx.http import HttpResponseClientRedirect
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
-
     permanent = False
 
     def get(self, request, *args, **kwargs):

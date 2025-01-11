@@ -1,5 +1,3 @@
-# pylint: disable=redefined-outer-name
-# flake8: noqa: E800
 import os
 from collections.abc import Generator
 
@@ -34,7 +32,7 @@ def vite() -> None:
 
 
 @pytest.fixture(scope="session")
-def playwright(playwright: Playwright) -> Generator[Playwright, None, None]:
+def playwright(playwright: Playwright) -> Generator[Playwright]:
     """Override of playwright fixture so we can set up for use with Django.
 
     Background: https://github.com/microsoft/playwright-python/issues/439
@@ -45,15 +43,15 @@ def playwright(playwright: Playwright) -> Generator[Playwright, None, None]:
 
 
 @pytest.fixture
-def context(context: BrowserContext) -> Generator[BrowserContext, None, None]:
+def context(context: BrowserContext) -> Generator[BrowserContext]:
     # Uncomment to disable or modify Playwright timeout
-    # context.set_default_timeout(0)  # In milliseconds
+    # context.set_default_timeout(0)  # In milliseconds #noqa ERA001
 
     yield context
 
 
 @pytest.fixture
-def page(page: Page) -> Generator[Page, None, None]:
+def page(page: Page) -> Generator[Page]:
     """Override of playwright page fixture that raises any console errors."""
     page.on("console", raise_error)
 
@@ -71,4 +69,4 @@ def raise_error(msg: ConsoleMessage) -> None:
     if msg.type != "error":
         return
 
-    raise Error(f'error: {msg.text}, {msg.location["url"]}')
+    raise Error(f"error: {msg.text}, {msg.location['url']}")

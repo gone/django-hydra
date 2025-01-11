@@ -23,6 +23,7 @@ htmx.config.historyCacheSize = 0;
 htmx.config.scrollBehavior = "auto";
 
 htmx.defineExtension("get-csrf", {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   onEvent(name: string, evt: any) {
     if (name === "htmx:configRequest") {
       evt.detail.headers["X-CSRFToken"] = Cookies.get(
@@ -33,6 +34,7 @@ htmx.defineExtension("get-csrf", {
 });
 
 htmx.defineExtension("get-timezone", {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   onEvent: function(name: string, evt: any) {
     if (name === "htmx:configRequest") {
       evt.detail.headers["X-Timezone"] = Intl.DateTimeFormat().resolvedOptions().timeZone;

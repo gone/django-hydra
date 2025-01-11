@@ -33,14 +33,12 @@ class UserAdmin(DjangoUserAdmin):
                     "is_superuser",
                     "groups",
                     "user_permissions",
-                )
+                ),
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "created")}),
     )
-    add_fieldsets = (
-        (None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),
-    )
+    add_fieldsets = ((None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),)
 
     add_form = UserCreationForm
     form = UserChangeForm

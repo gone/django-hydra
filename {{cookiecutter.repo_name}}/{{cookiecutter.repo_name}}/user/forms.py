@@ -16,13 +16,14 @@ class LoginForm(AllAuthLoginForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
 class SignupForm(AllAuthSignupForm):
     first_name = forms.CharField(
         label=_("First Name"),
         min_length=1,
         max_length=User._meta.get_field("first_name").max_length,
         widget=forms.TextInput(
-            attrs={"placeholder": _("First Name"), "autocomplete": "given-name"}
+            attrs={"placeholder": _("First Name"), "autocomplete": "given-name"},
         ),
     )
 
@@ -31,7 +32,7 @@ class SignupForm(AllAuthSignupForm):
         min_length=1,
         max_length=User._meta.get_field("last_name").max_length,
         widget=forms.TextInput(
-            attrs={"placeholder": _("Last Name"), "autocomplete": "family-name"}
+            attrs={"placeholder": _("Last Name"), "autocomplete": "family-name"},
         ),
     )
 

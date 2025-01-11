@@ -1,14 +1,13 @@
 from django_components import Component, register
 
+
 @register("footer_nav_link")
 class FooterNavLink(Component):
     template_name = "footer_nav_link.html"
 
     def get_context_data(self, href, text):
-        return {
-            "href": href,
-            "text": text
-        }
+        return {"href": href, "text": text}
+
 
 @register("social_link")
 class SocialLink(Component):
