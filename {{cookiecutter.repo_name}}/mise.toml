@@ -35,7 +35,11 @@ DJANGO_SECURE_HSTS_SECONDS=0
 [tasks]
 export = "./scripts/export_project.py . output.xml"
 uv = "uv sync --extra dev --extra test"
-dev = "./manage.py runserver_plus"
+dev = '''
+trap 'kill $(jobs -p)' EXIT
+npm run dev &
+./manage.py runserver
+'''
 build = "npm run build; ./manage.py collectstatic"
 test = "pytest"
 lint = "pre-commit run --all-files"
