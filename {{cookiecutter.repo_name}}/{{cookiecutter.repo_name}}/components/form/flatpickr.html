@@ -1,0 +1,16 @@
+{% load heroicons %}
+
+<div
+  x-data="dateTime('{{ event_name }}', '{{ value|default:'' }}', {{ enable_time|yesno:'true,false' }})"
+  @click="picker.open()"
+  :class="{ 'has-focus': active }"
+  {% html_attrs attrs %}
+>
+  <input
+    x-ref="picker"
+    x-model="value"
+    type="text"
+    {% html_attrs input %}
+  />
+  {% heroicon_outline "calendar" class="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" %}
+</div>

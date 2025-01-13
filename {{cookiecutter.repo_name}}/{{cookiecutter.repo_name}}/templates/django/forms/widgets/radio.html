@@ -1,0 +1,27 @@
+<div x-data="{value: '{{ widget.value.0 }}' }" x-radio x-model="value" class="radio flex flex-col gap-4">
+{% for group, options, index in widget.optgroups %}
+  {% if group %}
+    <label>{{ group }}</label>
+  {% endif %}
+  {% for option in options %}
+    <div x-radio:option value="{{ option.value }}" class="flex items-center">
+        <input
+          id="{{ option.id }}"
+          type="radio"
+          name="{{ option.name }}"
+          value="{{ option.value }}"
+          x-bind:checked="value === '{{ option.value }}'"
+          class="hidden"
+        >
+        <span
+          :class="{ 'bg-primary': $radioOption.isChecked }"
+          class="radio-choice-ring inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 border-white ring-1 ring-gray-600"
+          aria-hidden="true"
+        ></span>
+        <span class="ml-3">
+          <p x-radio:label>{{ option.label }}</p>
+        </span>
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>

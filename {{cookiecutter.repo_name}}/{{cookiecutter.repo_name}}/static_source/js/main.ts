@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import "./links.ts";
 import "./forms/input.ts";
 import "./forms/select.js";
+import "./forms/date_datetime.js";
 
 if (import.meta.env.MODE !== "development") {
   // // @ts-expect-error  // this whole system is broken w/ vite

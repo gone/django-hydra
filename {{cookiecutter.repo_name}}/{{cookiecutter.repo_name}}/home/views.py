@@ -46,3 +46,15 @@ def FourOhFour(request, exception):
 
 def WorkedLocally(request):
     return server_error(request, template_name="500.html")
+
+from django.views.generic.edit import FormView
+
+from .forms import TestForm
+
+class FormTestView(FormView):
+    template_name = "home/form_test.html"
+    form_class = TestForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        return super().form_invalid(form)

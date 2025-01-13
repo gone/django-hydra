@@ -1,2 +1,7 @@
-{% from 'forms/date_datetime.jinja' import widget_to_date_datetime %}
-{{ widget_to_date_datetime(widget) }}
+{% component "flatpickr"
+  type="date"
+  value=widget.value
+  id=widget.id
+  input:name=widget.name
+  input:required=widget.required
+%}{% endcomponent %}

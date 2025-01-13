@@ -181,6 +181,7 @@ $background-color: #fff;
 
   .input:not(.has-focus).input::placeholder,
   .input:not(.has-focus).textarea::placeholder,
+  .input:not(.has-focus) input::placeholder,
   .password:not(.has-focus) input::placeholder {
     color: transparent;
   }
