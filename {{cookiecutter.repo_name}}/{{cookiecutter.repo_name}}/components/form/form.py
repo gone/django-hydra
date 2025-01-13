@@ -1,8 +1,19 @@
 from django_components import Component, register
+from django.forms import BoundField
+from django.template.loader import get_template
+from django.template.exceptions import TemplateDoesNotExist
 
+@register("form")
+class FormComponent(Component):
+    """Base form component that provides form context to child components"""
+    template_name = "form.html"
+
+    def get_context_data(self, form, **kwargs):
+        return form.get_context()
 
 @register("field")
 class Field(Component):
+    default_classes = " relative h-full w-full"
     def get_template_name(self, context):
         field = context.get("field")
         if not field:
@@ -17,10 +28,14 @@ class Field(Component):
         return "form/input.html"
 
     def get_context_data(self, field, attrs=None):
+        form_ctx = self.inject("form_context")
+        if not form_ctx:
+            raise RuntimeError("Field component must be used within a form component")
+
         attrs = attrs or {}
         # defauts overridden by user passed attrs
-        attrs["class"] = f"relative h-full {field.css_classes(extra_classes=attrs.get('class', ''))}".strip()
-        # checkbox is a little bit of a special snowflakex
+        attrs["class"] = f"{self.default_classes} {field.css_classes(extra_classes=attrs.get('class', ''))}".strip()
+        # checkbox is a little bit of a special snowflake
         if field.widget_type == "checkbox":
             attrs["class"] += " flex items-start"
 
@@ -28,9 +43,47 @@ class Field(Component):
             attrs["class"] += " py-4"
 
         return {
+            "form": form_ctx.form,
             "field": field,
             "attrs": attrs,
         }
+
+@register("widget")
+class Widget(Component):
+    """Renders a widget within a form field context"""
+
+    template = "{{field}}"
+
+    def get_widget_template_name(self, context):
+        field = context.get("field")
+        if not field:
+            raise RuntimeError("Widget component must be used with a field")
+
+        widget = field.field.widget
+        template_name = widget.template_name.replace(
+            'django/forms/widgets/',
+            'form/widgets/'
+        )
+        try:
+            get_template(template_name)
+            return template_name
+        except TemplateDoesNotExist:
+            return 'form/widgets/input.html'
+
+    def get_context_data(self, field, attrs=None, **kwargs):
+        # Get the parent form context
+        form_ctx = self.inject("form_context")
+        if not form_ctx:
+            raise RuntimeError("Widget component must be used within a form component")
+
+        context = {
+            "field": field,
+            **kwargs,
+        }
+        field.field.widget.template_name = self.get_widget_template_name(context)
+
+        return context
+
 
 
 @register("toggle")

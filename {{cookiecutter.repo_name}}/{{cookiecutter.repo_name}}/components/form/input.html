@@ -2,7 +2,7 @@
 
 <div {% html_attrs attrs %}>
   <div class="field {% if field.errors %}error{% endif %} {{field.widget_type}}">
-    {{ field }}
+    {% component "widget" field=field /%}
     {% if field.label %}{{ field.label_tag }}{% endif %}
   </div>
   {% if field.errors %}

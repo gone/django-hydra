@@ -18,8 +18,7 @@ REDIS_URL="redis://localhost:6379"
 DJANGO_DEBUG = "True"
 DJANGO_SECRET_KEY = "your-secret-key-here"
 PYTHONDONTWRITEBYTECODE = "1"  # Prevent Python from writing .pyc files
-
-
+PYTHONBREAKPOINT="pdb.set_trace"
 #required settings for prod to run, sometimes helpful to set locally to run local w/ prod settings
 REDIS_HOST=""
 REDIS_PORT=""

@@ -7,8 +7,7 @@
     <h1 class="text-3xl font-bold mb-8">Form Field Test</h1>
 
     <form method="post" class="max-w-2xl">
-      {% csrf_token %}
-      {{ form }}
+      {% component "form" form=form  /%}
 
       <div class="mt-8">
         {% component "button" attrs:type="submit" %}

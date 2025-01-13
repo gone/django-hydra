@@ -23,11 +23,19 @@ const input = (...args: unknown[]): AlpineComponent<Input> => {
     init() {
       inputListener.call(this);
 
-
       if (this.type === 'checkbox') {
         // For checkboxes, initial state can come from either value or checked attribute
         const input = this.$el as HTMLInputElement;
-        this.value = (value === 'true' || value === 'on' || input.hasAttribute('checked')) ? 'on' : '';
+        this.value = (value === true || value === 'true' || value === 'on' || input.hasAttribute('checked')) ? 'on' : '';
+
+        // Convert boolean true to 'on' for Django compatibility
+        this.$watch('value', (newVal) => {
+          if (newVal === true) {
+            this.value = 'on';
+          } else if (newVal === false) {
+            this.value = '';
+          }
+        });
       } else if (this.value === "None") {
         this.value = "";
       } else if (this.$refs !== undefined && "input" in this.$refs) {

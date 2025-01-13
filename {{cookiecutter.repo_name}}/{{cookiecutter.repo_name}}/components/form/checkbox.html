@@ -1,5 +1,7 @@
 <div  {% html_attrs attrs %}>
-  <div class="flex items-center h-4 w-4">{{ field }}</div>
+  <div class="flex items-center h-4 w-4">
+    {% component "widget" field=field /%}
+  </div>
   <div class="ml-3 flex flex-col">
     {% if field.label %}
       <label for="{{ field.id_for_label }}" class="text-sm font-medium text-gray-700 leading-none -mt-1">
