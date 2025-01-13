@@ -22,6 +22,7 @@ export default defineConfig({
                 components: resolve(__dirname, './{{cookiecutter.project_name}}/static_source/js/components.ts'),
                 main: resolve(__dirname, './{{cookiecutter.project_name}}/static_source/js/main.ts'),
                 styles: resolve(__dirname, './{{cookiecutter.project_name}}/static_source/css/styles.js'),
+                admin: resolve(__dirname, './{{cookiecutter.repo_name}}/static_source/css/admin.js'),
                 raw_tailwind: resolve(__dirname, './{{cookiecutter.project_name}}/static_source/css/tailwind.js'),
             }
         },
