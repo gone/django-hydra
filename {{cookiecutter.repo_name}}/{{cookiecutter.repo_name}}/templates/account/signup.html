@@ -9,8 +9,8 @@
       hx-select="#account-box"
       hx-swap="outerHTML"
       class="flex flex-col">
-    {{ form }}
-    {% csrf_token %}
+
+    {% component "form" form=form  /%}
     {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
