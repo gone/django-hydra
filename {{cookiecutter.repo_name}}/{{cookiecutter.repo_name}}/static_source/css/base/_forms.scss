@@ -54,21 +54,6 @@ $background-color: #fff;
   to {}
 }
 
-.select {
-  overflow-x: visible !important;
-  min-height: $input-height; // prevent flash of content from tom select starting up
-  // basic styles for no js
-  select {
-    border-width: 0;
-    width: 100%;
-  }
-
-  select ~ label {
-    z-index: 2;
-  }
-}
-
-
 .helptext {
   ul {
     list-style: none;
@@ -99,9 +84,7 @@ $background-color: #fff;
   }
 
   & .input,
-  & .input ~ label,
-  & .select,
-  & .select ~ label {
+  & .input ~ label {
     @apply px-4;
   }
 
@@ -164,18 +147,12 @@ $background-color: #fff;
     height: $textarea-height;
   }
 
-  .ts-wrapper + label,
   .input ~ label,
-  .password ~ label,
-  select + label { // default position for input labels
+  .password ~ label { // default position for input labels
     @include label-resting;
   }
 
-  .ts-wrapper.has-items + label,
-  select:-webkit-autofill:hover + label,
-  select:-webkit-autofill:focus + label,
-  .has-focus ~ label,
-  .ts-wrapper.focus + label {
+  .has-focus ~ label {
     @include label-focused;
   }
 
@@ -185,6 +162,94 @@ $background-color: #fff;
   .password:not(.has-focus) input::placeholder {
     color: transparent;
   }
+
+
+  // removes input styling that some browsers apply to autofilled elements
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    @apply ring-0;
+
+    background-clip: text;
+    font-size: inherit;
+  }
+}
+
+
+.left-icon {
+  @apply absolute left-3 pointer-events-none z-10;
+
+  top: $input-center;
+  transform: translateY(-50%);
+  background-color: transparent;
+}
+
+.right-icon {
+  @apply absolute -right-7 pointer-events-none z-10;
+
+  top: $input-center;
+  transform: translateY(-50%);
+  background-color: transparent;
+}
+
+.form-wrapper {
+  @apply flex flex-row flex-wrap gap-7;
+}
+
+.errorlist {
+  @apply text-red-400 list-none
+}
+
+
+
+// styling for flatpickr (generally fine except overriding focus styles)
+.flatpickr-input {
+  @apply focus:ring-0;
+}
+
+
+
+// ------------------tom-select-------------------
+.field.select {
+  @apply px-4;
+  overflow-x: visible !important;
+  min-height: $input-height; // prevent flash of content from tom select starting up
+
+  // basic styles for no js
+  select {
+    border-width: 0;
+    width: 100%;
+  }
+
+  select ~ label {
+    z-index: 2;
+  }
+
+  .ts-wrapper + label,
+  ~ label {
+    @include label-resting;
+  }
+
+  .ts-wrapper:not(.input-active) input::placeholder {
+    color: transparent;
+  }
+
+  .ts-wrapper.has-items + label,
+  select:-webkit-autofill:hover + label,
+  select:-webkit-autofill:focus + label,
+  .has-focus ~ label,
+  .ts-wrapper.focus + label {
+    background-color: transparent !important;
+    @apply pl-4;
+    @include label-focused;
+  }
+
 
   // Font-end styling for tom-select
   .ts-wrapper {
@@ -210,8 +275,7 @@ $background-color: #fff;
     .ts-dropdown {
       margin: 12px 0 0;
       border-radius: 8px;
-      left: -16px;
-      width: calc(100% + 16px);
+      background-color: $background-color;
 
       .ts-dropdown-content {
         padding: 0;
@@ -224,28 +288,8 @@ $background-color: #fff;
       }
     }
   }
-
-  // removes input styling that some browsers apply to autofilled elements
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    @apply ring-0;
-
-    background-clip: text;
-    font-size: inherit;
-  }
 }
 
-// styling for flatpickr (generally fine except overriding focus styles)
-.flatpickr-input {
-  @apply focus:ring-0;
-}
 
 // global/admin styling for tom-select
 .ts-wrapper {
@@ -300,29 +344,4 @@ $background-color: #fff;
       }
     }
   }
-}
-
-
-.left-icon {
-  @apply absolute left-3 pointer-events-none z-10;
-
-  top: $input-center;
-  transform: translateY(-50%);
-  background-color: transparent;
-}
-
-.right-icon {
-  @apply absolute -right-7 pointer-events-none z-10;
-
-  top: $input-center;
-  transform: translateY(-50%);
-  background-color: transparent;
-}
-
-.form-wrapper {
-  @apply flex flex-row flex-wrap gap-7;
-}
-
-.errorlist {
-  @apply text-red-400 list-none
 }
