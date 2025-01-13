@@ -55,7 +55,6 @@ class TestForm(forms.Form):
 
     checkbox = forms.BooleanField(
         label=_("Checkbox"),
-        required=False,
         help_text=_("This is a checkbox field")
     )
 

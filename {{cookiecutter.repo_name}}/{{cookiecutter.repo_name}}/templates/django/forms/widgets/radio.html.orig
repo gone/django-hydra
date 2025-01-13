@@ -6,7 +6,7 @@
   {% for option in options %}
     <div x-radio:option value="{{ option.value }}" class="flex items-center">
         <input
-          id="{{ option.attrs.id }}"
+          id="{{ option.id }}"
           type="radio"
           name="{{ option.name }}"
           value="{{ option.value }}"
