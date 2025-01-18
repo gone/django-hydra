@@ -1,0 +1,66 @@
+# Basic project info
+project_name:
+  type: str
+  help: Project name (directory-friendly syntax)
+  validator: >-
+    {% if not (project_name | regex_match('^[a-z][_a-z]+$')) %}
+    Project name must be lowercase with underscores
+    {% endif %}
+
+project_name_verbose:
+  type: str
+  help: Human-friendly project name
+
+repo_name:
+  type: str
+  help: Repository name
+  default: "{{ project_name | lower | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}"
+
+author_name:
+  type: str
+  help: Author's name for pyproject and django admins
+  default: Anonymous
+
+domain_name:
+  type: str
+  help: Production domain name
+  default: example.com
+
+email:
+  type: str
+  help: Author's email for pyproject and django admins
+  default: "{{ author_name | lower | replace(' ', '-') }}@{{domain_name}}"
+
+description:
+  type: str
+  multiline: true
+  help: A short description of the project
+  default: A short description of the project.
+
+version:
+  type: str
+  help: Initial version number
+  default: 0.1.0
+
+_subdirectory: template
+
+# Templates Customization
+_envops:
+  block_end_string: "%]"
+  block_start_string: "[%"
+  comment_end_string: "#]"
+  comment_start_string: "[#"
+  keep_trailing_newline: true
+  variable_end_string: "]]"
+  variable_start_string: "[["
+
+_tasks:
+  - "chmod +x manage.py"
+  - "chmod +x scripts/*.sh"
+
+_message_after_copy: |
+ Project successfully created!
+ For new projects, run `uv new-project` from the project root to:
+   - setup database
+   - install python packages
+   - install node packages

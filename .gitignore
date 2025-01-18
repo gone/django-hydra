@@ -216,3 +216,25 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 testapp/
+
+
+# gunicorn pid file
+gunicorn.pid
+junit.xml
+
+#yarn stuf
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+#project export for ai
+output.xml
+
+#stylelint cache
+.stylelintcache
+
+
+.mypy_cache/
