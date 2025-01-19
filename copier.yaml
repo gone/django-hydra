@@ -1,20 +1,27 @@
-# Basic project info
 project_name:
   type: str
-  help: Project name (directory-friendly syntax)
+  help: >-
+    Project name - used as both the Python package name and service name.
+    Must be lowercase, start with a letter, and use only letters and underscores.
+    Examples: my_project, awesome_django_app
   validator: >-
-    {% if not (project_name | regex_match('^[a-z][_a-z]+$')) %}
-    Project name must be lowercase with underscores
+    {% if not project_name %}
+    Project name cannot be empty
+    {% endif %}
+    {% if not (project_name | regex_match('^[a-z][a-z_]*[a-z]$')) %}
+    Project name must be lowercase, start and end with a letter, and contain only letters and underscores
+    {% endif %}
+    {% if '_-' in project_name or '-_' in project_name or '__' in project_name %}
+    Project name cannot contain consecutive separators
+    {% endif %}
+    {% if project_name | length > 50 %}
+    Project name must be less than 50 characters
     {% endif %}
 
 project_name_verbose:
   type: str
   help: Human-friendly project name
-
-repo_name:
-  type: str
-  help: Repository name
-  default: "{{ project_name | lower | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}"
+  default: "{{ project_name | replace('_', ' ') | title }}"
 
 author_name:
   type: str

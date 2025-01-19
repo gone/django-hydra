@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export ENV_NAME="{{cookiecutter.repo_name}}"
+export ENV_NAME="{{cookiecutter.project_name}}"
 
 dropdb $ENV_NAME
 heroku pg:pull DATABASE_URL $ENV_NAME --app $ENV_NAME-development

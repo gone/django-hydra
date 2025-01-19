@@ -5,14 +5,14 @@ module.exports = {
     preflight: false,  //manually import this in app.css
   },
   content: [
-    './{{cookiecutter.repo_name}}/static_source/**/*.html',
-    './{{cookiecutter.repo_name}}/static_source/**/*.js',
-    './{{cookiecutter.repo_name}}/static_source/**/*.scss',
-    './{{cookiecutter.repo_name}}/static_source/**/*.sass',
-    './{{cookiecutter.repo_name}}/templates/**/*.html',
-    './{{cookiecutter.repo_name}}/components/**/*.html',
-    './{{cookiecutter.repo_name}}/components/**/*.svg',
-    './{{cookiecutter.repo_name}}/components/**/*.py',
+    './{{cookiecutter.project_name}}/static_source/**/*.html',
+    './{{cookiecutter.project_name}}/static_source/**/*.js',
+    './{{cookiecutter.project_name}}/static_source/**/*.scss',
+    './{{cookiecutter.project_name}}/static_source/**/*.sass',
+    './{{cookiecutter.project_name}}/templates/**/*.html',
+    './{{cookiecutter.project_name}}/components/**/*.html',
+    './{{cookiecutter.project_name}}/components/**/*.svg',
+    './{{cookiecutter.project_name}}/components/**/*.py',
 
   ],
   theme: {

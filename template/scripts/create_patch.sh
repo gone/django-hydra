@@ -42,13 +42,13 @@ ORIGINAL_BRANCH=$(cd ../django-hydra && git branch --show-current)
 # Extract commit message and patch
 COMMIT_MSG=$(git log -1 --format=%B "$PATCH_COMMIT")
 git format-patch --binary --minimal --stdout "$BASE_COMMIT..$PATCH_COMMIT" > "$WORK_DIR/changes.patch"
-sed -i.bak "s/$PROJECT_NAME/{{cookiecutter.repo_name}}/g" "$WORK_DIR/changes.patch"
+sed -i.bak "s/$PROJECT_NAME/{{cookiecutter.project_name}}/g" "$WORK_DIR/changes.patch"
 
 pushd "../django-hydra" >/dev/null
 TEMP_BRANCH="temp_patch_$(date +%s)"
 git checkout -b "$TEMP_BRANCH"
 
-if ! git apply -v --reject --directory="{{cookiecutter.repo_name}}" "$WORK_DIR/changes.patch" ; then
+if ! git apply -v --reject --directory="{{cookiecutter.project_name}}" "$WORK_DIR/changes.patch" ; then
     log_warning "Merge conflicts detected. Resolve the conflicts then:"
     log_warning "1. git add changed files"
     log_warning "2. git commit -m '$COMMIT_MSG'"

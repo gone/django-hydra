@@ -159,7 +159,7 @@ For instructions on customizing or extending the color palette, see the instruct
 Components
 ----------
 
-All generic Jinja components are under the `{{cookiecutter.repo_name}}/templates/components/` directory. The structure follows the
+All generic Jinja components are under the `{{cookiecutter.project_name}}/templates/components/` directory. The structure follows the
 material.ui format of having a folder per component with the js/css/jinja files within, allowing for files to be overwritten and customized
 as needed.
 

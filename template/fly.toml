@@ -1,6 +1,6 @@
 # fly.toml file generated on 2021-12-28T20:18:42-05:00
 
-app = "{{cookiecutter.repo_name}}"
+app = "{{cookiecutter.project_name}}"
 
 kill_signal = "SIGINT"
 kill_timeout = 5

@@ -6,6 +6,6 @@ if [ -d .git ]; then
 else
     echo "Setting up Git"
     git init . -b main
-    git remote add origin "git@github.com:Lightmatter/{{ cookiecutter.repo_name }}.git"
+    git remote add origin "git@github.com:Lightmatter/{{ cookiecutter.project_name }}.git"
     #todo - add all and make initial push
 fi

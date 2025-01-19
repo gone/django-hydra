@@ -2,7 +2,7 @@ previewsEnabled: true
 previewsExpireAfterDays: 5
 services:
     - type: web
-      name: {{cookiecutter.repo_name}}
+      name: {{cookiecutter.project_name}}
       env: python
       previewPlan: starter
       healthCheckPath: /
@@ -15,30 +15,30 @@ services:
         - key: DJANGO_SECRET_KEY
           generateValue: true
         - key: DJANGO_SETTINGS_MODULE
-          value: "{{cookiecutter.repo_name}}.config.settings.prod"
+          value: "{{cookiecutter.project_name}}.config.settings.prod"
         - key: DJANGO_ALLOWED_HOSTS
           fromService:
             type: web
             envVarKey: RENDER_EXTERNAL_HOSTNAME
-            name: {{cookiecutter.repo_name}}
+            name: {{cookiecutter.project_name}}
         - key: DJANGO_DEBUG
           value: false
         - key: DATABASE_URL
           fromDatabase:
-            name: {{cookiecutter.repo_name}}-db
+            name: {{cookiecutter.project_name}}-db
             property: connectionString
         - key: SENTRY_ENVIRONMENT
           fromService:
             type: web
             envVarKey: RENDER_SERVICE_NAME
-            name: {{cookiecutter.repo_name}}
+            name: {{cookiecutter.project_name}}
         - key: SENTRY_RELEASE
           fromService:
             type: web
             envVarKey: RENDER_GIT_COMMIT
-            name: {{cookiecutter.repo_name}}
+            name: {{cookiecutter.project_name}}
         - key: DJANGO_AWS_STORAGE_BUCKET_NAME
-          value: {{cookiecutter.repo_name}}
+          value: {{cookiecutter.project_name}}
         - key: DJANGO_AWS_ACCESS_KEY_ID
           fromService:
             type: web
@@ -95,9 +95,9 @@ services:
 
 
 databases:
-    - name: {{cookiecutter.repo_name}}-db
+    - name: {{cookiecutter.project_name}}-db
       previewPlan: starter
-      databaseName: {{cookiecutter.repo_name}} # optional (Render may add a suffix)
+      databaseName: {{cookiecutter.project_name}} # optional (Render may add a suffix)
       ipAllowList: [] # optional (defaults to allow all)
 
 envVarGroups:
@@ -106,4 +106,4 @@ envVarGroups:
         - key: SENTRY_DSN
           sync: false
         - key: SENTRY_PROJECT
-          value: {{cookiecutter.repo_name}}
+          value: {{cookiecutter.project_name}}

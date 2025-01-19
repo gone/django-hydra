@@ -1,5 +1,5 @@
 [project]
-name = "{{cookiecutter.repo_name}}"
+name = "{{cookiecutter.project_name}}"
 version = "0.1.0"
 description = ""
 authors = ["{{cookiecutter.author_name}} <{{cookiecutter.email}}>"]
@@ -94,11 +94,11 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"{{cookiecutter.repo_name}}/config/settings/*.py" = ["F405"]
-"{{cookiecutter.repo_name}}/home/views.py" = ["N802"]
-"{{cookiecutter.repo_name}}/config/websocket.py" = ["SIM102"]
+"{{cookiecutter.project_name}}/config/settings/*.py" = ["F405"]
+"{{cookiecutter.project_name}}/home/views.py" = ["N802"]
+"{{cookiecutter.project_name}}/config/websocket.py" = ["SIM102"]
 "scripts/export_project.py" = ["SIM110"]
-"{{cookiecutter.repo_name}}/conftest.py" = ["S603", "S607"]
+"{{cookiecutter.project_name}}/conftest.py" = ["S603", "S607"]
 "*tests.py" = ["S105"]
 "*tests/*.py" = ["S105"]
 [tool.ruff.lint.mccabe]
@@ -134,7 +134,7 @@ ignore_errors = true
 omit = [
   "*/migrations/*",
   "manage.py",
-  "{{cookiecutter.repo_name}}/config/*",
+  "{{cookiecutter.project_name}}/config/*",
   "**/tests.py",
 ]
 
@@ -153,7 +153,7 @@ use_gitignore=true
 env_files = [".env", ".env.example"]
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 # https://pytest-django.readthedocs.io/en/latest/database.html#example-work-flow-with-reuse-db-and-create-db
-addopts = ["--reuse-db", "--ds={{cookiecutter.repo_name}}.config.settings.test"]
+addopts = ["--reuse-db", "--ds={{cookiecutter.project_name}}.config.settings.test"]
 markers = ["integration"]
 
 [tool.cruft]

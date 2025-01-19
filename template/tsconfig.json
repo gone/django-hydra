@@ -14,11 +14,11 @@
     "lib": ["esnext", "dom"]
   },
   "include": [
-    "{{cookiecutter.repo_name}}/**/*.ts",
-    "{{cookiecutter.repo_name}}/**/*.d.ts",
-    "{{cookiecutter.repo_name}}/**/*.tsx",
-    "{{cookiecutter.repo_name}}/**/*.vue",
-    "{{cookiecutter.repo_name}}/**/*.js",
+    "{{cookiecutter.project_name}}/**/*.ts",
+    "{{cookiecutter.project_name}}/**/*.d.ts",
+    "{{cookiecutter.project_name}}/**/*.tsx",
+    "{{cookiecutter.project_name}}/**/*.vue",
+    "{{cookiecutter.project_name}}/**/*.js",
     "./*.js",
     "./*.ts"
   ]
