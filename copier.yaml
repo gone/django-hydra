@@ -33,7 +33,7 @@ domain_name:
   help: Production domain name
   default: example.com
 
-email:
+author_email:
   type: str
   help: Author's email for pyproject and django admins
   default: "{{ author_name | lower | replace(' ', '-') }}@{{domain_name}}"
