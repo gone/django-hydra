@@ -28,7 +28,7 @@ htmx.defineExtension("get-csrf", {
   onEvent(name: string, evt: any) {
     if (name === "htmx:configRequest") {
       evt.detail.headers["X-CSRFToken"] = Cookies.get(
-        "{{cookiecutter.project_name}}_csrftoken"
+        "[[project_name]]_csrftoken"
       );
     }
   },

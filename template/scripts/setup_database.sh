@@ -31,12 +31,12 @@ insert_db_user() {
 
 setup_db() {
   #TODO: This doesn't handle test databases correctly
-  RESULT=`psql -l | grep "{{ cookiecutter.project_name }}" | wc -l`
+  RESULT=`psql -l | grep "[[project_name]]" | wc -l`
   if test $RESULT -eq 0; then
       echo "Creating Database";
-      psql -c "create role {{ cookiecutter.project_name }} with createdb encrypted password '{{ cookiecutter.project_name }}' login;"
-      psql -c "alter user {{ cookiecutter.project_name }} superuser;"
-      psql -c "create database {{ cookiecutter.project_name }} with owner {{ cookiecutter.project_name }};"
+      psql -c "create role [[project_name]] with createdb encrypted password '[[project_name]]' login;"
+      psql -c "alter user [[project_name]] superuser;"
+      psql -c "create database [[project_name]] with owner [[project_name]];"
   else
       echo "Database exists"
   fi

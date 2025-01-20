@@ -4,7 +4,7 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 from django.contrib import admin
 from django.urls import include, path, re_path
 
-from {{cookiecutter.project_name}}.home.views import FourHundy, FourOhFour, FourOhThree, WorkedLocally
+from [[project_name]].home.views import FourHundy, FourOhFour, FourOhThree, WorkedLocally
 
 handler400 = FourHundy
 handler403 = FourOhThree
@@ -51,10 +51,10 @@ if settings.DEBUG:
 
 
 urlpatterns += [
-    path("account/", include("{{cookiecutter.project_name}}.user.urls", namespace="user")),
+    path("account/", include("[[project_name]].user.urls", namespace="user")),
     path("account/", include("allauth.urls")),
     path("admin/", admin.site.urls),
     path("hijack/", include("hijack.urls")),
-    path("", include("{{cookiecutter.project_name}}.home.urls")),
+    path("", include("[[project_name]].home.urls")),
     path("", include("django_components.urls")),
 ]

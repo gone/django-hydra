@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONHASHSEED=random
-ENV DJANGO_SETTINGS_MODULE={{ cookiecutter.project_name }}.config.settings.prod
+ENV DJANGO_SETTINGS_MODULE=[[project_name]].config.settings.prod
 
 
 FROM node:lts-alpine AS js-deps
@@ -37,9 +37,9 @@ WORKDIR app
 
 # Install application into container
 COPY . .
-COPY --from=js-deps /{{ cookiecutter.project_name }}/static_source ./{{ cookiecutter.project_name }}/static_source
+COPY --from=js-deps /[[project_name]]/static_source ./[[project_name]]/static_source
 
-ENV DJANGO_SETTINGS_MODULE="{{ cookiecutter.project_name }}.config.settings.prod"
+ENV DJANGO_SETTINGS_MODULE="[[project_name]].config.settings.prod"
 RUN DJANGO_AWS_ACCESS_KEY_ID="" \
     DJANGO_AWS_SECRET_ACCESS_KEY="" \
     DJANGO_AWS_STORAGE_BUCKET_NAME="" \

@@ -3,7 +3,7 @@ Project Structure
 
 Hydra is wholly contained within the Django project folder. All of the backend functionality is defined in apps within the project folders, html/jinja templates and Alpine.js components for additional frontend functionality are defined side by side within a templates folder, and the static assets (such as CSS and TypeScript) that are served by Vite are defined in the static_source. The philosophy is to have things that are related to each other actually next to each other and not have a separate frontend vs backend folder structure.
 
-The folder structure within ``/{{ cookiecutter.project_name }}``  is as follows:
+The folder structure within ``/[[project_name]]``  is as follows:
 
 * ``/config`` - Project settings, asgi settings, and base urls
 * ``/home`` - Handles home page for django, error endpoint, settings context processor
@@ -159,7 +159,7 @@ For instructions on customizing or extending the color palette, see the instruct
 Components
 ----------
 
-All generic Jinja components are under the `{{cookiecutter.project_name}}/templates/components/` directory. The structure follows the
+All generic Jinja components are under the `[[project_name]]/templates/components/` directory. The structure follows the
 material.ui format of having a folder per component with the js/css/jinja files within, allowing for files to be overwritten and customized
 as needed.
 

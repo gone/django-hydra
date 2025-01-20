@@ -1205,7 +1205,7 @@ wheels = [
 ]
 
 [[package]]
-name = "{{cookiecutter.project_name}}"
+name = "[[project_name]]"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

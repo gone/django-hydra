@@ -46,9 +46,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = "{{cookiecutter.project_name}}.config.urls"
+ROOT_URLCONF = "[[project_name]].config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = "{{cookiecutter.project_name}}.config.wsgi.application"
+WSGI_APPLICATION = "[[project_name]].config.wsgi.application"
 
 
 # APPS
@@ -80,9 +80,9 @@ THIRD_PARTY_APPS = [
     "django_components",
 ]
 LOCAL_APPS = [
-    "{{cookiecutter.project_name}}.home.apps.HomeConfig",
-    "{{cookiecutter.project_name}}.user.apps.UserConfig",
-    "{{cookiecutter.project_name}}.util.apps.UtilConfig",
+    "[[project_name]].home.apps.HomeConfig",
+    "[[project_name]].user.apps.UserConfig",
+    "[[project_name]].util.apps.UtilConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -148,8 +148,8 @@ MIDDLEWARE = [
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "hijack.middleware.HijackUserMiddleware",
-    "{{cookiecutter.project_name}}.util.middleware.HTMXMessageMiddleware",
-    "{{cookiecutter.project_name}}.util.middleware.TimezoneMiddleware",
+    "[[project_name]].util.middleware.HTMXMessageMiddleware",
+    "[[project_name]].util.middleware.TimezoneMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django_components.middleware.ComponentDependencyMiddleware",
 ]
@@ -248,7 +248,7 @@ FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 
 def prefixed_cookie(name):
-    return f"{{cookiecutter.project_name}}_{name}"
+    return f"[[project_name]]_{name}"
 
 
 SESSION_COOKIE_NAME = prefixed_cookie("sessionid")
@@ -333,13 +333,13 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
-ACCOUNT_ADAPTER = "{{cookiecutter.project_name}}.user.adapter.HTMXAccountAdapter"
+ACCOUNT_ADAPTER = "[[project_name]].user.adapter.HTMXAccountAdapter"
 
 
 # https://django-allauth.readthedocs.io/en/latest/forms.html#account-forms
 ACCOUNT_FORMS = {
-    "login": "{{cookiecutter.project_name}}.user.forms.LoginForm",
-    "signup": "{{cookiecutter.project_name}}.user.forms.SignupForm",
+    "login": "[[project_name]].user.forms.LoginForm",
+    "signup": "[[project_name]].user.forms.SignupForm",
 }
 
 

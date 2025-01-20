@@ -9,9 +9,9 @@ pre-commit = "latest"
 [env]
 _.python.venv = { path = ".venv", create = true }
 UV_PYTHON="python3.13"
-ENV_NAME="{{cookiecutter.project_name}}"
-DJANGO_SETTINGS_MODULE = "{{cookiecutter.project_name}}.config.settings.local"
-DATABASE_URL = "postgres://{{cookiecutter.project_name}}:{{cookiecutter.project_name}}@localhost:5432/{{cookiecutter.project_name}}"
+ENV_NAME="[[project_name]]"
+DJANGO_SETTINGS_MODULE = "[[project_name]].config.settings.local"
+DATABASE_URL = "postgres://[[project_name]]:[[project_name]]@localhost:5432/[[project_name]]"
 REDIS_URL="redis://localhost:6379"
 
 # Development settings

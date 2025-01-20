@@ -6,11 +6,9 @@ authors = ["Ben Beecher <benbeecher@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-cookiecutter = "^2.6.0"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.13.2"
-retrocookie = "^0.4.3"
 
 [tool.poetry.group.docs.dependencies]
 Sphinx = "^8.1.3"

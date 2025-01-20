@@ -8,8 +8,8 @@ echo "Setting up for a GRRRRREAT DJANGO PROJECT"
 thisdir="${0%/*}"
 
 
-echo "Making Virtual Environment for {{cookiecutter.project_name}}"
-export ENV_NAME="{{cookiecutter.project_name}}"
+echo "Making Virtual Environment for [[project_name]]"
+export ENV_NAME="[[project_name]]"
 
 cp $thisdir/../.env.example $thisdir/../.env;
 export DJANGO_SETTINGS_MODULE=$ENV_NAME.config.settings.local

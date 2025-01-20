@@ -7,7 +7,7 @@
 This project is divided into 2 major parts: Alpine.js to provide additional front end functionality and a Django backend.
 It's the Django server is deployed with precompiled static assets
 
-- `/{{ cookiecutter.project_name }}` - the Django project folder
+- `/[[project_name]]` - the Django project folder
     - `/config` - Project settings, asgi settings, and base urls
     - `/home` - Handles home page for django, error endpoint, settings context processor
     - `/user` - User related logic, views, models, etc.
@@ -214,9 +214,9 @@ NOTE: you must be at the project root to run any `./manage.py ...` or `./scripts
 ### AWS
 - Retrieve Media assets from AWS S3:
     - Set up and configure the AWS CLI: see <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html> for instructions
-        - be sure to set up your AWS config with your {{ cookiecutter.project_name }} credentials: instructions here <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html>
-    - make sure a directory exists with the path [project root]/{{ cookiecutter.project_name }}/media
-    - from the project root run: `aws s3 cp s3://{{ cookiecutter.project_name }}-dev ./{{ cookiecutter.project_name }}/media --recursive` replacing `{{ cookiecutter.project_name }}-dev` with `{{ cookiecutter.project_name }}-prod` or a different s3 bucket name as needed
+        - be sure to set up your AWS config with your [[project_name]] credentials: instructions here <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html>
+    - make sure a directory exists with the path [project root]/[[project_name]]/media
+    - from the project root run: `aws s3 cp s3://[[project_name]]-dev ./[[project_name]]/media --recursive` replacing `[[project_name]]-dev` with `[[project_name]]-prod` or a different s3 bucket name as needed
 
 ## Styleguide
 

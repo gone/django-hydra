@@ -14,12 +14,12 @@ import os
 from django.core.asgi import get_asgi_application
 
 # Import websocket application here, so apps from django_application are loaded first
-from {{cookiecutter.project_name}}.config.websocket import websocket_application  # noqa isort:skip
+from [[project_name]].config.websocket import websocket_application  # noqa isort:skip
 
 # fmt: off
 os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE",
-    "{{cookiecutter.project_name}}.config.settings.prod",
+    "[[project_name]].config.settings.prod",
 )
 # fmt: on
 
