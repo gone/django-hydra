@@ -1,4 +1,3 @@
-{%- raw -%}
 #!/bin/bash
 
 set -euo pipefail
@@ -66,4 +65,3 @@ fi
 git branch -d "$TEMP_BRANCH"
 log_info "Successfully applied changes to template"
 popd >/dev/null
-{%- endraw -%}
