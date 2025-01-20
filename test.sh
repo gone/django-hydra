@@ -8,27 +8,11 @@ YELLOW='\033[1;33m'
 CLEAR='\033[0m'
 
 
-while getopts "k" opt; do
-    case ${opt} in
-        k)
-            echo "Keeping the old env"
-            keepenv=true
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            ;;
-    esac
-done
-
 tmpfolder=""
 appname=sampleapp
 appdir=../$appname
 
 unset DJANGO_SETTINGS_MODULE
-
-if [ "$keepenv" = true ]; then
-    export POETRY_VIRTUALENVS_IN_PROJECT=false
-fi
 
 
 
