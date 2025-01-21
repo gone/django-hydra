@@ -42,7 +42,7 @@ repos:
         name: stylelint
         entry: npx stylelint
         language: node
-        files: ^{{cookiecutter.repo_name}}/static_source/
+        files: ^[[project_name]]/static_source/
         types_or: [css, scss]
         args: [--fix, --allow-empty-input, --cache]
 
@@ -50,14 +50,14 @@ repos:
         name: eslint
         entry: npx eslint
         language: node
-        files: ^{{cookiecutter.repo_name}}/static_source/
+        files: ^[[project_name]]/static_source/
         types_or: [javascript, ts]
         args: [--fix]
 
       - id: tsc
         name: tsc
         entry: npx tsc --noEmit
-        files: ^{{cookiecutter.repo_name}}/static_source/
+        files: ^[[project_name]]/static_source/
         language: system
         types_or: [javascript, ts]
         pass_filenames: false

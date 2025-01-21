@@ -7,14 +7,11 @@ project_name:
   validator: >-
     {% if not project_name %}
     Project name cannot be empty
-    {% endif %}
-    {% if not (project_name | regex_match('^[a-z][a-z_]*[a-z]$')) %}
+    {% else if not (project_name | regex_match('^[a-z][a-z_]*[a-z]$')) %}
     Project name must be lowercase, start and end with a letter, and contain only letters and underscores
-    {% endif %}
-    {% if '_-' in project_name or '-_' in project_name or '__' in project_name %}
+    {% else if '_-' in project_name or '-_' in project_name or '__' in project_name %}
     Project name cannot contain consecutive separators
-    {% endif %}
-    {% if project_name | length > 50 %}
+    {% else if project_name | length > 50 %}
     Project name must be less than 50 characters
     {% endif %}
 

@@ -9,10 +9,10 @@
 {% endblock %}
 {% block title %}
     {% if subtitle %}{{ subtitle }} |{% endif %}
-    {{ title }} | {{ site_title|default:_('Sampleapp site admin') }}
+    {{ title }} | {{ site_title|default:_('[[project_name_verbose]] site admin') }}
 {% endblock %}
 {% block branding %}
     <h1 id="site-name">
-        <a href="{% url 'admin:index' %}">{{ site_header|default:_('Sampleapp administration') }}</a>
+        <a href="{% url 'admin:index' %}">{{ site_header|default:_('[[project_name_verbose]] administration') }}</a>
     </h1>
 {% endblock %}

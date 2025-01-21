@@ -1,7 +1,4 @@
-# In YAML, 'raw' and 'endraw' can't come at the beginning of a token or at the end of a quoted value, which is why they're in weird places. They are
-# needed to escape YAML templating variables, which still allowing cookiecutter to replace the value of the repository name.
-
-name: Django CI{% raw %}
+name: Django CI
 on: pull_request
 
 concurrency:
@@ -69,10 +66,10 @@ jobs:
 
   test:
     name: Django CI
-    runs-on: ubuntu-latest{% endraw %}
+    runs-on: ubuntu-latest
     env:
       DATABASE_URL: "psql://postgres:postgres@localhost/postgres"
-      DJANGO_SETTINGS_MODULE: "{{cookiecutter.repo_name}}.config.settings.test"
+      DJANGO_SETTINGS_MODULE: "[[project_name]].config.settings.test"
       DJANGO_SECRET_KEY: "!!!! Change me !!!!"
 
     steps:

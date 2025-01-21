@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 
-import {{cookiecutter.repo_name}}.util.util
+import [[project_name]].util.util
 
 
 class Migration(migrations.Migration):
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='TestFileModel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file_field', models.ImageField(upload_to={{cookiecutter.repo_name}}.util.util.file_url('filez'), verbose_name='foo')),
+                ('file_field', models.ImageField(upload_to=[[project_name]].util.util.file_url('filez'), verbose_name='foo')),
             ],
             options={
                 'verbose_name': 'test',

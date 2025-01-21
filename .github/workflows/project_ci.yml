@@ -1,6 +1,3 @@
-# In YAML, 'raw' and 'endraw' can't come at the beginning of a token or at the end of a quoted value, which is why they're in weird places. They are
-# needed to escape YAML templating variables, which still allowing cookiecutter to replace the value of the repository name.
-
 # Instructions to clear caches:
 # 1) List all caches for this repo using the Github CLI: gh api  -H "Accept: application/vnd.github+json" /repos/Lightmatter/django-hydra/actions/caches
 # 2) Delete each cache id from the list, e.g.: gh api --method DELETE  -H "Accept: application/vnd.github+json" /repos/Lightmatter/django-hydra/actions/caches/1
