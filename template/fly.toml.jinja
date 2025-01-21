@@ -1,7 +1,7 @@
 # fly.toml file generated on 2021-12-28T20:18:42-05:00
 
 app = "[[project_name]]"
-
+[% raw %]
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -45,3 +45,4 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+[% endraw %]

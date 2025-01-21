@@ -4,21 +4,22 @@ project_name:
     Project name - used as both the Python package name and service name.
     Must be lowercase, start with a letter, and use only letters and underscores.
     Examples: my_project, awesome_django_app
+  default: "sampleapp"
   validator: >-
-    {% if not project_name %}
+    [% if not project_name %]
     Project name cannot be empty
-    {% else if not (project_name | regex_match('^[a-z][a-z_]*[a-z]$')) %}
+    [% elif not (project_name | regex_search('^[a-z][a-z_]*[a-z]$')) %]
     Project name must be lowercase, start and end with a letter, and contain only letters and underscores
-    {% else if '_-' in project_name or '-_' in project_name or '__' in project_name %}
+    [% elif '_-' in project_name or '-_' in project_name or '__' in project_name %]
     Project name cannot contain consecutive separators
-    {% else if project_name | length > 50 %}
+    [% elif project_name | length > 50 %]
     Project name must be less than 50 characters
-    {% endif %}
+    [% endif %]
 
 project_name_verbose:
   type: str
   help: Human-friendly project name
-  default: "{{ project_name | replace('_', ' ') | title }}"
+  default: "[[ project_name | replace('_', ' ') | title ]]"
 
 author_name:
   type: str
@@ -33,7 +34,7 @@ domain_name:
 author_email:
   type: str
   help: Author's email for pyproject and django admins
-  default: "{{ author_name | lower | replace(' ', '-') }}@{{domain_name}}"
+  default: "[[ author_name | lower | replace(' ', '-') ]]@[[domain_name]]"
 
 description:
   type: str
@@ -61,10 +62,11 @@ _envops:
 _tasks:
   - "chmod +x manage.py"
   - "chmod +x scripts/*.sh"
+  - "mise trust"
 
 _message_after_copy: |
  Project successfully created!
- For new projects, run `uv new-project` from the project root to:
+ For new projects, run `mise new-project` from the project root to:
    - setup database
    - install python packages
    - install node packages
