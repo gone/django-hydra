@@ -1,3 +1,4 @@
+{# todo: get widget.required working, but need peer-invalid error messages first #}
 <div x-data="{value: '{{ widget.value.0 }}' }" x-radio x-model="value" class="radio flex flex-col gap-4">
 {% for group, options, index in widget.optgroups %}
   {% if group %}
@@ -6,7 +7,7 @@
   {% for option in options %}
     <div x-radio:option value="{{ option.value }}" class="flex items-center">
         <input
-          id="{{ option.id }}"
+          id="{{ option.attrs.id }}"
           type="radio"
           name="{{ option.name }}"
           value="{{ option.value }}"
