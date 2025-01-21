@@ -125,5 +125,15 @@ echo '  Maybe The Real init Was the Friends We Made Along the Way  '
 echo '-------------------------------------------------------------'
 """
 
+[tasks.make-favicon]
+run = """
+cd [[project_name]]/static_source/img/favicons/
+magick favicon.svg -resize 16x16 favicon-16.png
+magick favicon.svg -resize 32x32 favicon-32.png
+magick favicon.svg -resize 48x48 favicon-48.png
+magick favicon.svg -resize 256x256 favicon-256.png
+magick favicon-16.png favicon-32.png favicon-48.png favicon-256.png favicon.ico
+"""
+
 [settings]
 status.show_env = true

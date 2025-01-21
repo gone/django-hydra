@@ -1,6 +1,10 @@
 <div {% html_attrs attrs %}>
     <div class="boolean-field flex items-center {% if field.errors %}error{% endif %}">
-        {% if field.label %}{{ field.label_tag }}{% endif %}
+      {% if field.label %}
+        {% component "label" field=field %}
+          {{ field.label }}
+        {% endcomponent %}
+      {% endif %}
 
         <div x-data="{ switchOn: {% if field.value %}true{% else %}false{% endif %} }"
              class="relative ml-4 inline-flex items-center">

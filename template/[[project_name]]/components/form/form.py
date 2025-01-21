@@ -1,15 +1,17 @@
-from django_components import Component, register
-from django.forms import BoundField
-from django.template.loader import get_template
 from django.template.exceptions import TemplateDoesNotExist
+from django.template.loader import get_template
+from django_components import Component, register
+
 
 @register("form")
 class FormComponent(Component):
     """Base form component that provides form context to child components"""
+
     template_name = "form.html"
 
     def get_context_data(self, form, **kwargs):
         return form.get_context()
+
 
 @register("field")
 class Field(Component):
@@ -48,6 +50,61 @@ class Field(Component):
             "attrs": attrs,
         }
 
+
+@register("label")
+class Label(Component):
+    """
+    Label component
+
+    Usage:
+    {% component "label" field=field %}
+        Label Text
+    {% endcomponent %}
+
+    Or with custom classes:
+    {% component "label" field=field attrs:class="custom-class" %}
+        Label Text
+    {% endcomponent %}
+    """
+
+    template_name = "form/label.html"
+
+    default_disabled_classes = "translate-y-2 cursor-not-allowed"
+    default_readonly_classes = "-translate-y-2 translate-x-2 text-xs bg-white px-1 cursor-not-allowed"
+    default_classes = "cursor-text transition"
+
+    def get_context_data(self, field, attrs=None):
+        if attrs is None:
+            attrs = {}
+
+        # Base classes for different states
+        if field.field.disabled:
+            classes = self.default_disabled_classes
+        elif field.field.widget.attrs.get("readonly"):
+            classes = self.default_readonly_classes
+        else:
+            classes = self.default_classes
+
+
+        attrs["class"] = f"{classes} {attrs.get("class", "")}".strip()
+
+        attrs["for"] = field.id_for_label
+
+        return {
+            "field": field,
+            "attrs": attrs,
+        }
+
+@register("checkbox_label")
+class CheckboxLabel(Label):
+    """
+    Label component specifically for checkboxes and toggles with different default styling.
+    """
+
+    default_disabled_classes = "cursor-not-allowed"
+    default_readonly_classes = "cursor-not-allowed"
+    default_classes = "text-sm font-medium text-gray-700 leading-none -mt-1"
+
 @register("widget")
 class Widget(Component):
     """Renders a widget within a form field context"""
@@ -60,15 +117,12 @@ class Widget(Component):
             raise RuntimeError("Widget component must be used with a field")
 
         widget = field.field.widget
-        template_name = widget.template_name.replace(
-            'django/forms/widgets/',
-            'form/widgets/'
-        )
+        template_name = widget.template_name.replace("django/forms/widgets/", "form/widgets/")
         try:
             get_template(template_name)
             return template_name
         except TemplateDoesNotExist:
-            return 'form/widgets/input.html'
+            return "form/widgets/input.html"
 
     def get_context_data(self, field, attrs=None, **kwargs):
         # Get the parent form context
@@ -83,7 +137,6 @@ class Widget(Component):
         field.field.widget.template_name = self.get_widget_template_name(context)
 
         return context
-
 
 
 @register("toggle")
@@ -103,14 +156,14 @@ class Toggle(Component):
     template_name = "toggle.html"
 
     # Default classes that can be overridden by subclasses
-    default_wrapper_class = 'flex items-center justify-center'
-    default_label_class = 'text-gray-900 font-medium'
-    default_switch_wrapper_class = 'relative ml-4 inline-flex w-14 rounded-full py-1 transition'
-    default_switch_active_color = 'bg-slate-400'
-    default_switch_inactive_color = 'bg-slate-300'
-    default_switch_inner_class = 'bg-white h-6 w-6 rounded-full transition shadow-md'
-    default_inner_active_class = 'translate-x-7'
-    default_inner_inactive_class = 'translate-x-1'
+    default_wrapper_class = "flex items-center justify-center"
+    default_label_class = "text-gray-900 font-medium"
+    default_switch_wrapper_class = "relative ml-4 inline-flex w-14 rounded-full py-1 transition"
+    default_switch_active_color = "bg-slate-400"
+    default_switch_inactive_color = "bg-slate-300"
+    default_switch_inner_class = "bg-white h-6 w-6 rounded-full transition shadow-md"
+    default_inner_active_class = "translate-x-7"
+    default_inner_inactive_class = "translate-x-1"
 
     def get_context_data(
         self,
@@ -122,7 +175,7 @@ class Toggle(Component):
         attrs=None,
     ):
         attrs = attrs or {}
-        attrs["class"] = f"{self.default_switch_wrapper_class} {attrs.get('class', '')}".strip()
+        attrs["class"] = f"{self.default_switch_wrapper_class} {attrs.get("class", "")}".strip()
 
         return {
             "name": name,
@@ -152,7 +205,7 @@ class Flatpickr(Component):
         {% component "flatpickr" type="datetime" name="my_datetime" value=value %}{% endcomponent %}
 
     Props:
-        type: 'date' or 'datetime' (default: 'date')
+        type: "date" or "datetime" (default: "date")
         name: field name
         value: initial value
         attrs: additional HTML attributes
@@ -171,20 +224,20 @@ class Flatpickr(Component):
 
         enable_time = type == "datetime"
         if enable_time:
-            input['x-mask'] =  "99/99/9999 99:99"
-            input.setdefault('placeholder', "MM/DD/YYYY HH:ii")
+            input["x-mask"] =  "99/99/9999 99:99"
+            input.setdefault("placeholder", "MM/DD/YYYY HH:ii")
         else:
-            input['x-mask'] =  "99/99/9999"
-            input.setdefault('placeholder', "MM/DD/YYYY")
+            input["x-mask"] =  "99/99/9999"
+            input.setdefault("placeholder", "MM/DD/YYYY")
 
-        attrs["class"] = f"{self.default_wrapper_classes} {attrs.get('class', '')}".strip()
+        attrs["class"] = f"{self.default_wrapper_classes} {attrs.get("class", "")}".strip()
         if value:
             attrs["class"] += " has-focus"
 
         input["value"] = value
-        input["class"] = f"{self.default_input_classes} {input.get('class', '')}".strip()
+        input["class"] = f"{self.default_input_classes} {input.get("class", "")}".strip()
 
-        event_name = f"update-{id.replace('_', '-')}" if id else ""
+        event_name = f"update-{id.replace("_", "-")}" if id else ""
         return {
             "type": type,
             "value": value,

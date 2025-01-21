@@ -7,6 +7,7 @@ class TestForm(forms.Form):
     text_input = forms.CharField(
         label=_("Text Input"),
         help_text=_("This is a basic text input field"),
+        widget=forms.TextInput(attrs={"placeholder": "this is a text input"}),
         required=False,
     )
 
@@ -33,10 +34,10 @@ class TestForm(forms.Form):
     select = forms.ChoiceField(
         label=_("Select"),
         choices=[
-            ('', 'Select an option'),
-            ('1', 'Option 1'),
-            ('2', 'Option 2'),
-            ('3', 'Option 3'),
+            ("", "Select an option"),
+            ("1", "Option 1"),
+            ("2", "Option 2"),
+            ("3", "Option 3"),
         ],
         help_text=_("This is a select field"),
         required=False,
@@ -46,9 +47,9 @@ class TestForm(forms.Form):
         label=_("Radio"),
         widget=forms.RadioSelect,
         choices=[
-            ('1', 'Radio 1'),
-            ('2', 'Radio 2'),
-            ('3', 'Radio 3'),
+            ("1", "Radio 1"),
+            ("2", "Radio 2"),
+            ("3", "Radio 3"),
         ],
         help_text=_("This is a radio field")
     )

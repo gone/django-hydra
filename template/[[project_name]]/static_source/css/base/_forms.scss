@@ -218,6 +218,7 @@ $background-color: #fff;
 // ------------------tom-select-------------------
 .field.select {
   @apply px-4;
+
   overflow-x: visible !important;
   min-height: $input-height; // prevent flash of content from tom select starting up
 
@@ -246,6 +247,7 @@ $background-color: #fff;
   .has-focus ~ label,
   .ts-wrapper.focus + label {
     background-color: transparent !important;
+
     @apply pl-4;
     @include label-focused;
   }

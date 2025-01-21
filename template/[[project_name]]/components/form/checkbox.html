@@ -4,9 +4,9 @@
   </div>
   <div class="ml-3 flex flex-col">
     {% if field.label %}
-      <label for="{{ field.id_for_label }}" class="text-sm font-medium text-gray-700 leading-none -mt-1">
+      {% component "checkbox_label" field=field %}
         {{ field.label }}
-      </label>
+      {% endcomponent %}
     {% endif %}
     {% if field.help_text %}
       <p class="helptext text-sm text-gray-500" id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</p>
