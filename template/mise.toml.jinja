@@ -43,7 +43,93 @@ build = "npm run build; ./manage.py collectstatic"
 test = "pytest"
 lint = "pre-commit run --all-files"
 clean = ["rm -rf .venv", "rm -rf node_modules"]
+setup-js = "npm install; npm run build"
+pre-commit =  "pre-commit run"
 
+
+[tasks.migrate]
+description = "run django migrations"
+wait_for = ["uv"]
+run = "./manage.py migrate"
+
+
+[tasks."db:check"]
+description = "Check if current user has PostgreSQL permissions"
+file = "mise-tasks/db/check"
+hide = true # Hide from task list since it's a dependency
+[tasks."db:create-user"]
+description = "Create PostgreSQL user for current system user"
+file = "mise-tasks/db/create-user"
+depends = ["db:check"]
+hide = true # Hide from task list since it's a dependency
+
+[tasks."db:create-database"]
+description = "Set up project database"
+file = "mise-tasks/db/setup"
+depends = ["db:create-user"]
+
+[tasks."db:finished"]
+quiet = true
+run = "echo 'omae wa mou shindeiru'"
+
+[tasks."db:init-migrate"]
+description = "Set up database and run migrations"
+wait_for = ["uv"]
+run = "./manage.py migrate"
+
+[tasks."db:init"]
+description = "Set up database and run migrations"
+depends = ["db:create-database", "db:init-migrate"]
+depends_post = ["db:finished"]
+
+[tasks."init:git"]
+description = "Initialize git repository if not already setup"
+depends = ["uv"]
+run = """
+#!/usr/bin/env bash
+source mise-tasks/utils/colors
+
+if [ -d .git ]; then
+    color_info "Git repository already initialized"
+else
+    color_info "Initializing new Git repository..."
+    git init . -b master
+    color_success "Git repository initialized on main branch"
+    color_info "Adding initial files..."
+    git add .
+    git commit -m "Initial commit"
+    color_success "Created initial commit"
+fi
+"""
+
+[tasks."init:js"]
+description = "Initialize javascript"
+depends = ["setup-js"]
+
+
+[tasks."init:pre-commit"]
+wait_for = ["uv", "init:git", "init:js"]
+run = """
+pre-commit install --install-hooks
+pre-commit run --all-files
+"""
+
+[tasks."init:started"]
+quiet = true
+run = "echo 'Setting up for a GRRRRREAT DJANGO PROJECT'"
+
+[tasks."init:finished"]
+quiet = true
+run = """
+echo '-------------------------------------------------------------'
+echo '  Maybe The Real init Was the Friends We Made Along the Way  '
+echo '-------------------------------------------------------------'
+"""
+
+[tasks.new-project]
+description = "Set up project"
+depends = ["init:started", "uv", "init:js", "db:init","init:git", "init:pre-commit"]
+depends_post = ["init:finished"]
 
 [settings]
 status.show_env = true

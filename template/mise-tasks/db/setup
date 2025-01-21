@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# @desc Set up project database
+# @depends db:create-user
+
+set -euo pipefail
+
+# Source colors
+source "$(dirname "$0")/../utils/colors"
+
+# Get project name from mise config
+project_name=$ENV_NAME
+
+if [ -z "$project_name" ]; then
+  color_error "Error: project_name not set in mise.toml"
+  exit 1
+fi
+
+# Check if database exists
+if [ "$(psql -tAc "SELECT 1 FROM pg_database WHERE datname='$project_name'" postgres)" != "1" ]; then
+  color_info "Creating project database..."
+  if psql postgres -c "create role $project_name with createdb encrypted password '$project_name' login;" &&\
+     psql postgres -c "alter user $project_name superuser;" &&\
+     psql postgres -c "create database $project_name with owner $project_name;"; then
+    color_success "Project database created successfully"
+  else
+    color_error "Failed to create project database"
+    exit 1
+  fi
+else
+  color_warning "Project database already exists"
+fi

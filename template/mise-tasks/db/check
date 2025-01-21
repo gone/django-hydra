@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# @desc Check if current user has PostgreSQL permissions
+
+set -euo pipefail
+
+# Source colors
+source "$(dirname "$0")/../utils/colors"
+
+if ! psql postgres -c '\du' &>/dev/null; then
+  color_error "PostgreSQL permissions not configured for current user"
+  exit 1
+fi
+
+color_success "PostgreSQL permissions verified"
