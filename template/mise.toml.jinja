@@ -74,6 +74,7 @@ wait_for = ["uv"]
 run = "./manage.py migrate"
 
 [tasks."db:init"]
+quiet = true
 description = "Set up database and run migrations"
 depends = ["db:create-database", "db:init-migrate"]
 run = "echo 'omae wa mou shindeiru'"
@@ -115,6 +116,7 @@ quiet = true
 run = "echo 'Setting up for a GRRRRREAT DJANGO PROJECT'"
 
 [tasks.new-project]
+quiet = true
 description = "Set up project"
 depends = ["init:started", "uv", "init:js", "db:init","init:git", "init:pre-commit"]
 run = """

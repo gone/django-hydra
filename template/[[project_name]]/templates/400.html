@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {% translate "Forbidden (403)" %}
+    {% translate "Bad Request (400)" %}
 {% endblock title %}
 
 {% block content %}
   <div class="container mx-auto text-center ">
     <div class="mt-56" >
-      <h1>{% translate "Forbidden (403)" %}</h1>
-    <p>
+      <h1>{% translate "Bad Request (400)" %}</h1>
+      <p>
         {% if exception %}
             {{ exception }}
         {% else %}
-            {% translate "You're not allowed to access this page." %}
+            {% translate "This request was a bad, bad request." %}
         {% endif %}
     </p>
     </div>
