@@ -1,0 +1,6 @@
+.link {
+  @apply cursor-pointer no-underline;
+  @apply text-indigo-600;
+  @apply hover:underline;
+  @apply hover:text-indigo-800;
+}

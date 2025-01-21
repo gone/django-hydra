@@ -68,10 +68,6 @@ description = "Set up project database"
 file = "mise-tasks/db/setup"
 depends = ["db:create-user"]
 
-[tasks."db:finished"]
-quiet = true
-run = "echo 'omae wa mou shindeiru'"
-
 [tasks."db:init-migrate"]
 description = "Set up database and run migrations"
 wait_for = ["uv"]
@@ -80,7 +76,7 @@ run = "./manage.py migrate"
 [tasks."db:init"]
 description = "Set up database and run migrations"
 depends = ["db:create-database", "db:init-migrate"]
-depends_post = ["db:finished"]
+run = "echo 'omae wa mou shindeiru'"
 
 [tasks."init:git"]
 description = "Initialize git repository if not already setup"
@@ -118,18 +114,14 @@ pre-commit run --all-files
 quiet = true
 run = "echo 'Setting up for a GRRRRREAT DJANGO PROJECT'"
 
-[tasks."init:finished"]
-quiet = true
+[tasks.new-project]
+description = "Set up project"
+depends = ["init:started", "uv", "init:js", "db:init","init:git", "init:pre-commit"]
 run = """
 echo '-------------------------------------------------------------'
 echo '  Maybe The Real init Was the Friends We Made Along the Way  '
 echo '-------------------------------------------------------------'
 """
-
-[tasks.new-project]
-description = "Set up project"
-depends = ["init:started", "uv", "init:js", "db:init","init:git", "init:pre-commit"]
-depends_post = ["init:finished"]
 
 [settings]
 status.show_env = true

@@ -7,14 +7,14 @@ interface Input {
   [key: symbol]: unknown;
   //real types
   eventName: string;
-  value: string;
+  value: string | boolean;
   type: string;
   active: boolean;
 }
 
 
 const input = (...args: unknown[]): AlpineComponent<Input> => {
-  const [eventName, value, type] = args as [string, string, string];
+  const [eventName, value, type] = args as [string, string | boolean, string];
   return {
     eventName,
     value,
@@ -26,13 +26,15 @@ const input = (...args: unknown[]): AlpineComponent<Input> => {
       if (this.type === 'checkbox') {
         // For checkboxes, initial state can come from either value or checked attribute
         const input = this.$el as HTMLInputElement;
-        this.value = (value === true || value === 'true' || value === 'on' || input.hasAttribute('checked')) ? 'on' : '';
+        this.value = (
+          value == true || value === 'on' || input.hasAttribute('checked')
+        ) ? 'on' : '';
 
         // Convert boolean true to 'on' for Django compatibility
-        this.$watch('value', (newVal) => {
-          if (newVal === true) {
+        this.$watch('value', (newVal: string | boolean) => {
+          if (newVal == true) {
             this.value = 'on';
-          } else if (newVal === false) {
+          } else {
             this.value = '';
           }
         });
