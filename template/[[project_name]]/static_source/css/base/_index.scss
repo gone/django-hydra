@@ -1,8 +1,8 @@
-@import "colors";
-@import "typography";
-@import "fonts";
-@import "forms";
-@import "flatpickr";
+@forward "colors";
+@forward "typography";
+@forward "fonts";
+@forward "forms";
+@forward "flatpickr";
 
 /* sticky footer */
 body {

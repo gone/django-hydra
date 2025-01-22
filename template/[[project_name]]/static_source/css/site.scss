@@ -1,0 +1,9 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles. We import preflight manually to allow
+ * admin to not use it
+ */
+@use "tailwindcss/lib/css/preflight";
+@use "tailwind";
+@use "base";
+@use "components";

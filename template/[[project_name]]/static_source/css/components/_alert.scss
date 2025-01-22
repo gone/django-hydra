@@ -1,4 +1,6 @@
-.alert-message {
-  transform: translateZ(0); /* Force GPU acceleration */
-  backface-visibility: hidden;
+@layer components {
+  .alert-message {
+    transform: translateZ(0); /* Force GPU acceleration */
+    backface-visibility: hidden;
+  }
 }

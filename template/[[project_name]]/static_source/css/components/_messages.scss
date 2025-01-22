@@ -1,6 +1,8 @@
-.messages {
-  position: fixed;
-  left: 40px;
-  bottom: 40px;
-  list-style: none;
+@layer components {
+  .messages {
+    position: fixed;
+    left: 40px;
+    bottom: 40px;
+    list-style: none;
+  }
 }
