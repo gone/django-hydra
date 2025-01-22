@@ -4,11 +4,9 @@
     {% fill "trigger" %}
       <span class="sr-only">Open user menu</span>
       <div class="flex items-center justify-between w-full">
-        <img
-          class="h-8 w-8 rounded-full"
-          src="{{ avatar_url|default:'' }}"
-          alt="{{ user_name|default:'Profile' }}"
-        >
+        <img class="h-8 w-8 rounded-full"
+             src="{{ avatar_url|default:'' }}"
+             alt="{{ user_name|default:'Profile' }}">
         <span class="flex items-center gap-2">
           {{ user_name }}
           {% if show_chevron|default:True %}

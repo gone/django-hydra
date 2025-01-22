@@ -1,17 +1,14 @@
 {% extends "base.html" %}
 {% load heroicons %}
-
 {% block title %}
-    Index
+  Index
 {% endblock title %}
-
 {% block content %}
   <div class="container mx-auto">
     <h1>
       <em class="text-2xl font-bold">Hello There!</em>
     </h1>
     <div id="current-time">{% include "samples/current_time.html" %}</div>
-
     {% component "button"
       attrs:hx-get="{% url 'current_time' %}"
       attrs:hx-target="#current-time"
@@ -30,10 +27,9 @@
     {% component "button"
       variant="outline"
       attrs:hx-get="{% url 'test_refresh' %}"
-    %}
+      %}
       Test hx-refresh with messages
     {% endcomponent %}
-
     <div class="flex flex-col items-start">
       {% component "popover" button_class="group flex items-center rounded-lg w-full p-1 hover:bg-gray-800/10" %}
         {% fill "trigger" %}
@@ -42,22 +38,10 @@
           {% endcomponent %}
         {% endfill %}
         {% fill "content" %}
-          <a
-            href="#"
-            class="block w-full px-4 py-2 text-sm transition-colors"
-          >
-            Menu Item One
-          </a>
-
-          <a
-            href="#"
-            class="block w-full px-4 py-2 text-sm transition-colors"
-          >
-            Menu Item two
-          </a>
-      {% endfill %}
-    {% endcomponent %}
-
+          <a href="#" class="block w-full px-4 py-2 text-sm transition-colors">Menu Item One</a>
+          <a href="#" class="block w-full px-4 py-2 text-sm transition-colors">Menu Item two</a>
+        {% endfill %}
+      {% endcomponent %}
       {% component "modal" %}
         {% fill "title" %}
           welcome to hydra!
@@ -66,23 +50,18 @@
           This is a hydra modal
         {% endfill %}
       {% endcomponent %}
-
       {% component "tabs" %}
-
         {% component "tab_item" header="TabOne" %}
           <div class="bg-slate-500">
             <h4 class="text-red-900">Testing 123</h4>
           </div>
         {% endcomponent %}
-
         {% component "tab_item" header="TabTwo" %}
           <div class="bg-green-500">
             <h4 class="text-blue-900">Testing 124</h4>
           </div>
         {% endcomponent %}
-
       {% endcomponent %}
-
+    </div>
   </div>
-</div>
 {% endblock content %}

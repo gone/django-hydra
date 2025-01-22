@@ -1,20 +1,14 @@
 {% extends "base.html" %}
-
 {% block title %}
-    {% translate "Page not found" %}
+  {% translate "Page not found" %}
 {% endblock title %}
-
 {% block content %}
   <div class="container mx-auto text-center ">
-    <div class="mt-56" >
+    <div class="mt-56">
       <h1>{% translate "Page not found" %}</h1>
+      <p>{% translate "This is not the page you were looking for." %}</p>
       <p>
-      {% translate "This is not the page you were looking for." %}
-      </p>
-      <p>
-        {% if exception %}
-            {{ exception }}
-        {% endif %}
+        {% if exception %}{{ exception }}{% endif %}
       </p>
     </div>
   </div>

@@ -1,17 +1,15 @@
 {% extends "base.html" %}
-
 {% block title %}
-    {% translate "Server Error" %}
+  {% translate "Server Error" %}
 {% endblock title %}
-
 {% block content %}
   <div class="container mx-auto text-center ">
-    <div class="mt-56" >
-    <h1>{% translate "Ooops!!! 500" %}</h1>
-    <h3>{% translate "Looks like something went wrong!" %}</h3>
-    <p>
+    <div class="mt-56">
+      <h1>{% translate "Ooops!!! 500" %}</h1>
+      <h3>{% translate "Looks like something went wrong!" %}</h3>
+      <p>
         {% translate "We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing." %}
-    </p>
+      </p>
     </div>
   </div>
 {% endblock content %}

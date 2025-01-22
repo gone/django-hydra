@@ -1,20 +1,18 @@
 {% extends "base.html" %}
-
 {% block title %}
-    {% translate "Bad Request (400)" %}
+  {% translate "Bad Request (400)" %}
 {% endblock title %}
-
 {% block content %}
   <div class="container mx-auto text-center ">
-    <div class="mt-56" >
+    <div class="mt-56">
       <h1>{% translate "Bad Request (400)" %}</h1>
       <p>
         {% if exception %}
-            {{ exception }}
+          {{ exception }}
         {% else %}
-            {% translate "This request was a bad, bad request." %}
+          {% translate "This request was a bad, bad request." %}
         {% endif %}
-    </p>
+      </p>
     </div>
   </div>
 {% endblock content %}

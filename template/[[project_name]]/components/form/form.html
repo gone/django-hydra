@@ -1,15 +1,13 @@
 {% provide "form_context" form=form %}
 <div class="form-wrapper justify-between mb-6">
   {{ errors }}
-
   {% csrf_token %}
-
   {% for field, errors in fields %}
     {% component "field" field=field /%}
   {% endfor %}
   <span class="hidden-inputs hidden">
     {% for field in hidden_fields %}
-      {% component "field" field=field /%}
+      {% component "field" field=field / %}
     {% endfor %}
   </span>
 </div>

@@ -1,37 +1,37 @@
 {% extends "account/account_base.html" %}
-
-{% block title %}{{ block.super }}| {% translate "Register" %}{% endblock title %}
-{% block account_title %}{% translate "Register" %}{% endblock account_title %}
-
+{% block title %}
+  {{ block.super }}| {% translate "Register" %}
+{% endblock title %}
+{% block account_title %}
+  {% translate "Register" %}
+{% endblock account_title %}
 {% block account_content %}
-<form hx-post="{% url 'account_signup' %}"
-      hx-target="#account-box"
-      hx-select="#account-box"
-      hx-swap="outerHTML"
-      class="flex flex-col">
-
-    {% component "form" form=form /%}
+  <form hx-post="{% url 'account_signup' %}"
+        hx-target="#account-box"
+        hx-select="#account-box"
+        hx-swap="outerHTML"
+        class="flex flex-col">
+    {% component "form" form=form / %}
     {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      <input type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}" />
     {% endif %}
     {% component "button" attrs:type="submit" %}
-        {% translate "Create Account" %}
+      {% translate "Create Account" %}
     {% endcomponent %}
-</form>
-<a class="link mb-10" href="{% url 'account_login' %}">{% translate "Already have an account?" %}</a>
+  </form>
+  <a class="link mb-10" href="{% url 'account_login' %}">{% translate "Already have an account?" %}</a>
 
-<div class="relative">
+  <div class="relative">
     <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-gray-300"></div>
+      <div class="w-full border-t border-gray-300"></div>
     </div>
     <div class="relative flex justify-center text-sm">
-        <span class="px-2 bg-white text-gray-500">{% translate "Or" %}</span>
+      <span class="px-2 bg-white text-gray-500">{% translate "Or" %}</span>
     </div>
-</div>
-
-<div class="mt-6">
-    <div class="grid grid-cols-3 gap-3">
-        {% include "account/snippets/social_login_buttons.html" %}
-    </div>
-</div>
+  </div>
+  <div class="mt-6">
+    <div class="grid grid-cols-3 gap-3">{% include "account/snippets/social_login_buttons.html" %}</div>
+  </div>
 {% endblock account_content %}

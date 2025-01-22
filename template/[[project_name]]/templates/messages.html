@@ -1,5 +1,3 @@
 {% for message in messages %}
-    <li hx-swap-oob="afterbegin:#messages">
-      {% component "alert" message=message /%}
-    </li>
+  <li hx-swap-oob="afterbegin:#messages">{% component "alert" message=message / %}</li>
 {% endfor %}

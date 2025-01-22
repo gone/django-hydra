@@ -2,13 +2,10 @@
   <div x-tabs:list {% html_attrs labels_list_attrs %}>
     {% for tab in tabs %}
       <button x-tabs:tab
-        type="button"
-        :class="$tab.isSelected && '{{ selected_class }}'"
-        {% html_attrs tab.attrs %}
-        {% if tab.disabled %}disabled="disabled"{% endif %}
-      >
-        {{ tab.header }}
-      </button>
+              type="button"
+              :class="$tab.isSelected && '{{ selected_class }}'"
+              {% html_attrs tab.attrs %}
+              {% if tab.disabled %}disabled="disabled"{% endif %}>{{ tab.header }}</button>
     {% endfor %}
   </div>
   <div x-tabs:panels {% html_attrs panels_list_attrs %}>

@@ -1,20 +1,21 @@
 {% if not request or not request.user.is_authenticated %}
   <div class="flex-shrink-0">
     <a href="{% url 'account_login' %}"
-      class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-grey-600 hover:bg-grey-50">
+       class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-grey-600 hover:bg-grey-50">
       Sign in
     </a>
   </div>
 {% else %}
-<div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-  {% component "profile-popover"
-    avatar_url="https://images.unsplash.com/photo-1601814933824-fd0b574dd592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1112&q=80"
-    user_name=request.user.get_full_name
-    user_email=request.user.email
-  %}
-    {% include "header/profile_menu_item.html" with label="Your Profile" icon="user" only %}
-    {% include "header/profile_menu_item.html" with label="Settings" icon="cog-6-tooth" only %}
-    {% url 'account_logout' as logout_url %}{% include "header/profile_menu_item.html" with label="Sign out" href=logout_url icon="arrow-right-start-on-rectangle" only %}
-  {% endcomponent %}
-</div>
+  <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+    {% component "profile-popover"
+      avatar_url="https://images.unsplash.com/photo-1601814933824-fd0b574dd592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1112&q=80"
+      user_name=request.user.get_full_name
+      user_email=request.user.email
+    %}
+      {% include "header/profile_menu_item.html" with label="Your Profile" icon="user" only %}
+      {% include "header/profile_menu_item.html" with label="Settings" icon="cog-6-tooth" only %}
+      {% url 'account_logout' as logout_url %}
+      {% include "header/profile_menu_item.html" with label="Sign out" href=logout_url icon="arrow-right-start-on-rectangle" only %}
+    {% endcomponent %}
+  </div>
 {% endif %}

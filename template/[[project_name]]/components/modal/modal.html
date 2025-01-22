@@ -1,6 +1,6 @@
 {% load heroicons %}
-
-<div x-data="{ open:{{ open|yesno:'true,false' }} }" class="flex justify-center">
+<div x-data="{ open:{{ open|yesno:'true,false' }} }"
+     class="flex justify-center">
   <!-- Trigger -->
   <span x-on:click="open=true">
     {% slot "trigger" %}
@@ -9,30 +9,32 @@
       {% endcomponent %}
     {% endslot %}
   </span>
-
   <!-- Modal -->
-  <div
-    x-dialog
-    x-model="open"
-    x-cloak
-    class="fixed inset-0 overflow-y-auto z-10"
-  >
+  <div x-dialog
+       x-model="open"
+       x-cloak
+       class="fixed inset-0 overflow-y-auto z-10">
     <!-- Overlay -->
-    <div x-dialog:overlay x-transition.opacity class="fixed inset-0 bg-black/25"></div>
-
+    <div x-dialog:overlay
+         x-transition.opacity
+         class="fixed inset-0 bg-black/25"></div>
     <!-- Panel -->
     <div class="relative flex min-h-screen items-center justify-center p-4">
-      <div x-dialog:panel x-trap="open" x-transition class="relative rounded-xl shadow-lg bg-white min-w-96 max-w-xl p-6">
+      <div x-dialog:panel
+           x-trap="open"
+           x-transition
+           class="relative rounded-xl shadow-lg bg-white min-w-96 max-w-xl p-6">
         <!-- Close Button -->
         {% slot "close" %}
           <div class="absolute right-0 top-0 mr-4 mt-4">
-            <button type="button" @click="$dialog.close()" class="relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-transparent p-1.5 font-medium text-gray-400 hover:bg-gray-800/10 hover:text-gray-800">
+            <button type="button"
+                    @click="$dialog.close()"
+                    class="relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-transparent p-1.5 font-medium text-gray-400 hover:bg-gray-800/10 hover:text-gray-800">
               <span class="sr-only">Close modal</span>
               {% heroicon_micro "x-mark" %}
             </button>
           </div>
         {% endslot %}
-
         <!-- Body -->
         <div>
           {% slot "body" %}
@@ -41,7 +43,6 @@
               {% slot "title" %}
               {% endslot "title" %}
             </h2>
-
             <!-- Content -->
             {% slot "content" required default %}
               <div class="mt-2 text-gray-500 max-w-xs">
@@ -50,7 +51,6 @@
             {% endslot %}
           {% endslot %}
         </div>
-
         <!-- Footer -->
         <div class="mt-6 flex justify-end space-x-2">
           {% slot "footer" %}

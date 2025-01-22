@@ -1,20 +1,18 @@
 {% extends "base.html" %}
-
 {% block title %}
-    {% translate "Forbidden (403)" %}
+  {% translate "Forbidden (403)" %}
 {% endblock title %}
-
 {% block content %}
   <div class="container mx-auto text-center ">
-    <div class="mt-56" >
-    <h1>{% translate "Forbidden (403)" %}</h1>
-    <p>
+    <div class="mt-56">
+      <h1>{% translate "Forbidden (403)" %}</h1>
+      <p>
         {% if exception %}
-            {{ exception }}
+          {{ exception }}
         {% else %}
-            {% translate "You're not allowed to access this page." %}
+          {% translate "You're not allowed to access this page." %}
         {% endif %}
-    </p>
+      </p>
     </div>
   </div>
 {% endblock content %}

@@ -1,37 +1,38 @@
 <div {% html_attrs attrs %}>
-    <div class="boolean-field flex items-center {% if field.errors %}error{% endif %}">
-      {% if field.label %}
-        {% component "label" field=field %}
-          {{ field.label }}
-        {% endcomponent %}
+  <div class="boolean-field flex items-center
+              {% if field.errors %}error{% endif %}">
+    {% if field.label %}
+      {% component "label" field=field %}
+        {{ field.label }}
+      {% endcomponent %}
+    {% endif %}
+    <div x-data="{ switchOn:
+      {% if field.value %}
+        true
+      {% else %}
+        false
       {% endif %}
-
-        <div x-data="{ switchOn: {% if field.value %}true{% else %}false{% endif %} }"
-             class="relative ml-4 inline-flex items-center">
-            <input type="checkbox"
-                   name="{{ field.name }}"
-                   id="{{ field.id_for_label }}"
-                   x-model="switchOn"
-                   class="hidden"
-                   {% if field.required %}required{% endif %}
-                   {% if field.disabled %}disabled{% endif %}>
-
-            <button type="button"
-                    @click="switchOn = !switchOn"
-                    :class="switchOn ? 'bg-slate-400' : 'bg-slate-300'"
-                    class="relative inline-flex w-14 rounded-full py-1 transition"
-                    {% if field.disabled %}disabled{% endif %}>
-                <span :class="switchOn ? 'translate-x-7' : 'translate-x-1'"
-                      class="bg-white h-6 w-6 rounded-full transition shadow-md">
-                </span>
-            </button>
-        </div>
+      }" class="relative ml-4 inline-flex items-center">
+      <input type="checkbox"
+             name="{{ field.name }}"
+             id="{{ field.id_for_label }}"
+             x-model="switchOn"
+             class="hidden"
+             {% if field.required %}required{% endif %}
+             {% if field.disabled %}disabled{% endif %}>
+      <button type="button"
+              @click="switchOn = !switchOn"
+              :class="switchOn ? 'bg-slate-400' : 'bg-slate-300'"
+              class="relative inline-flex w-14 rounded-full py-1 transition"
+              {% if field.disabled %}disabled{% endif %}>
+        <span :class="switchOn ? 'translate-x-7' : 'translate-x-1'"
+              class="bg-white h-6 w-6 rounded-full transition shadow-md"></span>
+      </button>
     </div>
-
-    {% if field.errors %}
-        <div class="text-error">{{ field.errors }}</div>
-    {% endif %}
-    {% if field.help_text %}
-        <p class="helptext text-sm text-gray-500" id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</p>
-    {% endif %}
+  </div>
+  {% if field.errors %}<div class="text-error">{{ field.errors }}</div>{% endif %}
+  {% if field.help_text %}
+    <p class="helptext text-sm text-gray-500"
+       id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</p>
+  {% endif %}
 </div>

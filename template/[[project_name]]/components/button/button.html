@@ -1,12 +1,18 @@
 {% if not href %}
   <button {% html_attrs attrs defaults:type="button" %}>
     {% if is_htmx %}
-      <img width="10px" height="10px" class="htmx-indicator" src="{% static "img/loading.svg" %}" alt="loading" />
+      <img width="10px"
+           height="10px"
+           class="htmx-indicator"
+           src="{% static "img/loading.svg" %}"
+           alt="loading" />
     {% endif %}
-    {% slot "content" default required %}{% endslot %}
+    {% slot "content" default required %}
+    {% endslot %}
   </button>
 {% else %}
   <a {% html_attrs attrs %}>
-    {% slot "content" default required %}{% endslot %}
+    {% slot "content" default required %}
+    {% endslot %}
   </a>
 {% endif %}

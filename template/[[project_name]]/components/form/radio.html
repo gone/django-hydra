@@ -4,11 +4,10 @@
       {{ field.label }}
     {% endcomponent %}
   </legend>
-  {% component "widget" field=field /%}
+  {% component "widget" field=field / %}
   {% if field.help_text %}
-    <p class="helptext mt-2 text-sm text-gray-500" id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</p>
+    <p class="helptext mt-2 text-sm text-gray-500"
+       id="{{ field.auto_id }}_helptext">{{ field.help_text|safe }}</p>
   {% endif %}
-  {% if field.errors %}
-    <div class="text-error">{{ field.errors }}</div>
-  {% endif %}
+  {% if field.errors %}<div class="text-error">{{ field.errors }}</div>{% endif %}
 </fieldset>
