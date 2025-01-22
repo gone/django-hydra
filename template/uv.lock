@@ -313,18 +313,6 @@ wheels = [
 ]
 
 [[package]]
-name = "django-cachalot"
-version = "2.7.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/47/37/24b5344f682808d0f5488ef154e8ddb0d9c65a68e155ded7787d080667a3/django_cachalot-2.7.0.tar.gz", hash = "sha256:834b95d5cffdc8953018a33a4e16ef63c8cfe2226a4dc36573e8bf3d62130175", size = 74110 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/91/13/6290ac3e7ba6643585aa38e3bd448a99927f61a9004229847d129e9f8137/django_cachalot-2.7.0-py3-none-any.whl", hash = "sha256:a96fa16a25dc07110770d0bde0b01b444c065c7693d4c162c75da9e447f1750c", size = 55475 },
-]
-
-[[package]]
 name = "django-components"
 version = "0.124"
 source = { registry = "https://pypi.org/simple" }

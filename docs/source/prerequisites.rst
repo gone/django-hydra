@@ -68,7 +68,6 @@ Hydra
 * `django-anymail <https://github.com/anymail/django-anymail>`_: Extension for Django's core mailing feature that allows sending and receiving from several popular email service providers
 * `django-vite <https://github.com/MrBin99/django-vite>`_: Plugin for using Vite in the Django ecosystem. For a detailed explanation of how Vite builds the frontend, see the Compiling and Deplyment section
 * `tblib <https://github.com/ionelmc/python-tblib>`_: Serialization library for Exceptions and Tracebacks
-* `django-cachalot <https://github.com/noripyt/django-cachalot>`_: Cache management for Django ORM queries
 * `redis <https://github.com/redis/redis>`_: Used for caching and as a message broker
 * `hiredis <https://github.com/redis/hiredis>`_: C client library for Redis
 * `django-redis <https://github.com/jazzband/django-redis>`_: Redis cache backend for Django that provides convenience methods for managing redis

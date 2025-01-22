@@ -68,7 +68,6 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.signals.SignalsPanel",
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
-    "cachalot.panels.CachalotPanel",
 ]
 
 
@@ -91,16 +90,6 @@ SILKY_INTERCEPT_PERCENT = 100
 SILKY_MAX_REQUEST_BODY_SIZE = 1024  # If request body>1kb, don't log
 SILKY_MAX_RESPONSE_BODY_SIZE = 1024  # If response body>1kb, don't log
 SILKY_META = True  # Record how much time silky is adding to each request
-
-CACHALOT_UNCACHABLE_TABLES = frozenset(
-    (
-        "django_migrations",
-        "silk_response",
-        "silk_sqlquery",
-        "silk_profile",
-        "silk_request",
-    ),
-)
 
 CSP_DEFAULT_SRC = [
     "'self'",
