@@ -148,10 +148,9 @@ format_attribute_template_tags=true
 custom_blocks="component,slot,fill"
 
 [tool.pytest.ini_options]
-env_files = [".env", ".env.example"]
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 # https://pytest-django.readthedocs.io/en/latest/database.html#example-work-flow-with-reuse-db-and-create-db
-addopts = ["--reuse-db", "--ds=[[project_name]].config.settings.test"]
+addopts = ["--reuse-db", "-m not integration", "--ds=[[project_name]].config.settings.test"]
 markers = ["integration"]
 
 [dependency-groups]

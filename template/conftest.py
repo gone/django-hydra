@@ -2,7 +2,7 @@ import os
 from collections.abc import Generator
 
 import pytest
-from playwright.sync_api import BrowserContext, ConsoleMessage, Error, Page, Playwright
+from playwright.sync_api import BrowserContext, ConsoleMessage, Error, Page, Playwright, expect
 
 
 # See https://docs.pytest.org/en/7.1.x/reference/reference.html#pytest.hookspec.pytest_collection_modifyitems
@@ -45,7 +45,7 @@ def playwright(playwright: Playwright) -> Generator[Playwright]:
 @pytest.fixture
 def context(context: BrowserContext) -> Generator[BrowserContext]:
     # Uncomment to disable or modify Playwright timeout
-    # context.set_default_timeout(0)  # In milliseconds #noqa ERA001
+    context.set_default_timeout(1000)  # 1 second in milliseconds
 
     yield context
 
@@ -54,7 +54,8 @@ def context(context: BrowserContext) -> Generator[BrowserContext]:
 def page(page: Page) -> Generator[Page]:
     """Override of playwright page fixture that raises any console errors."""
     page.on("console", raise_error)
-
+    page.set_default_timeout(1000)  # For actions like click/fill
+    expect.set_options(timeout=1000)  # For assertions
     yield page
 
 

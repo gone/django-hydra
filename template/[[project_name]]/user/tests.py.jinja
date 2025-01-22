@@ -113,7 +113,7 @@ def test_login_badpass_live(page: Page, live_server, super_user):
     page.click("button[type=submit]")
 
     expect(page.locator(".errorlist")).to_contain_text(
-        "The e-mail address and/or password you specified are not correct.",
+        "The email address and/or password you specified are not correct.",
     )
 
 
@@ -186,7 +186,7 @@ def test_register_live(page: Page, live_server, form_data):
 
     page.fill('input[name="email"]', form_data["email"])
 
-    page.fill('input[placeholder="E-mail address confirmation"]', form_data["email2"])
+    page.fill('input[placeholder="Email address confirmation"]', form_data["email2"])
     page.fill('input[placeholder="First Name"]', form_data["first_name"])
     page.fill('input[placeholder="Last Name"]', form_data["last_name"])
     page.fill('input[placeholder="Password"]', form_data["password1"])
@@ -205,7 +205,7 @@ def test_register_bad_repeat_email_live(page: Page, live_server, form_data):
 
     page.fill('input[name="email"]', form_data["email"])
 
-    page.fill('input[placeholder="E-mail address confirmation"]', "email@bademail.com")
+    page.fill('input[placeholder="Email address confirmation"]', "email@bademail.com")
     page.fill('input[placeholder="First Name"]', form_data["first_name"])
     page.fill('input[placeholder="Last Name"]', form_data["last_name"])
     page.fill('input[placeholder="Password"]', form_data["password1"])
@@ -225,7 +225,7 @@ def test_register_bad_repeat_pass1_live(page: Page, live_server, form_data):
     expect(header).to_have_text("Register")
 
     page.fill('input[name="email"]', form_data["email"])
-    page.fill('input[placeholder="E-mail address confirmation"]', form_data["email2"])
+    page.fill('input[placeholder="Email address confirmation"]', form_data["email2"])
     page.fill('input[placeholder="First Name"]', form_data["first_name"])
     page.fill('input[placeholder="Last Name"]', form_data["last_name"])
     page.fill('input[placeholder="Password"]', form_data["password1"])
