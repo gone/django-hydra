@@ -20,9 +20,6 @@ if (import.meta.env.MODE !== "development") {
 // Turn off the history cache - have found this is generally error prone
 htmx.config.historyCacheSize = 0;
 
-// Optional behavior - will remove scroll to top animation for boosted pages
-htmx.config.scrollBehavior = "auto";
-
 htmx.defineExtension("get-csrf", {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   onEvent(name: string, evt: any) {
