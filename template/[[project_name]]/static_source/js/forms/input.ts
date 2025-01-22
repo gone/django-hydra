@@ -26,18 +26,21 @@ const input = (...args: unknown[]): AlpineComponent<Input> => {
       if (this.type === 'checkbox') {
         // For checkboxes, initial state can come from either value or checked attribute
         const input = this.$el as HTMLInputElement;
-        this.value = (
-          value == true || value === 'on' || input.hasAttribute('checked')
-        ) ? 'on' : '';
+        const isChecked = value == true || value === 'on' || input.hasAttribute('checked');
+        this.value = isChecked ? 'on' : '';
+        input.checked = isChecked;
 
         // Convert boolean true to 'on' for Django compatibility
         this.$watch('value', (newVal: string | boolean) => {
-          if (newVal == true) {
-            this.value = 'on';
-          } else {
-            this.value = '';
-          }
+          const checked = newVal === true || newVal === 'on';
+          input.checked = checked;
+          this.value = checked ? 'on' : '';
         });
+        // Also watch the input's checked state
+        input.addEventListener('change', () => {
+          this.value = input.checked ? 'on' : '';
+        });
+
       } else if (this.value === "None") {
         this.value = "";
       } else if (this.$refs !== undefined && "input" in this.$refs) {

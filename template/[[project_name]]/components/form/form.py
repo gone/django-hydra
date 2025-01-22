@@ -16,6 +16,7 @@ class FormComponent(Component):
 @register("field")
 class Field(Component):
     default_classes = " relative h-full w-full"
+
     def get_template_name(self, context):
         field = context.get("field")
         if not field:
@@ -86,7 +87,7 @@ class Label(Component):
             classes = self.default_classes
 
 
-        attrs["class"] = f"{classes} {attrs.get("class", "")}".strip()
+        attrs["class"] = f"{classes} {attrs.get('class', '')}".strip()
 
         attrs["for"] = field.id_for_label
 
@@ -94,6 +95,7 @@ class Label(Component):
             "field": field,
             "attrs": attrs,
         }
+
 
 @register("checkbox_label")
 class CheckboxLabel(Label):
@@ -104,6 +106,7 @@ class CheckboxLabel(Label):
     default_disabled_classes = "cursor-not-allowed"
     default_readonly_classes = "cursor-not-allowed"
     default_classes = "text-sm font-medium text-gray-700 leading-none -mt-1"
+
 
 @register("widget")
 class Widget(Component):
@@ -175,7 +178,7 @@ class Toggle(Component):
         attrs=None,
     ):
         attrs = attrs or {}
-        attrs["class"] = f"{self.default_switch_wrapper_class} {attrs.get("class", "")}".strip()
+        attrs["class"] = f"{self.default_switch_wrapper_class} {attrs.get('class', '')}".strip()
 
         return {
             "name": name,
@@ -212,6 +215,7 @@ class Flatpickr(Component):
         disabled: whether the field is disabled
         readonly: whether the field is readonly
     """
+
     template_name = "flatpickr.html"
     default_wrapper_classes = "w-full input"
     default_input_classes = "w-full rounded-md border border-gray-200 px-3 py-2.5"
@@ -224,20 +228,20 @@ class Flatpickr(Component):
 
         enable_time = type == "datetime"
         if enable_time:
-            input["x-mask"] =  "99/99/9999 99:99"
+            input["x-mask"] = "99/99/9999 99:99"
             input.setdefault("placeholder", "MM/DD/YYYY HH:ii")
         else:
-            input["x-mask"] =  "99/99/9999"
+            input["x-mask"] = "99/99/9999"
             input.setdefault("placeholder", "MM/DD/YYYY")
 
-        attrs["class"] = f"{self.default_wrapper_classes} {attrs.get("class", "")}".strip()
+        attrs["class"] = f"{self.default_wrapper_classes} {attrs.get('class', '')}".strip()
         if value:
             attrs["class"] += " has-focus"
 
         input["value"] = value
-        input["class"] = f"{self.default_input_classes} {input.get("class", "")}".strip()
+        input["class"] = f"{self.default_input_classes} {input.get('class', '')}".strip()
 
-        event_name = f"update-{id.replace("_", "-")}" if id else ""
+        event_name = f"update-{id.replace('_', '-')}" if id else ""
         return {
             "type": type,
             "value": value,

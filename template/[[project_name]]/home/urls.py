@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic.base import TemplateView
 
-from .views import current_time, error, test_message_redirect, test_message_refresh, FormTestView
+from .views import FormTestView, current_time, error, test_message_redirect, test_message_refresh
 
 urlpatterns = [
     path("form-test/", FormTestView.as_view(), name="form_test"),
