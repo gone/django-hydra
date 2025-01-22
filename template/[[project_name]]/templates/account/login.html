@@ -1,11 +1,10 @@
 {% extends "account/account_base.html" %}
 
 {% block title %}
- {{block.super}} | Welcome back!
-{% endblock %}
+ {{ block.super }} | Welcome back!
+{% endblock title %}
 
-{% block account_title %}{% translate "Sign In" %}{% endblock %}
-
+{% block account_title %}{% translate "Sign In" %}{% endblock account_title %}
 
 {% block account_content %}
   <form hx-post="{% url 'account_login' %}"
@@ -13,7 +12,7 @@
     hx-select="#account-box"
     hx-swap="outerHTML"
     class="flex flex-col">
-    {% component "form" form=form  /%}
+    {% component "form" form=form /%}
     {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
@@ -37,4 +36,4 @@
     {% include "account/snippets/social_login_buttons.html" %}
   </div>
 </div>
-{% endblock %}
+{% endblock account_content %}

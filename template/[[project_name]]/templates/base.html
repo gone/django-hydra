@@ -11,13 +11,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         {% block opengraph %}
-            {% include 'components/open_graph_tags.html' with title="TODO | Home" url="TODO" description="TODO" image_url="TODO" %}
+            {% include "components/open_graph_tags.html" with title="TODO | Home" url="TODO" description="TODO" image_url="TODO" %}
         {% endblock opengraph %}
-        <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}" />
+        <link rel="icon" href="{% static "img/favicons/favicon.ico" %}" />
         {% vite_hmr_client %}
-        {% vite_asset 'css/styles.js' %}
-        {% vite_asset 'js/components.ts' %}
-        {% vite_asset 'js/main.ts' %}
+        {% vite_asset "css/styles.js" %}
+        {% vite_asset "js/components.ts" %}
+        {% vite_asset "js/main.ts" %}
         {% django_htmx_script %}
         <title>
             {% block title %}

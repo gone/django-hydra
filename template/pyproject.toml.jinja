@@ -103,7 +103,6 @@ ignore = [
 "*tests.py" = ["S105"]
 "*tests/*.py" = ["S105"]
 [tool.ruff.lint.mccabe]
-# Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
 
 [tool.ruff.lint.isort]
@@ -143,12 +142,12 @@ omit = [
 context = 10
 
 [tool.djlint]
-ignore = ["H006", "H023", "T002"]
-profile = "jinja"
+ignore = "H006,H023,T002"
+profile = "django"
 indent = 2
-max_line_length=92
-max_attribute_length=6
 use_gitignore=true
+format_attribute_template_tags=true
+custom_blocks="component,slot,fill"
 
 [tool.pytest.ini_options]
 env_files = [".env", ".env.example"]
@@ -156,9 +155,6 @@ python_files = ["tests.py", "test_*.py", "*_tests.py"]
 # https://pytest-django.readthedocs.io/en/latest/database.html#example-work-flow-with-reuse-db-and-create-db
 addopts = ["--reuse-db", "--ds=[[project_name]].config.settings.test"]
 markers = ["integration"]
-
-[tool.cruft]
-skip = [".git", "node_modules"]
 
 [dependency-groups]
 dev = [

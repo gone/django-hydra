@@ -12,9 +12,9 @@
     user_name=request.user.get_full_name
     user_email=request.user.email
   %}
-    {% include "header/profile_menu_item.html" with label="Your Profile" icon="user"  only %}
+    {% include "header/profile_menu_item.html" with label="Your Profile" icon="user" only %}
     {% include "header/profile_menu_item.html" with label="Settings" icon="cog-6-tooth" only %}
-    {% url 'account_logout' as logout_url %}{% include "header/profile_menu_item.html" with label="Sign out" href=logout_url icon="arrow-right-start-on-rectangle"  only %}
+    {% url 'account_logout' as logout_url %}{% include "header/profile_menu_item.html" with label="Sign out" href=logout_url icon="arrow-right-start-on-rectangle" only %}
   {% endcomponent %}
 </div>
 {% endif %}

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Form Test{% endblock %}
+{% block title %}Form Test{% endblock title %}
 
 {% block content %}
   <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8">Form Field Test</h1>
 
     <form method="post" class="max-w-2xl">
-      {% component "form" form=form  /%}
+      {% component "form" form=form /%}
 
       <div class="mt-8">
         {% component "button" attrs:type="submit" %}
@@ -16,4 +16,4 @@
       </div>
     </form>
   </div>
-{% endblock %}
+{% endblock content %}

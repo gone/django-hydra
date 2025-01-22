@@ -1,6 +1,6 @@
 {% extends "account/account_base.html" %}
 
-{% block account_title %}{% translate "Sign Out" %}{% endblock %}
+{% block account_title %}{% translate "Sign Out" %}{% endblock account_title %}
 
 {% block account_content %}
   <p class="mb-10 text-center">{% translate "Are you sure you want to sign out?" %}</p>
@@ -13,4 +13,4 @@
       {% translate "Sign Out" %}
     {% endcomponent %}
   </form>
-{% endblock %}
+{% endblock account_content %}

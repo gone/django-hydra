@@ -1,7 +1,7 @@
 {% load heroicons %}
 
 <div {% html_attrs attrs %}>
-  <div class="field {% if field.errors %}error{% endif %} {{field.widget_type}}">
+  <div class="field {% if field.errors %}error{% endif %} {{ field.widget_type }}">
     {% component "widget" field=field /%}
       {% if field.label %}
         {% component "label" field=field %}

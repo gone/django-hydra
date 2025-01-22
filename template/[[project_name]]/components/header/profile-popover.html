@@ -10,7 +10,7 @@
           alt="{{ user_name|default:'Profile' }}"
         >
         <span class="flex items-center gap-2">
-          {{user_name}}
+          {{ user_name }}
           {% if show_chevron|default:True %}
             {% heroicon_micro "chevron-down" %}
           {% endif %}

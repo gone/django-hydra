@@ -9,7 +9,7 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-x-0"
          x-transition:leave-end="opacity-0 -translate-x-1"
-         style="display: none;">
+        >
         <div class="pt-2 pb-3 space-y-1">
             <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
             <a href="#"
@@ -25,6 +25,7 @@
             <div class="flex items-center px-4 sm:px-6">
                 <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full"
+                         height="40" width="40"
                          src="https://images.unsplash.com/photo-1601814933824-fd0b574dd592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1112&q=80"
                          alt="{{ request.user.first_name }} {{ request.user.last_name }} Profile">
                 </div>

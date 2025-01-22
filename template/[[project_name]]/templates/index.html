@@ -12,7 +12,6 @@
     </h1>
     <div id="current-time">{% include "samples/current_time.html" %}</div>
 
-
     {% component "button"
       attrs:hx-get="{% url 'current_time' %}"
       attrs:hx-target="#current-time"
@@ -59,10 +58,7 @@
       {% endfill %}
     {% endcomponent %}
 
-
-
-
-      {% component "modal"  %}
+      {% component "modal" %}
         {% fill "title" %}
           welcome to hydra!
         {% endfill %}
@@ -70,7 +66,6 @@
           This is a hydra modal
         {% endfill %}
       {% endcomponent %}
-
 
       {% component "tabs" %}
 

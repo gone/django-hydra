@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %}Account{% endblock %}
+{% block title %}Account{% endblock title %}
 
 {% block content %}
   <div class="mt-20 sm:mx-auto sm:w-full sm:max-w-md" id="account-box">
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex flex-col justify-center relative">
       <div class="absolute top-0 left-3">
         {% block account_back %}
-        {% endblock %}
-        </div><span></span>
-      <img class="mx-auto h-12 w-auto" src="{% static 'img/logo.svg' %}" alt="logo">
-      <h2 class="mt-2 mb-4 text-center text-xl font-bold text-gray-900">{% block account_title %}{% endblock %}</h2>
-      {% block account_content %}{% endblock %}
+        {% endblock account_back %}
+      </div><span></span>
+      <img height="256" width="256" class="mx-auto h-12 w-auto" src="{% static 'img/logo.svg' %}" alt="logo">
+      <h2 class="mt-2 mb-4 text-center text-xl font-bold text-gray-900">{% block account_title %}{% endblock account_title %}</h2>
+      {% block account_content %}{% endblock account_content %}
     </div>
   </div>
-{% endblock %}
+{% endblock content %}
