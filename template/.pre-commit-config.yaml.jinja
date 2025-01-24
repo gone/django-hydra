@@ -36,10 +36,12 @@ repos:
   - repo: https://github.com/djlint/djLint
     rev: v1.36.4
     hooks:
-      - id: djlint-reformat-django
-        files: "\\.html"
+      # TODO: Turn on when this works with django component and alpine.js
+      # - id: djlint-reformat-django
+      #   files: "\\.html"
       - id: djlint-django
         files: "\\.html"
+
   # TODO:  https://github.com/adamchainz/pre-commit-oxipng
 
 

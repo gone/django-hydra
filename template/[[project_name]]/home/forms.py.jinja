@@ -55,28 +55,16 @@ class TestForm(forms.Form):
         help_text=_("This is a radio field"),
     )
 
-    checkbox = forms.BooleanField(
-        label=_("Checkbox"),
-        help_text=_("This is a checkbox field")
-    )
+    checkbox = forms.BooleanField(label=_("Checkbox"), help_text=_("This is a checkbox field"))
 
     toggle = forms.BooleanField(
-        label=_("Toggle"),
-        required=False,
-        widget=ToggleWidget,
-        help_text=_("This is a toggle field")
+        label=_("Toggle"), required=False, widget=ToggleWidget, help_text=_("This is a toggle field")
     )
 
-    date = forms.DateField(
-        label=_("Date"),
-        widget=forms.DateInput,
-        help_text=_("This is a date field")
-    )
+    date = forms.DateField(label=_("Date"), widget=forms.DateInput, help_text=_("This is a date field"))
 
     datetime = forms.DateTimeField(
-        label=_("DateTime"),
-        widget=forms.DateTimeInput,
-        help_text=_("This is a datetime field")
+        label=_("DateTime"), widget=forms.DateTimeInput, help_text=_("This is a datetime field")
     )
 
     favorite_colors = forms.MultipleChoiceField(
@@ -91,6 +79,6 @@ class TestForm(forms.Form):
         help_text=_("Select your favorite colors"),
         required=True,
         error_messages={
-            'required': _('Please select at least one color.'),
-        }
+            "required": _("Please select at least one color."),
+        },
     )

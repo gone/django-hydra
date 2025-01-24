@@ -15,7 +15,6 @@ jobs:
         with:
           path: |
             ~/.cache/pre-commit
-            ~/.cache/mise
             node_modules
           key: precommit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml', '**/package-lock.json') }}
           restore-keys: |
@@ -32,13 +31,14 @@ jobs:
       DATABASE_URL: "psql://postgres:postgres@localhost/postgres"
       DJANGO_SETTINGS_MODULE: "[[project_name]].config.settings.test"
       DJANGO_SECRET_KEY: "!!!! Change me !!!!"
+      UV_CACHE_DIR: /tmp/.uv-cache
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
           path: |
-            ~/.cache/uv
-            ~/.cache/mise
+            /tmp/.uv-cache
             ~/.cache/ms-playwright
             node_modules
           key: ${{ runner.os }}-deps-${{ hashFiles('**/uv.lock', '**/package-lock.json') }}
@@ -49,10 +49,14 @@ jobs:
         run: |
           mise setup-js
           mise uv
-          playwright install chromium
+          mise x -- playwright install chromium
 
       - name: Run tests
         run: mise test-all --cov
+
+      - name: Minimize uv cache
+        run: mise x -- uv cache prune --ci
+
 
     services:
       postgres:
