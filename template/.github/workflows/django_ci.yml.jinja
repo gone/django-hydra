@@ -1,5 +1,9 @@
 name: Django CI
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -28,10 +32,8 @@ jobs:
     name: Django CI
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: "psql://postgres:postgres@localhost/postgres"
-      DJANGO_SETTINGS_MODULE: "[[project_name]].config.settings.test"
-      DJANGO_SECRET_KEY: "!!!! Change me !!!!"
       UV_CACHE_DIR: /tmp/.uv-cache
+      MISE_ENV: ci
 
     steps:
       - uses: actions/checkout@v4

@@ -1,0 +1,4 @@
+[env]
+DATABASE_URL = "postgres://postgres:postgres@localhost/postgres"
+DJANGO_SETTINGS_MODULE = "[[project_name]].config.settings.test"
+DJANGO_SECRET_KEY = "!!!! Change me !!!!"
