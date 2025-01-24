@@ -6,63 +6,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # # uncomment when using docker
-  # docker:
-  #   name: Build the docker image
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         ref: ${{ github.event.pull_request.head.sha }}
-
-  #     - name: Cache Docker layers
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: /tmp/.buildx-cache
-  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-buildx-
-
-  #     - uses: docker/setup-buildx-action@v2
-  #       name: Set up Docker Buildx
-  #       id: buildx
-
-  #     - name: Build Docker image
-  #       uses: docker/build-push-action@v2
-  #       with:
-  #         context: ./
-  #         file: ./Dockerfile
-  #         builder: ${{ steps.buildx.outputs.name }}
-  #         cache-from: type=local,src=/tmp/.buildx-cache
-  #         cache-to: type=local,dest=/tmp/.buildx-cache
-  #         target: runtime
-
   precommit:
     name: Precommit linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          path: |
+            ~/.cache/pre-commit
+            ~/.cache/mise
+            node_modules
+          key: precommit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml', '**/package-lock.json') }}
+          restore-keys: |
+            precommit-${{ runner.os }}-
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-
+      - uses: jdx/mise-action@v2
       - run: npm install
-
-      - run: python -m pip install pre-commit
-        shell: bash
-
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
-
-      - run: pre-commit run --show-diff-on-failure --color=always ${{ inputs.extra_args }} --all-files
-        shell: bash
+      - run: mise pre-commit --all-files --color=always ${{ inputs.extra_args }}
 
   test:
     name: Django CI
@@ -71,103 +32,55 @@ jobs:
       DATABASE_URL: "psql://postgres:postgres@localhost/postgres"
       DJANGO_SETTINGS_MODULE: "[[project_name]].config.settings.test"
       DJANGO_SECRET_KEY: "!!!! Change me !!!!"
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-
-      - name: Install NPM package
-        run: npm install
-
-      - name: Install and configure Poetry
+          path: |
+            ~/.cache/uv
+            ~/.cache/mise
+            ~/.cache/ms-playwright
+            node_modules
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/uv.lock', '**/package-lock.json') }}
+          restore-keys: |
+              ${{ runner.os }}-deps-
+      - uses: jdx/mise-action@v2
+      - name: Install env
         run: |
-          pipx install poetry==1.3.2
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project false
-          poetry config installer.parallel true
-
-      - uses: actions/setup-python@v4
-        id: setup_python
-        with:
-          python-version-file: ".python-version"
-          cache: "poetry"
-
-      - name: Install + build NPM
-        run: |
-          npm ci
-          npm run build
-
-      - name: Install dependencies
-        run: |
-          poetry env use ${{ steps.setup_python.outputs.python-version }}
-          poetry install --no-interaction --no-root
-          poetry run playwright install chromium
+          mise setup-js
+          mise uv
+          playwright install chromium
 
       - name: Run tests
-        run: poetry run coverage run --source='.' -m pytest
+        run: mise test-all --cov
 
     services:
       postgres:
-        image: postgres
+        image: postgres:16-alpine
         env:
           POSTGRES_PASSWORD: postgres
 
         options: >-
           --health-cmd pg_isready
-          --health-interval 10s
+          --health-interval 5s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 3
         ports:
           - 5432:5432
 
   dependabot_approve:
-    name: Approve Dependabot prs
-    runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
-
-    if: ${{ github.actor == 'dependabot[bot]' }}
-    needs: test
-    steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1.1.1
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Approve a PR
-        run: gh pr review --approve "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-  dependabot_merge:
     name: Auto Merge Dependabot prs
+    if: ${{ github.actor == 'dependabot[bot]' }}
     runs-on: ubuntu-latest
 
     permissions:
       pull-requests: write
       contents: write
+    needs: test
 
-    if: ${{ github.actor == 'dependabot[bot]' }}
-    needs: dependabot_approve
     steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1.1.1
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --auto --squash "$PR_URL"
+      - uses: dependabot/fetch-metadata@v2
+      - run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

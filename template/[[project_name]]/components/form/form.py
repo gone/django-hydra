@@ -86,7 +86,6 @@ class Label(Component):
         else:
             classes = self.default_classes
 
-
         attrs["class"] = f"{classes} {attrs.get('class', '')}".strip()
 
         attrs["for"] = field.id_for_label

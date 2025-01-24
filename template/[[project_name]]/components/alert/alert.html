@@ -8,16 +8,14 @@
           }, 0);
       });
       setTimeout(() => { show = false; $el.remove(); }, {{ timeout }})
-  "
+     "
      x-show="show"
      x-cloak
      x-transition
      :class="init ? 'opacity-100' : 'opacity-0'"
-     class="rounded-lg p-4 mt-2 shadow-lg {{ level_class }} alert-message relative overflow-hidden transition-all duration-300  ">
+     class="rounded-lg p-4 mt-2 shadow-lg {{ level_class }} alert-message relative overflow-hidden transition-all duration-300">
   <div class="flex items-start">
-    <div class="shrink-0 text-current/60">
-      {% heroicon_solid icon class="h-5 w-5" %}
-    </div>
+    <div class="shrink-0 text-current/60">{% heroicon_solid icon class="h-5 w-5" %}</div>
     <div class="ml-3">
       <p class="text-sm font-medium">{{ message }}</p>
     </div>

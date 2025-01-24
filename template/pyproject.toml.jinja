@@ -145,7 +145,8 @@ profile = "django"
 indent = 2
 use_gitignore=true
 format_attribute_template_tags=true
-custom_blocks="component,slot,fill"
+# https://github.com/djlint/djLint/issues/1054
+custom_blocks = "component(?=(?:(?!/\\s%}).)*%}),slot,fill"
 
 [tool.pytest.ini_options]
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
