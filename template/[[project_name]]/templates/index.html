@@ -9,13 +9,23 @@
       <em class="text-2xl font-bold">Hello There!</em>
     </h1>
     <div id="current-time">{% include "samples/current_time.html" %}</div>
-    {% component "button" attrs:hx-get="{% url 'current_time' %}" attrs:hx-target="#current-time" attrs:hx-swap="innerHTML" attrs:hx-push-url="false" %}
+    {% component "button"
+      attrs:hx-get="{% url 'current_time' %}"
+      attrs:hx-target="#current-time"
+      attrs:hx-swap="innerHTML"
+      attrs:hx-push-url="false" %}
       Refresh time
     {% endcomponent %}
-    {% component "button" color="secondary" attrs:hx-get="{% url 'test_redirect' %}" attrs:hx-push-url="false" %}
+    {% component "button"
+      color="secondary"
+      attrs:hx-get="{% url 'test_redirect' %}"
+      attrs:hx-push-url="false" %}
       Test hx-redirect with messages
     {% endcomponent %}
-    {% component "button" variant="outline" attrs:hx-get="{% url 'test_refresh' %}" %}
+    {% component "button"
+      variant="outline"
+      attrs:hx-get="{% url 'test_refresh' %}"
+      %}
       Test hx-refresh with messages
     {% endcomponent %}
     <div class="flex flex-col items-start">
