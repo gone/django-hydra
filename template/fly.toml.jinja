@@ -1,48 +1,35 @@
-# fly.toml file generated on 2021-12-28T20:18:42-05:00
+# fly.toml app configuration file generated on 2025-01-26T16:37:12-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = "[[project_name]]"
-[% raw %]
-kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
+primary_region = 'ewr'
+console_command = '/app/manage.py shell_plus'
 
 [build]
-  dockerfile = "compose/prod/django/Dockerfile"
 
 [deploy]
-  release_command = "python /app/manage.py migrate"
+  release_command = 'python /app/manage.py migrate --noinput'
 
 [env]
-  PORT = "8080"
-  ALLOWED_HOSTS = "*"
+  PORT = "8000"
 
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = 'suspend'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
 
-[[services]]
-  http_checks = []
-  internal_port = 8080
-  processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
+[% raw %]
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
 
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+[[statics]]
+  guest_path = '/code/static'
+  url_prefix = '/static/'
 [% endraw %]

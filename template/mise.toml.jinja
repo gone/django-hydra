@@ -2,9 +2,6 @@
 python = "3.13"
 node = "22"
 uv = "0.5.9"
-colima  = "latest"
-lima = "latest"
-pre-commit = "latest"
 
 [env]
 _.python.venv = { path = ".venv", create = true }
@@ -20,8 +17,6 @@ DJANGO_SECRET_KEY = "your-secret-key-here"
 PYTHONDONTWRITEBYTECODE = "1"  # Prevent Python from writing .pyc files
 PYTHONBREAKPOINT="pdb.set_trace"
 #required settings for prod to run, sometimes helpful to set locally to run local w/ prod settings
-REDIS_HOST=""
-REDIS_PORT=""
 SENTRY_DSN=""
 DJANGO_ALLOWED_HOSTS="127.0.0.1,localhost"
 DJANGO_AWS_ACCESS_KEY_ID=""
