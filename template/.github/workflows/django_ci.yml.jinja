@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -73,6 +74,39 @@ jobs:
           --health-retries 3
         ports:
           - 5432:5432
+
+  deploy-master:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [precommit, test]
+    environment:
+      name: production
+      # url:  # Optional: URL where your app is deployed
+    concurrency: deploy-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  deploy-develop:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    needs: [precommit, test]
+    environment:
+      name: staging
+      # url:  # Optional: URL where your staging app is deployed
+    concurrency: deploy-staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 
   dependabot_approve:
     name: Auto Merge Dependabot prs

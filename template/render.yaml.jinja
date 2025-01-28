@@ -12,7 +12,7 @@ services:
         - key: PYTHON_VERSION
           value: 3.11.1
         - fromGroup: sentry
-        - key: DJANGO_SECRET_KEY
+        - key: SECRET_KEY
           generateValue: true
         - key: DJANGO_SETTINGS_MODULE
           value: "[[project_name]].config.settings.prod"
@@ -37,19 +37,19 @@ services:
             type: web
             envVarKey: RENDER_GIT_COMMIT
             name: [[project_name]]
-        - key: DJANGO_AWS_STORAGE_BUCKET_NAME
+        - key: BUCKET_NAME
           value: [[project_name]]
-        - key: DJANGO_AWS_ACCESS_KEY_ID
+        - key: AWS_ACCESS_KEY_ID
           fromService:
             type: web
             envVarKey: MINIO_ROOT_USER
             name: minio
-        - key: DJANGO_AWS_SECRET_ACCESS_KEY
+        - key: AWS_SECRET_ACCESS_KEY
           fromService:
             type: web
             envVarKey: MINIO_ROOT_PASSWORD
             name: minio
-        - key: DJANGO_AWS_S3_ENDPOINT_URL
+        - key: AWS_ENDPOINT_URL_S3
           fromService:
             type: web
             envVarKey: RENDER_EXTERNAL_URL

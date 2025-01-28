@@ -13,16 +13,16 @@ REDIS_URL="redis://localhost:6379"
 
 # Development settings
 DJANGO_DEBUG = "True"
-DJANGO_SECRET_KEY = "your-secret-key-here"
+SECRET_KEY = "your-secret-key-here"
 PYTHONDONTWRITEBYTECODE = "1"  # Prevent Python from writing .pyc files
 PYTHONBREAKPOINT="pdb.set_trace"
 #required settings for prod to run, sometimes helpful to set locally to run local w/ prod settings
 SENTRY_DSN=""
 DJANGO_ALLOWED_HOSTS="127.0.0.1,localhost"
-DJANGO_AWS_ACCESS_KEY_ID=""
-DJANGO_AWS_SECRET_ACCESS_KEY=""
-DJANGO_AWS_STORAGE_BUCKET_NAME=""
-DJANGO_AWS_S3_ENDPOINT_URL=""
+AWS_ACCESS_KEY_ID=""
+AWS_SECRET_ACCESS_KEY=""
+BUCKET_NAME=""
+AWS_ENDPOINT_URL_S3=""
 DJANGO_SECURE_SSL_REDIRECT="false"
 DJANGO_SECURE_HSTS_SECONDS=0
 

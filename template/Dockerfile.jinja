@@ -5,7 +5,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev
-ADD . /app
+COPY . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
@@ -19,15 +19,16 @@ RUN npm run build
 
 # In your main stage:
 
-FROM python:3.13-slim-bookworm
+FROM python:3.13-slim-bookworm as web
 # Copy the application from the builder
 COPY --from=builder --chown=app:app /app /app
-COPY --from=js-builder /app/sampleapp/static_source/assets /app/sampleapp/static_source/assets
-COPY --from=js-builder /app/sampleapp/static_source/manifest.json /app/sampleapp/static_source/
+COPY --from=js-builder /app/[[project_name]]/static_source/assets /app/[[project_name]]/static_source/assets
+COPY --from=js-builder /app/[[project_name]]/static_source/manifest.json /app/[[project_name]]/static_source/
 
 # Place executables in the environment at the front of the path
+WORKDIR /app
 ENV PATH="/app/.venv/bin:$PATH"
-RUN python /app/manage.py collectstatic --noinput --settings sampleapp.config.settings.build
+RUN python manage.py collectstatic --noinput --settings [[project_name]].config.settings.build
 EXPOSE 8000
 
 CMD ["gunicorn"]
