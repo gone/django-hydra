@@ -1,7 +1,3 @@
-# Instructions to clear caches:
-# 1) List all caches for this repo using the Github CLI: gh api  -H "Accept: application/vnd.github+json" /repos/Lightmatter/django-hydra/actions/caches
-# 2) Delete each cache id from the list, e.g.: gh api --method DELETE  -H "Accept: application/vnd.github+json" /repos/Lightmatter/django-hydra/actions/caches/1
-
 name: Project CI
 on:
   push:
@@ -15,119 +11,149 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  create_and_test_project:
-    name: Create and test Django project
+  generate_project:
+    name: Generate Project Instance
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: "psql://postgres:postgres@localhost/postgres"
-      DJANGO_SECRET_KEY: "!!!! Change me !!!!"
-
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
 
-      - name: Install and configure Poetry
+      - name: Generate project from template
         run: |
-          pipx install poetry==1.3.2
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project false
-          poetry config installer.parallel true
+          uvx copier copy . ../test-output --trust --defaults
 
-      - name: Install Python
-        uses: actions/setup-python@v4
-        id: setup_python
-        with:
-          python-version-file: ".python-version"
-          cache: "poetry"
-
-      - name: Install Hydra dependencies
+      - name: Initialize git repo
+        working-directory: ../test-output
         run: |
-          poetry env use ${{ steps.setup_python.outputs.python-version }}
-          poetry install --no-interaction --no-root
+          git init
+          git add .
+          git config --global user.email "test@example.com"
+          git config --global user.name "Test User"
+          git commit -m "Initial commit"
 
-      - name: Instantiate project using the values in cookiecutter.json
-        run: poetry run cookiecutter . --no-input --accept-hooks no
-
-      - name: Install Node
-        uses: actions/setup-node@v3
+      # Upload the generated project as an artifact
+      - name: Upload generated project
+        uses: actions/upload-artifact@v4
         with:
-          node-version: lts/*
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
+          name: generated-project
+          path: ../test-output
+          retention-days: 1
 
-      - name: Install + build NPM
-        working-directory: ./sampleapp
-        run: |
-          npm ci
-          npm run build
 
-      - name: Install Sample App dependencies
-        working-directory: ./sampleapp
-        run: |
-          poetry env use ${{ steps.setup_python.outputs.python-version }}
-          poetry install --no-interaction --no-root
-          poetry run playwright install chromium
 
-      - name: Run tests
-        working-directory: ./sampleapp
-        run: poetry run coverage run --source='.' -m pytest
+  # create_and_test_project:
+  #   name: Create and test Django project
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     DATABASE_URL: "psql://postgres:postgres@localhost/postgres"
+  #     DJANGO_SECRET_KEY: "!!!! Change me !!!!"
 
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
 
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
+  #     - name: Install and configure Poetry
+  #       run: |
+  #         pipx install poetry==1.3.2
+  #         poetry config virtualenvs.create true
+  #         poetry config virtualenvs.in-project false
+  #         poetry config installer.parallel true
 
-  dependabot_approve:
-    name: Approve Dependabot prs
-    runs-on: ubuntu-latest
+  #     - name: Install Python
+  #       uses: actions/setup-python@v4
+  #       id: setup_python
+  #       with:
+  #         python-version-file: ".python-version"
+  #         cache: "poetry"
 
-    permissions:
-      pull-requests: write
+  #     - name: Install Hydra dependencies
+  #       run: |
+  #         poetry env use ${{ steps.setup_python.outputs.python-version }}
+  #         poetry install --no-interaction --no-root
 
-    if: ${{ github.actor == 'dependabot[bot]' }}
-    needs: create_and_test_project
-    steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1.1.1
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+  #     - name: Instantiate project using the values in cookiecutter.json
+  #       run: copier copy . ../test-output --trust --defaults
 
-      - name: Approve a PR
-        run: gh pr review --approve "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  #     - name: Install Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: lts/*
+  #         cache: "npm"
+  #         cache-dependency-path: "**/package-lock.json"
 
-  dependabot_merge:
-    name: Auto Merge Dependabot prs
-    runs-on: ubuntu-latest
+  #     - name: Install + build NPM
+  #       working-directory: ./sampleapp
+  #       run: |
+  #         npm ci
+  #         npm run build
 
-    permissions:
-      pull-requests: write
-      contents: write
+  #     - name: Install Sample App dependencies
+  #       working-directory: ./sampleapp
+  #       run: |
+  #         poetry env use ${{ steps.setup_python.outputs.python-version }}
+  #         poetry install --no-interaction --no-root
+  #         poetry run playwright install chromium
 
-    if: ${{ github.actor == 'dependabot[bot]' }}
-    needs: dependabot_approve
-    steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1.1.1
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+  #     - name: Run tests
+  #       working-directory: ./sampleapp
+  #       run: poetry run coverage run --source='.' -m pytest
 
-      - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --auto --squash "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  #   services:
+  #     postgres:
+  #       image: postgres
+  #       env:
+  #         POSTGRES_PASSWORD: postgres
+
+  #       options: >-
+  #         --health-cmd pg_isready
+  #         --health-interval 10s
+  #         --health-timeout 5s
+  #         --health-retries 5
+  #       ports:
+  #         - 5432:5432
+
+  # dependabot_approve:
+  #   name: Approve Dependabot prs
+  #   runs-on: ubuntu-latest
+
+  #   permissions:
+  #     pull-requests: write
+
+  #   if: ${{ github.actor == 'dependabot[bot]' }}
+  #   needs: create_and_test_project
+  #   steps:
+  #     - name: Dependabot metadata
+  #       id: metadata
+  #       uses: dependabot/fetch-metadata@v1.1.1
+  #       with:
+  #         github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+  #     - name: Approve a PR
+  #       run: gh pr review --approve "$PR_URL"
+  #       env:
+  #         PR_URL: ${{github.event.pull_request.html_url}}
+  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  # dependabot_merge:
+  #   name: Auto Merge Dependabot prs
+  #   runs-on: ubuntu-latest
+
+  #   permissions:
+  #     pull-requests: write
+  #     contents: write
+
+  #   if: ${{ github.actor == 'dependabot[bot]' }}
+  #   needs: dependabot_approve
+  #   steps:
+  #     - name: Dependabot metadata
+  #       id: metadata
+  #       uses: dependabot/fetch-metadata@v1.1.1
+  #       with:
+  #         github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+  #     - name: Enable auto-merge for Dependabot PRs
+  #       run: gh pr merge --auto --squash "$PR_URL"
+  #       env:
+  #         PR_URL: ${{github.event.pull_request.html_url}}
+  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
